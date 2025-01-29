@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LP's Portfolio</title>
     {% load static %}  <link rel="stylesheet" href="{% static 'portfolio/styles.css' %}">
-    <script src="js/script.js"></script>
+    {% comment %} <script src="js/script.js"></script> {% endcomment %}
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="hb-right">
-        <img src="images/lucas_portrait.png" alt="Lucas Patriquin" />
+        <img src="{% static 'portfolio/images/lucas_portrait.png' %}" alt="Lucas Patriquin Headshot">
       </div>
     </header>
 
@@ -72,7 +72,7 @@
     <section id="about-me" class="about-banner">
       <div class="about-content">
         <div class="about-image">
-          <img src="images/al&lou.png" alt="Your Profile Picture" />
+            <img src="{% static 'portfolio/images/al&lou.png' %}" alt="Lucas and wife, Alycia">
         </div>
         <div class="about-text">
           <h2>About Me</h2>
