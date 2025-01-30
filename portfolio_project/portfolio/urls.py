@@ -4,5 +4,5 @@ from . import views # Import my views
 app_name = 'portfolio' # needed for namespacing
 
 urlpatterns = [
-    path('', views.index, name='index'), # Maps the root URL to the index view
+    path('', views.home, name='home'), # Maps the root URL to the index view
 ]
