@@ -44,6 +44,7 @@
         <div class="pb-title"><h2>My Projects</h2></div>
         <div class="project-list">  {% if projects %}  {% for project in projects %}
                 <div class="project-card">
+                    <a href="{% url 'portfolio:project_detail' project.pk %}">
                     {% if project.image %}
                         <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
                     {% endif %}
