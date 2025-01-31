@@ -121,7 +121,7 @@ body {
 }
 
 .project-card {
-  display: flex;
+  display: inline-block;
   flex-direction: column; 
   width: 280px;
   margin: 25px;
@@ -208,6 +208,7 @@ body {
     padding: 80px 20px; /* Increased top/bottom padding */
     text-align: center;
     background-color: #f8f8f8; /* Light background color */
+    height: 100vh;
 }
 
 .contact-title h2 {
