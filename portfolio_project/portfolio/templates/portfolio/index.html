@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LP's Portfolio</title>
     {% load static %}  
-    <link rel="stylesheet" href="{% static 'portfolio/styles.css' %}">
-    {% comment %} <script src="js/script.js"></script> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
@@ -44,16 +43,14 @@
         <div class="pb-title"><h2>My Projects</h2></div>
         <div class="project-list">  {% if projects %}  {% for project in projects %}
                 <div class="project-card">
-                    {% comment %} <a href="{% url 'portfolio:project_detail' project.pk %}"> {% endcomment %}
+                    <a href="{% url 'portfolio:project_detail' project.pk %}">
                     {% if project.image %}
                         <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
                     {% endif %}
                     <div class="project-info">
                         <h3>{{ project.title }}</h3>  <p>{{ project.description }}</p>
-                        {% if project.link %}
-                            <a href="{{ project.link }}" target="_blank">View Project</a>
-                        {% endif %}
                     </div>
+                </a>
                 </div>
             {% endfor %}
         {% else %}

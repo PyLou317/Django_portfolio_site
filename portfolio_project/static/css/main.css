@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box; /* This is the most likely solution */
+    box-sizing: border-box;
 }
 
 body {
@@ -121,34 +121,45 @@ body {
 }
 
 .project-card {
-    display: inline-block; /* Arrange cards horizontally */
-    width: 280px; /* Increased width for better layout */
-    margin: 25px; /* Increased margin for spacing */
-    vertical-align: top; /* Align cards to the top */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added a subtle shadow */
-    border-radius: 8px; /* Added rounded corners */
-    overflow: hidden; /* Prevents content from overflowing rounded corners */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover */
+  display: flex;
+  flex-direction: column; 
+  width: 280px;
+  margin: 25px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
 }
 
 .project-card:hover {
-    transform: translateY(-5px); /* Move card up slightly on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.project-card .img {
-    background-color: #eee; /* Light gray background for image placeholder */
-    height: 250px; /* Increased height */
-    margin-bottom: 15px;
-    background-size: cover;
-    background-position: center;
+.project-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; 
+  flex-shrink: 0; /* Prevent image from shrinking below its natural size */
 }
 
 .project-card .project-info {
-    padding: 20px;
-    text-align: left;
-    height: 100px; /* Set a fixed height */
-    overflow: hidden; /* Hide overflowing text */
+  padding: 20px;
+  flex-grow: 1; /* Allow text area to grow and fill remaining space */
+}
+
+.project-card h3 {
+  margin-bottom: 10px;
+}
+
+.project-card p {
+  margin-bottom: 15px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: -webkit-box; 
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical; 
 }
 
 .about-banner {
