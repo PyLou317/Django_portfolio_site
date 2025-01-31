@@ -123,7 +123,6 @@ body {
 .project-card {
     display: inline-block; /* Arrange cards horizontally */
     width: 280px; /* Increased width for better layout */
-    max-height: 300px;
     margin: 25px; /* Increased margin for spacing */
     vertical-align: top; /* Align cards to the top */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added a subtle shadow */
@@ -137,26 +136,16 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
 
-/* .project-card .img {
-    margin-bottom: 15px;
-    background-size: cover; or contain, depending on your preference 
-    background-position: center;
-    width: 100%; Ensure image takes full card width
-    display: block; Prevents a small space below the image 
-    aspect-ratio: 4/3; example aspect ratio - adjust as needed 
-} */
- 
 .project-card img {
     width: 100%;
     display: block;
-    aspect-ratio: 1 / 1; /* example aspect ratio - adjust as needed */
+    /* aspect-ratio: 1 / 1; example aspect ratio - adjust as needed */
     object-fit: cover; /* or contain, depending on your preference */
 }
 
 .project-card .project-info {
     padding: 20px;
     text-align: left;
-    /* height: 100px; Set a fixed height */
     overflow: hidden; /* Hide overflowing text */
 }
 
