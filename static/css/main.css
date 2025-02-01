@@ -124,6 +124,7 @@ body {
   display: inline-block;
   flex-direction: column; 
   width: 280px;
+  min-height: 300px;
   margin: 25px;
   border-radius: 8px;
   overflow: hidden;
