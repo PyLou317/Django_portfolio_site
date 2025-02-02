@@ -2,7 +2,7 @@ import pandas as pd
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import UploadFileForm
-from .models import Transaction
+from .models import Transaction, Category
 import os
 import csv
 from datetime import datetime
@@ -51,10 +51,20 @@ def upload_statement(request):
                                 except ValueError:
                                     print(f"Invalid amount format for transaction: {description}")
                                     continue 
-
+                            
+                            category_name = 'Other'
+                            category, created = Category.objects.get_or_create(name=category_name) 
+                            
                             # Create and Save Transaction
-                            transaction = Transaction(date=date, description=description, amount=amount) 
-                            transaction.save()
+                            transaction = Transaction.objects.create(
+                                date=date, 
+                                description=description, 
+                                amount=amount,
+                                category=category
+                                )
+                            
+                            # Print for debugging
+                            print(f"Saving transaction: {transaction}") 
 
                         except Exception as e:
                             print(f"Error processing transaction: {e}") 
