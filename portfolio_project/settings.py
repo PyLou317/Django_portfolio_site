@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     # OWN
     'portfolio',
+    'finance_tracker'
 ]
 
 MIDDLEWARE = [
