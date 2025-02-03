@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block navbar %}
+<nav class="nav-bar" aria-label="Main Navigation">
+  {% url 'home:home' as home_url %} {% url 'home:home' as home_url %}
+  <a
+    class="home-link {% if request.get_full_path == home_url %}active{% endif %}"
+    href="{% url 'home:home' %}"
+    >Home</a
+  >
+
+  <div class="header-links">
+    <ul>
+      <li><a href="#projects">My Projects</a></li> {% comment %} Projects are displayed on home page  {% endcomment %}
+      <li><a href="{% url 'about:index' %}" class="{% if request.path == '/about/' %}active{%% endif %}">About</a></li>
+      <li><a href="{% url 'contact:index' %}" class="{% if request.path == '/contact/' %}active{%% endif %}">Contact Me</a></li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
