@@ -5,5 +5,5 @@ app_name = 'finance_tracker'
 
 urlpatterns = [
     path('', views.finance_tracker_home, name='home'),
-    path('file_upload/', views.upload_statement, name='file_upload'),
+    path('upload/', views.upload_statement, name='file_upload'),
 ]
