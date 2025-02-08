@@ -1,0 +1,16 @@
+<nav class="nav-bar" aria-label="Main Navigation">
+  {% url 'portfolio:home' as home_url %}
+  <a
+    class="home-link {% if request.get_full_path == home_url %}active{% endif %}"
+    href="{{ home_url }}"
+    >Home</a
+  >
+
+  <div class="header-links">
+    <ul>
+      <li><a href="#projects">My Projects</a></li> {% comment %} Projects are displayed on home page  {% endcomment %}
+      <li><a href="{% url 'portfolio:about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About</a></li>
+      {% comment %} <li><a href="{% url 'portfolio:contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact Me</a></li> {% endcomment %}
+    </ul>
+  </div>
+</nav>
