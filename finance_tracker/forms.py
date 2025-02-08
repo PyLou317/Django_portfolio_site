@@ -4,6 +4,7 @@ import csv
 from datetime import datetime
 from decimal import Decimal
 from io import StringIO
+from .utils import categorize_transaction
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
@@ -38,13 +39,7 @@ class UploadFileForm(forms.Form):
                             continue
 
                     # Basic categorization (replace with more sophisticated logic)
-                    category_name = 'Other'  # Default category
-                    if 'Groceries' in description:
-                        category_name = 'Groceries'
-                    elif 'Restaurant' in description:
-                        category_name = 'Dining Out'
-                    elif 'Coffee' in description:
-                        category_name = 'Coffee' 
+                    category_name = categorize_transaction(description)
 
                     category, created = Category.objects.get_or_create(name=category_name)
 

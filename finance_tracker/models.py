@@ -14,4 +14,4 @@ class Transaction(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.date} - {self.description} - ${self.amount}" 
+        return f"{self.date} - {self.description} - ${self.amount} - {self.category}"
