@@ -10,4 +10,9 @@ def home(request):
 def project_detail(request, pk):
     project = get_object_or_404(Project, pk=pk)
     context = {'project': project}  # Pass the project object to the context
-    return render(request, 'project_detail.html', context)
+    return render(request, 'portfolio/project_detail.html', context)
+
+
+def about(request):
+    return render(request, 'portfolio/about.html') # Renders the index.html template and pass the projects to the template
+

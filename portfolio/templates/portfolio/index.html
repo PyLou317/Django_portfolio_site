@@ -1,135 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LP's Portfolio</title>
-    {% load static %}  
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <nav class="nav-bar" aria-label="Main Navigation">
-      <div class="header-logo">Header Logo</div>
-      <div class="header-links">
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#projects">My Projects</a></li>
-          <li><a href="#about-me">About</a></li>
-          <li><a href="#contact-me">Contact Me</a></li>
-        </ul>
-      </div>
-    </nav>
+{% extends 'portfolio/base.html' %}
+{% load static %}
+{% block content %}
+<header id="home" class="hero-banner">
+    <div class="hb-left">
+    <div class="website-title">Welcome to LP's Digital Playground</div>
+    <div class="title-subtext">
+        This is my first html and css only landing page, please find my
+        projects and links to repo's below, enjoy!
+        <button>My Resume</button>
+    </div>
+    </div>
+    <div class="hb-right">
+    <img src="{% static 'portfolio/images/lucas_portrait.png' %}" alt="Lucas Patriquin Headshot">
+    </div>
+</header>
 
-    <header id="home" class="hero-banner">
-      <div class="hb-left">
-        <div class="website-title">Welcome to LP's Digital Playground</div>
-        <div class="title-subtext">
-          This is my first html and css only landing page, please find my
-          projects and links to repo's below, enjoy!
-          <button>My Resume</button>
-        </div>
-      </div>
-      <div class="hb-right">
-        <img src="{% static 'portfolio/images/lucas_portrait.png' %}" alt="Lucas Patriquin Headshot">
-      </div>
-    </header>
-
-    <section id="projects" class="project-banner">
-        <div class="pb-title"><h2>My Projects</h2></div>
-        <div class="project-list">  {% if projects %}  {% for project in projects %}
-                <div class="project-card">
-                    {% comment %} <a href="{% url 'portfolio:project_detail' project.pk %}"> {% endcomment %}
-                    {% if project.image %}
-                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
-                    {% endif %}
-                    <div class="project-info">
-                        <h3>{{ project.title }}</h3>  <p>{{ project.description }}</p>
-                        <a href="{% url 'portfolio:project_detail' project.pk %}">View Project</a>
-                    </div>
-                </a>
+<section id="projects" class="project-banner">
+    <div class="pb-title"><h2>My Projects</h2></div>
+    <div class="project-list">  {% if projects %}  {% for project in projects %}
+            <div class="project-card">
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
+                {% endif %}
+                <div class="project-info">
+                    <h3>{{ project.title }}</h3>  <p>{{ project.description }}</p>
+                    <a href="{% url 'portfolio:project_detail' project.pk %}">View Project</a>
                 </div>
-            {% endfor %}
-        {% else %}
-            <p>No projects added yet.</p>
-        {% endif %}
-        </div>
-    </section>
+            </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No projects added yet.</p>
+    {% endif %}
+    </div>
+</section>
 
-    {% comment %} <section id="projects" class="project-banner">
-      <div class="pb-title"><h2>My Projects</h2></div>
-      <div class="project-card">
-        <div class="img"></div>
-        <div class="project-info">
-          This is some subtext about each project under a picture.
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="img"></div>
-        <div class="project-info">
-          This is some subtext about each project under a picture.
-          hdhdhdhdhoah;bfoihi aifh aihfi oqiohfas ;ohioshaidhfoia ifhio;ahf
-          ia;hodfihasoif.
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="img"></div>
-        <div class="project-info">
-          This is some subtext about each project under a picture.
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="img"></div>
-        <div class="project-info">
-          This is some subtext about each project under a picture.
-        </div>
-      </div>
-    </section> {% endcomment %}
+<section id="contact-me" class="contact-banner">
+    <div class="contact-title"><h2>Reach Out to Me!</h2></div>
+    <form action="submit_form.php" method="POST">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" required />
 
-    <section id="about-me" class="about-banner">
-      <div class="about-content">
-        <div class="about-image">
-            <img src="{% static 'portfolio/images/al&lou.png' %}" alt="Lucas and wife, Alycia">
-        </div>
-        <div class="about-text">
-          <h2>About Me</h2>
-          <p>Hey everyone! I'm Lucas, and I'm passionate about building things – whether it's a strong client relationship, a successful business venture, or a clean, functional line of code.  I've spent the last 7+ years honing my skills in B2B sales, learning the art of understanding client needs and delivering solutions that drive real results.  I thrive on the challenge of exceeding expectations and building partnerships that last.</p>
+    <label for="email">Email address:</label>
+    <input type="email" id="email" name="email" required />
 
-          <p>One of the things I appreciate most about programming is the constant learning and evolution.  It mirrors the dynamic nature of the business world, where adaptability and continuous improvement are key. I'm currently working through online courses and tutorials to deepen my programing knowledge and explore frameworks like Django and React. Recently completed two MOOCs from the University of Helsinki on Python, Django 4 Everybody by Dr. Charles Severance, and I'm currently working my way through The Odin Project.</p>
+    <!-- <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject" required /> -->
 
-          <p>My background is a blend of business and hands-on experience.  Beyond my sales roles at companies like Aerotek, I've also embraced the entrepreneurial spirit, founding and running businesses like Force Pro Fitness, Mealworkx, and the RSCUED, a purpose-driven apparel brand focused on animal adoption awareness.  These ventures have given me invaluable experience in all aspects of business operations, from marketing and website development to managing suppliers and fulfillment.</p>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
 
-          <p>I believe that the combination of my business acumen and my growing technical skills provides a unique perspective. I'm eager to connect with other developers and professionals who share my passion for innovation and building things that matter.  Feel free to reach out – let's connect!</p>
-          </p>
-        </div>
-      </div>
-    </section>
+    <input type="submit" value="Submit" />
+    </form>
+</section>
+{% endblock %}
 
-    <section id="contact-me" class="contact-banner">
-      <div class="contact-title"><h2>Reach Out to Me!</h2></div>
-      <form action="submit_form.php" method="POST">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" required />
-
-        <label for="email">Email address:</label>
-        <input type="email" id="email" name="email" required />
-
-        <!-- <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required /> -->
-
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
-
-        <input type="submit" value="Submit" />
-      </form>
-    </section>
-
+{% block footer %}
     <footer class="footer" aria-label="Footer">
       <p>Copyright © Lucas Patriquin Designs 2025</p>
     </footer>
-  </body>
-</html>
+{% endblock %}
