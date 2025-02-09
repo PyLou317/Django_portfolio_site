@@ -5,7 +5,9 @@
 {% block title %}Finance Tracker{% endblock %} 
 {% block nav_bar %}
     {{ block.super }}
-        <h3>Finance Tracker</h3>
+        <div class="m-3">
+            <h1>Finance Tracker</h1>
+        </div>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'finance_tracker:home' %}" {% if request.path == '/' %}class="active"{% endif %}>Dashboard</a> 
