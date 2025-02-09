@@ -1,5 +1,8 @@
-{% extends 'portfolio/base.html' %} {% load static %} {% block content %}
-<h1>Transactions</h1>
+{% extends 'finance_tracker/base.html' %} 
+
+{% block title %}Transactions{% endblock %} 
+{% block finance_tracker_content %}
+<h4>Transactions</h4>
 <ul>
     {% if page_obj %} 
         {% for transaction in page_obj %}

@@ -8,7 +8,7 @@ from .forms import UploadFileForm
 from .models import Transaction
 
 def finance_tracker_home(request):
-    return render(request, 'finance_tracker/index.html')
+    return render(request, 'finance_tracker/dashboard.html')
 
 
 def upload_statement(request):

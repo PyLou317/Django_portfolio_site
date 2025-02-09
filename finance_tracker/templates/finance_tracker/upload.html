@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Upload Bank Statement</title>
-</head>
-<body>
-    <h1>Upload Bank Statement</h1>
-    <form method="post" enctype="multipart/form-data"> 
-        {% csrf_token %} 
-        {{ form.as_p }} 
-        <button type="submit">Upload</button>
-    </form>
-</body>
-</html>
+{% extends 'finance_tracker/base.html' %} 
+{% load static %} 
+{% block title %}Upload Statement{% endblock %} 
+{% block content %}
+<h4>Upload Bank Statement</h4>
+<form method="post" enctype="multipart/form-data"> 
+    {% csrf_token %} 
+    {{ form.as_p }} 
+    <button type="submit">Upload</button>
+</form>
+{% endblock%}
