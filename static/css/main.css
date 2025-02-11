@@ -8,12 +8,12 @@ body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     min-height: 100vh; /* Ensure footer sticks to bottom */
-    padding-top: 50px; /* Add padding for fixed navbar */
+    /* padding-top: 50px; Add padding for fixed navbar */
 }
 
 .hero-banner {
     display: flex;
-    background-color: #1f2937;
+    background-color: #191a1c;
     justify-content: space-between;
     align-items: center;
     min-height: 75vh;
@@ -55,8 +55,8 @@ body {
 }
 
 .hero-banner button:hover {
-    background-color: #2962ff; /* Darker blue on hover */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    background-color: #3a3c3f; /* Darker blue on hover */
+    box-shadow: 0 2px 5px rgba(164, 163, 163, 0.2); /* Add a subtle shadow */
     transform: translateY(-2px); /* Slightly move the button up */
 }
 
