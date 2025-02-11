@@ -11,12 +11,16 @@ body {
     /* padding-top: 50px; Add padding for fixed navbar */
 }
 
+main {
+    flex: 1;
+}
+
 .hero-banner {
     display: flex;
     background-color: #191a1c;
     justify-content: space-between;
     align-items: center;
-    min-height: 75vh;
+    height: auto;
     padding: 100px 20px;
     color: white;
 }
@@ -35,8 +39,7 @@ body {
 }
 
 .hb-right img {
-    max-width: 500px;
-    border-radius: 50%; /* Make the image circular */
+    height: 700px;
 }
 
 .website-title {
@@ -52,6 +55,7 @@ body {
 
 .hero-banner button {
     display: flex;
+    background-color: rgb(33, 33, 33);
 }
 
 .hero-banner button:hover {
@@ -224,44 +228,9 @@ body {
     box-shadow: 0 0 5px rgba(56, 130, 246, 0.2); /* Subtle box-shadow on focus */
 }
 
-.footer {
-    background-color: #1f2937;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: auto;
-    font-size: 14px; /* Slightly smaller font size */
-}
-
-.footer p {
-    margin: 0; /* Remove default paragraph margins */
-}
-
 
 /* Media query for smaller screens (smartphones) */
 @media (max-width: 768px) { /* Adjust 768px as needed */
-    body {
-        padding-top: 140px;
-    }
-    .nav-bar {
-        flex-direction: column; /* Stack logo and links vertically */
-        align-items: flex-start; /* Align items to the left */
-        padding: 10px; /* Reduce padding */
-        height: auto; /* Let height adjust to content */
-    }
-
-    .header-logo {
-        margin-bottom: 10px; /* Add some space below logo */
-    }
-
-    .header-links ul {
-        flex-direction: column; /* Stack links vertically */
-        align-items: flex-start; /* Align links to the left */
-    }
-
-    .header-links li {
-        margin-bottom: 5px; /* Add space between links */
-    }
 
     .hero-banner {
         flex-direction: column; /* Stack elements vertically */
@@ -341,10 +310,5 @@ body {
     .contact-banner input,
     .contact-banner textarea {
         font-size: 14px; /* Smaller font size */
-    }
-
-    .footer {
-        padding: 15px; /* Reduce padding */
-        font-size: 12px; /* Smaller font size */
     }
 }
