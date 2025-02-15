@@ -1,48 +1,33 @@
-<!-- Remove the container if you want to extend the Footer to full width. -->
-{% comment %} <div class="container my-5"> {% endcomment %}
 <!-- Footer -->
 <footer class="text-center text-white" style="background-color:rgb(38, 36, 36)">
 <!-- Grid container -->
 <div class="container">
     <!-- Section: Links -->
     <section class="mt-5">
-    <!-- Grid row-->
-    <div class="row text-center d-flex justify-content-center pt-5">
-        <!-- Grid column -->
-        <div class="col-md-2">
-        <h6 class="text-uppercase font-weight-bold">
-            <a href="{% url 'portfolio:home' %}#about-me" class="text-white">About me</a>
-        </h6>
-        </div>
-        <!-- Grid column -->
+        <!-- Grid row-->
+        <div class="row text-center d-flex justify-content-center pt-5">
+            <!-- Grid column -->
+            <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+                <a href="{% url 'portfolio:home' %}#about-me" class="text-white">About me</a>
+            </h6>
+            </div>
 
-        <!-- Grid column -->
-        <div class="col-md-2">
-        <h6 class="text-uppercase font-weight-bold">
-            <a href="#!" class="text-white">Projects</a>
-        </h6>
-        </div>
-        <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+                <a href="{% url 'portfolio:home' %}#projects" class="text-white">Projects</a>
+            </h6>
+            </div>
 
-        <!-- Grid column -->
-        {% comment %} <div class="col-md-2">
-        <h6 class="text-uppercase font-weight-bold">
-            <a href="#!" class="text-white">Awards</a>
-        </h6>
-        </div> {% endcomment %}
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-2">
-        <h6 class="text-uppercase font-weight-bold">
-            <a href="{% url 'portfolio:home' %}#contact-me" class="text-white">Contact me</a>
-        </h6>
+            <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+                <a href="{% url 'portfolio:home' %}#contact-me" class="text-white">Contact me</a>
+            </h6>
+            </div>
+       
         </div>
-        <!-- Grid column -->
-    </div>
-    <!-- Grid row-->
     </section>
-    <!-- Section: Links -->
 
     <hr class="my-5" />
 
@@ -59,7 +44,6 @@
         </div>
     </div>
     </section>
-    <!-- Section: Text -->
 
     <!-- Section: Social -->
     <section class="text-center mb-5">
@@ -82,17 +66,11 @@
         <i class="fab fa-github"></i>
     </a>
     </section>
-    <!-- Section: Social -->
 </div>
-<!-- Grid container -->
 
 <!-- Copyright -->
 <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.29)">
     © 2025 Copyright:
     <a class="text-white" href="https://lucaspatriquin.com/">LucasPatriquin.com</a>
 </div>
-<!-- Copyright -->
 </footer>
-<!-- Footer -->
-{% comment %} </div> {% endcomment %}
-<!-- End of .container -->
