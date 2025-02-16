@@ -18,10 +18,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'finance_tracker:transaction-list' %}" {% if request.path == '/transactions/' %}class="active"{% endif %}>View Transactions</a> 
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'finance_tracker:transaction-table' %}" {% if request.path == '/transactions/' %}class="active"{% endif %}>Transaction Table</a> 
+            </li>
             </ul>
 {% endblock %}
     
 {% block content %} 
-    {% block finance_tracker_content %} 
-    {% endblock %} 
 {% endblock %} 
+
+{% block script %}
+{% endblock script %}

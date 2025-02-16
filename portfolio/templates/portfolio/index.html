@@ -24,12 +24,10 @@
 
 <section id="projects">
     <div class="container mb-5">
-        <h1 class="display-4 text-center m-5">My Projects</h1>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">  {% if projects %}
+        <h1 class="display-3 text-center m-5">My Projects</h1>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">  {% if projects %}
             {% for project in projects %}
-                {% block project_card %}
                     {% include 'portfolio/project_card.html' %}
-                {% endblock project_card %}
             {% endfor %}
 
             {% else %}

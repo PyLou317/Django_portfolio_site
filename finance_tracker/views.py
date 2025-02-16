@@ -25,3 +25,6 @@ def upload_statement(request):
 class TransactionListView(ListView):
     paginate_by = 25
     model = Transaction
+
+def transaction_table(request):
+    return render(request, 'finance_tracker/transaction_table.html')

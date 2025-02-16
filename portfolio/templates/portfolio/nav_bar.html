@@ -1,35 +1,35 @@
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top border-bottom border-body" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="{% url 'portfolio:home' %}">LUCAS PATRIQUIN</a>
-    {% comment %} <a class="navbar-brand" href="{% url 'portfolio:home' %}">
-    <img src="static/portfolio/images/site_logo.png" alt="LUCAS PATRIQUIN" width="180" height="100">
-    </a> {% endcomment %}
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'portfolio:home' %}">Home</a>
-        </li>
-        <li class="nav-item dropdown">  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Projects
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown"> 
-            <li><a class="dropdown-item" href="{% url 'finance_tracker:home' %}">Personal Finance Tracker</a></li>
-            <li><a class="dropdown-item" href="#">Happiness - Coming Soon</a></li>
-            <li><a class="dropdown-item" href="#">Business Locator - Coming Soon</a></li>
-            <li><a class="dropdown-item" href="#">Blog - Coming Soon</a></li>
-            <li><hr class="dropdown-divider"></li>  <li><a class="dropdown-item" href="{% url 'portfolio:home' %}#projects">All Projects</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'portfolio:home' %}#about-me">About Me</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'portfolio:home' %}#contact-me">Contact</a>
-        </li>
-      </ul>
+     <div class="container-fluid">
+         <a class="navbar-brand fw-bold" href="{% url 'portfolio:home' %}">LUCAS PATRIQUIN</a>
+         {% comment %} <a class="navbar-brand" href="{% url 'portfolio:home' %}">
+            <img src="static/portfolio/images/site_logo.png" alt="LUCAS PATRIQUIN" width="180" height="100">
+            </a> {% endcomment %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'portfolio:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Projects
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown"> 
+                        <li><a class="dropdown-item" href="{% url 'finance_tracker:home' %}">Personal Finance Tracker</a></li>
+                        <li><a class="dropdown-item" href="#">Happiness - Coming Soon</a></li>
+                        <li><a class="dropdown-item" href="#">Business Locator - Coming Soon</a></li>
+                        <li><a class="dropdown-item" href="#">Blog - Coming Soon</a></li>
+                        <li><hr class="dropdown-divider"></li>  <li><a class="dropdown-item" href="{% url 'portfolio:home' %}#projects">All Projects</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'portfolio:home' %}#about-me">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'portfolio:home' %}#contact-me">Contact</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>

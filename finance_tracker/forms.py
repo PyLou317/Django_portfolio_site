@@ -38,7 +38,7 @@ class UploadFileForm(forms.Form):
                             print(f"Invalid amount format for transaction: {description}")
                             continue
 
-                    # Basic categorization (replace with more sophisticated logic)
+                    # Categorize transactions
                     category_name = categorize_transaction(description)
 
                     category, created = Category.objects.get_or_create(name=category_name)

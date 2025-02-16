@@ -1,6 +1,6 @@
-<div class="col">  
+<div class="col text-center">  
     <div class="card h-100">
-            <a href="{% url 'portfolio:project_redirect' pk=project.pk %}">
+        <a href="{% url 'portfolio:project_redirect' pk=project.pk %}">
             {% if project.image %}
             <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
             {% endif %}
@@ -11,4 +11,5 @@
         </div>
     </a>
 </div>
+
 
