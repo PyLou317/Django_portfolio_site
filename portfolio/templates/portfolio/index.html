@@ -4,11 +4,11 @@
 {% block title %}Home - My Portfolio{% endblock %} 
 
 {% block content %}
-<div class="container-fuid bg-dark text-light min-vh-90">
+<div class="container-fuid bg-dark text-light min-vh-100 mt-5">
     <div class="container col-xxl-8 px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
-            <img src="{% static 'portfolio/images/lucas_portrait.png' %}" class="d-block mx-lg-auto img-fluid" alt="Lucas Patriquin Headshot" width="700" height="500" loading="lazy">
+            <img id="hero-img" src="{% static 'portfolio/images/lucas_portrait.png' %}" class="d-block mx-lg-auto img-fluid" alt="Lucas Patriquin Headshot" loading="lazy">
         </div>
         <div class="col-lg-6">
             <h1 class="display-5 fw-bold lh-1 mb-3">Hi, I'm Lucas!</h1>
