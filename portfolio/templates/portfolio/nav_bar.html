@@ -1,6 +1,9 @@
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid px-5">
-    <a class="navbar-brand fw-bold" href="{% url 'portfolio:home' %}">LUCAS PATRIQUIN</a>
+    {% comment %} <a class="navbar-brand fw-bold" href="{% url 'portfolio:home' %}">LUCAS PATRIQUIN</a> {% endcomment %}
+    <a class="navbar-brand" href="{% url 'portfolio:home' %}">
+      <img src="portfolio/images/site_logo.png" alt="LUCAS PATRIQUIN" width="30" height="24">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
