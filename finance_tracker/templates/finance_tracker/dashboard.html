@@ -9,7 +9,7 @@
                     <h5 class="card-title text-primary">Total Expense</h5>
                     <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
                     <div>
-                        <canvas id ="total-expense"></canvas>
+                        <canvas id ="total-expense-chart"></canvas>
                     </div>
                     <h1 class="card-text text-end">50,487</h1>
                 </div>
@@ -19,7 +19,7 @@
                     <h5 class="card-title text-primary">Monthly Expense</h5>
                     <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
                     <div>
-                        <canvas id ="total-expense"></canvas>
+                        <canvas id ="monthly-expense-chart"></canvas>
                     </div>
                     <h1 class="card-text text-end">5,487</h1>
                 </div>
@@ -29,7 +29,7 @@
                     <h5 class="card-title text-primary">Total Income</h5>
                     <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
                     <div>
-                        <canvas id ="total-expense"></canvas>
+                        <canvas id ="total-income-chart"></canvas>
                     </div>
                     <h1 class="card-text text-end">110,000</h1>
                 </div>
@@ -39,5 +39,5 @@
 {% endblock content %}
 
 {% block extra_js %}
-<script src="{% static 'js/dashboard.js' %}"></script>
+<script src="{% static 'finance_tracker/js/dashboard.js' %}"></script>
 {% endblock extra_js %}

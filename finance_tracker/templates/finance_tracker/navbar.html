@@ -1,6 +1,4 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-9 d-flex"> 
 
             <!-- Tabs -->
             <ul class="nav nav-tabs">
@@ -16,9 +14,13 @@
                 <li class="nav-item">
                     <a class="nav-link {% if request.path == '/finance_tracker/transaction_table/' %}active{% endif %}" href="{% url 'finance_tracker:transaction-table' %}">Transaction Table</a>
                 </li>
+
+                <!-- Fix this -->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/finance_tracker/transaction_table/' %}active{% endif %}" href="{% url 'finance_tracker:transaction-table' %}">Sign-in</a>
+                </li>
+                
             </ul>
             <!-- End Tabs -->
 
-        </div>
-    </div>
-</div>
+</div>          
