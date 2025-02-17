@@ -2,26 +2,26 @@
 {% load static %}
 
 {% block content %}
-<div class="my-3 mx-3 min-vh-100">
+<div class="container-fluid min-vh-100">
     {% comment %} <div class="w-100 mt-5 h-25"></div>  {% endcomment %}
     
     <!-- Cards -->
-        <div class="d-flex mt-5 flex-wrap">
-            <div class="col-md-3 col-sm-6 card mx-3">
+        <div class="d-flex mt-5 flex-wrap justify-content-center">
+            <div class="card mx-3 my-3 flex-grow-1 col-lg-3 col-md-4 col-sm-6">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Total Income</h5>
                     <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
                     <h1 class="card-text text-end">110,000</h1>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 card mx-3">
+            <div class="card mx-3 my-3 flex-grow-1 col-md-4 col-sm-6">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Total Expenses</h5>
                     <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
                     <h1 class="card-text text-end">90,000</h1>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 card mx-3">
+            <div class="card mx-3 my-3 flex-grow-1 col-md-4 col-sm-6">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Other Total</h5>
                     <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
@@ -31,8 +31,8 @@
         </div>
 
         <!-- Charts -->
-        <div class="d-flex mt-5 flex-wrap">
-            <div class="col-5 card mx-3">
+        <div class="d-flex my-3 flex-wrap justify-content-center">
+            <div class="flex-grow-1 card mx-3 col-lg-5 col-sm-6 my-3">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Income Total by Month</h5>
                     <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-5 card mx-3">
+            <div class="flex-grow-1 card mx-3 col-lg-5 col-sm-6 my-3">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Expense Total by Month</h5>
                     <h6 class="card-subtitles mb-2 text-muted">By Month</h6>
@@ -51,11 +51,15 @@
                 </div>
             </div>
         </div>
-
-        <div class="mx-3 my-5">
-            <h3 class="text-center">Expenses by Month</h3>
-            <div class="bg-secondary bg-opacity-25 px-5 py-3 rounded">
-                <canvas id="expense-by-month-chart"></canvas>
+        
+        {% comment %} <div class="mx-3 my-5"> {% endcomment %}
+        <h3 class="text-center mt-5">Expenses by Month</h3>
+        <div class="col flex-grow-1 card mx-3">
+            <div class="card-body">
+            {% comment %} <div class="bg-secondary bg-opacity-25 px-5 py-3 rounded"> {% endcomment %}
+                <div>
+                    <canvas id="expense-by-month-chart"></canvas>
+                </div>
             </div>
         </div>
 
