@@ -1,35 +1,24 @@
 {% extends 'finance_tracker/base.html' %} 
+{% load static %}
 
 {% block content %}
-    <div class="container min-vh-100 mt-5">
-        <table id="myTable"></table>
-        <canvas id="myChart"></canvas>
-    </div>
-{% endblock content %}
+<div class="container min-vh-100 mt-5">
+  <table id="myTable"></table>
+</div>
+{% endblock content %} 
 
-{% block extra_js %}  
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const dataTable = new simpleDatatables.DataTable("#myTable");
-            const ctx = document.getElementById('myChart');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        });
-    </script>
+{% spaceless %}
+{% block extra_js %}
+<script>
+    const dataTable = new simpleDatatables.DataTable("#myTable", {
+        searchable: true,
+        fixedHeight: true,
+        data: {
+            headings: ["Date", "Description", "Amount"],
+        }
+    })
+    
+</script>
+{{ transactions_json|safe }}
 {% endblock extra_js %}
+{% endspaceless %}

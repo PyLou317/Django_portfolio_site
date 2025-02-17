@@ -1,31 +1,42 @@
 {% extends 'portfolio/base.html' %} 
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'finance_tracker/css/finance_tracker.css' %}">
+{% endblock extra_css%}
 
 {% block title %}Finance Tracker{% endblock %} 
 {% block nav_bar %}
     {{ block.super }}
-        <div class="m-3">
-            <h1>Finance Tracker</h1>
+    <div id="ft-heading">
+        <h1>Finance Tracker</h1>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9 d-flex"> 
+                <!-- Tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' or request.path == '/finance_tracker/' %}active{% endif %}" href="{% url 'finance_tracker:home' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/finance_tracker/upload/' %}active{% endif %}" href="{% url 'finance_tracker:file_upload' %}">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/finance_tracker/transactions/' %}active{% endif %}" href="{% url 'finance_tracker:transaction-list' %}">View Transactions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/finance_tracker/transaction_table/' %}active{% endif %}" href="{% url 'finance_tracker:transaction-table' %}">Transaction Table</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'finance_tracker:home' %}" {% if request.path == '/' %}class="active"{% endif %}>Dashboard</a> 
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'finance_tracker:file_upload' %}">Upload</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'finance_tracker:transaction-list' %}" {% if request.path == '/transactions/' %}class="active"{% endif %}>View Transactions</a> 
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'finance_tracker:transaction-table' %}" {% if request.path == '/transactions/' %}class="active"{% endif %}>Transaction Table</a> 
-            </li>
-            </ul>
+    </div>
 {% endblock %}
     
 {% block content %} 
-{% endblock %} 
+{% endblock content %}
 
-{% block script %}
-{% endblock script %}
+{% block extra_js %} 
+{% endblock extra_js %}

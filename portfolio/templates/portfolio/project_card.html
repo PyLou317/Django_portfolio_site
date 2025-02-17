@@ -1,11 +1,11 @@
 <div class="col text-center">  
-    <div class="card h-100">
+    <div id="project-card" class="card h-100">
         <a href="{% url 'portfolio:project_redirect' pk=project.pk %}">
             {% if project.image %}
             <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
             {% endif %}
-            <div class="card-body">
-                <h5 class="card-title">{{ project.title }}</h5>
+            <div id="pc-body" class="card-body">
+                <h5 id="pc-title" class="card-title">{{ project.title }}</h5>
                 <p class="card-text">{{ project.description }}</p>
             </div>
         </div>
