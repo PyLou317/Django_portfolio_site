@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 d-flex"> 
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/' or request.path == '/finance_tracker/' %}active{% endif %}" href="{% url 'finance_tracker:home' %}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/finance_tracker/upload/' %}active{% endif %}" href="{% url 'finance_tracker:file_upload' %}">Upload</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/finance_tracker/transactions/' %}active{% endif %}" href="{% url 'finance_tracker:transaction-list' %}">View Transactions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/finance_tracker/transaction_table/' %}active{% endif %}" href="{% url 'finance_tracker:transaction-table' %}">Transaction Table</a>
+                </li>
+            </ul>
+            <!-- End Tabs -->
+
+        </div>
+    </div>
+</div>
