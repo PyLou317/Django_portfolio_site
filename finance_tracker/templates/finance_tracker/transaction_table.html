@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block content %}
-<h1 class="my-3 mx-4">All Transactions</h1>
-<div class="container min-vh-100 mt-5">
-  <table id="myTable"></table>
+<div class="m-3 min-vh-100">
+    <h1>All Transactions</h1>
+    <table id="myTable"></table>
 </div>
 {% endblock content %} 
 
@@ -15,7 +15,7 @@
         searchable: true,
         fixedHeight: true,
         data: {
-            headings: ["Date", "Description", "Amount"],
+            headings: ["Date", "Category", "Description", "Amount"],
         }
     })
     
