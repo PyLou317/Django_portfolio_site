@@ -3,27 +3,28 @@
 
 {% block content %}
     <div class="my-3 mx-3 min-vh-100">
-        <div class="d-flex mt-5">
-            <div class="col-3 card mx-3">
+        <div class="d-flex mt-5 flex-wrap">
+            <div class="col-5 card mx-3">
                 <div class="card-body">
-                    <h5 class="card-title text-primary">Total Expense</h5>
-                    <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
+                    <h5 class="card-title text-primary">Total Expenses</h5>
+                    <h6 class="card-subtitles mb-2 text-muted">By Month</h6>
                     <div>
-                        <canvas id ="total-expense-chart"></canvas>
+                        <canvas id ="total-expenses-chart"></canvas>
                     </div>
                     <h1 class="card-text text-end">50,487</h1>
                 </div>
             </div>
-            <div class="col-3 card mx-3">
+            <div class="col-5 card mx-3">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Monthly Expense</h5>
                     <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
                     <div>
-                        <canvas id ="monthly-expense-chart"></canvas>
+                        <canvas id ="monthly-expenses-chart"></canvas>
                     </div>
                     <h1 class="card-text text-end">5,487</h1>
                 </div>
             </div>
+            <div class="w-100 mt-5"></div> 
             <div class="col-3 card mx-3">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Total Income</h5>
