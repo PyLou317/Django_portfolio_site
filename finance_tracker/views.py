@@ -8,6 +8,8 @@ from .forms import UploadFileForm
 from .models import Transaction
 from django.core import serializers
 
+import json
+
 def finance_tracker_home(request):
     return render(request, 'finance_tracker/dashboard.html')
 
@@ -24,13 +26,21 @@ def upload_statement(request):
 
 
 def transaction_table(request):
-    transactions = Transaction.objects.all()
+    transactions = Transaction.objects.all().prefetch_related('category') # Added prefetch to get category before it's serialized
     
-    # Django can't pass json data to HTML so you have to Serialize Queryset
-    transactions_json = serializers.serialize('json', transactions)
-    
-    context = {'transactions_json': transactions_json}
-    return render(request, 'finance_tracker/transaction_table.html', context)
+    transaction_data_list = []
+    for transaction in transactions:
+        transaction_data = {
+            'date': transaction.date.isoformat() if transaction.date else None, # Format date as string
+            'category': transaction.category.name if transaction.category else None, # Get category name
+            'description': transaction.description,
+            'amount': str(transaction.amount) # Convert Decimal to string for JSON
+        }
+        transaction_data_list.append(transaction_data)
+
+    # 2. Pass the list of dictionaries to the template (no need for serializers.serialize):
+    transactions_json = json.dumps(transaction_data_list) # Serialize manually to JSON
+    return render(request, 'finance_tracker/transaction_table.html', {'transactions_json': transactions_json}) # Replace 'your_template.html' with your template name
 
 
 class TransactionListView(ListView):
