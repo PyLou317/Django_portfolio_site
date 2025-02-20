@@ -1,60 +1,48 @@
-{% extends 'finance_tracker/base.html' %} 
-{% load static %}
+{% extends 'finance_tracker/base.html' %}
+{% load static %}   
 
 {% block content %}
 <div class="m-3 min-vh-100">
     <h1>All Transactions</h1>
-    <table id="myTable">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            </tbody>
-    </table>
+    <table id="myTable"></table>
 </div>
-{% endblock content %} 
+{% endblock content %}
 
 {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        console.log('Javascript block is executing');
-        {% comment %} console.log('Raw transactions_json:', `{{ transactions_json|safe }}`); // Using backticks (template literals) {% endcomment %}
-        const transactionsData = JSON.parse(`{{ transactions_json|safe }}`); // Using backticks here too
-        console.log('Parsed transactionsData:', transactionsData);
+        fetch('/finance_tracker/transactions_json/')
+            .then(resp => resp.json())
+            .then(transactionsData => { // 'transactionsData' is now the JSON list from Django
+                console.log('Fetched transactionsData:', transactionsData);
 
-        // 2. Prepare data for simpleDatatables (assuming 'fields' structure from Django serializer)
-        const tableData = {
-            headings: ["Date", "Category", "Description", "Amount"],
-            rows: transactionsData.map(transaction => {
-                return [
-                    transaction.date,
-                    transaction.category,
-                    transaction.description,
-                    transaction.amount
-                ];
-            })
-        };
-        console.log('tableData:', tableData);
+                // Prepare data for dataTable.rows.add() - transform list of objects to array of arrays
+                const tableRowsToAdd = transactionsData.map(transaction => {
+                    return [
+                        transaction.date,
+                        transaction.category,
+                        transaction.description,
+                        transaction.amount
+                    ];
+                });
+                console.log('tableRowsToAdd:', tableRowsToAdd); // Verify transformed data
 
-        setTimeout(function() { // Introduce a small delay
-            console.log('Initializing DataTable with:', tableData); // Logging before init
-            try {
                 const dataTable = new simpleDatatables.DataTable("#myTable", {
                     searchable: true,
                     fixedHeight: true,
-                    data: tableData
+                    data: {
+                        headings: ['Date', 'Category', 'Description', 'Amount'] // Corrected headings order to match HTML
+                    }
                 });
-                console.log('DataTable initialized successfully:'); // Success log
-            } catch (error) {
-                console.error('Error initializing DataTable:', error); // Error log
-            }
-        }, 50); // 50 milliseconds delay - adjust if needed
+
+
+                dataTable.rows.add(tableRowsToAdd); // Use dataTable.rows.add() with the transformed data
+                console.log('DataTable rows added successfully');
+
+            });
     });
     
+        
 </script>
 {% endblock extra_js %}

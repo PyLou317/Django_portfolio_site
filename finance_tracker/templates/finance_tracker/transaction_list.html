@@ -1,36 +1,79 @@
 {% extends 'finance_tracker/base.html' %} 
+{% load static %}
 
 {% block content %}
-    <div class="m-3">
+<div class="container-fluid mx-2">
     <h4>Transactions</h4>
-    <ul>
-        {% if page_obj %} 
-            {% for transaction in page_obj %}
-                <li>
-                    {{ transaction.date|date:"Y-m-d" }} {{ transaction.description }} - {{ transaction.category|upper }} - ${{transaction.amount }}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Category</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% if page_obj %} 
+                {% for transaction in page_obj %}
+                    <tr>
+                        <td>{{ transaction.date|date:"Y-m-d" }}</td>
+                        <td>{{ transaction.category|upper }}</td>
+                        <td>{{ transaction.description }}</td>
+                        <td>${{transaction.amount }}</td>
+                    </tr>
+                {% endfor %} 
+            {% else %}
+                <tr> <td colspan="4">No Transactions yet.</td> </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <div class="pagination justify-content-center"> 
+        <nav id="pagination" class="pagination-dark">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; first</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item active" aria-current="page"> <span class="page-link">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} <span class="visually-hidden">(current)</span>
+                    </span>
                 </li>
-            {% endfor %} 
-        {% else %}
-            <li>No Transactions yet.</li>
-    {% endif %}
-    </ul>
 
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-        <a href="?page=1">&laquo; first</a>
-        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}  
-        </span>
-
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">next</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
+    {% comment %} <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}  
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div> {% endcomment %}
 </div>
 {% endblock content %}

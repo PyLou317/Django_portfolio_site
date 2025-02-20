@@ -9,4 +9,5 @@ urlpatterns = [
     path('transactions/', TransactionListView.as_view(), name='transaction-list'),
     path('transaction_table/', views.transaction_table, name='transaction-table'),
     path('upload/', views.upload_statement, name='file_upload'),
+    path('transactions_json/', views.transaction_list_json, name='transaction_list_json'),
 ]

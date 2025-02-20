@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 
 from django.views.generic.list import ListView
 from django.utils import timezone
@@ -26,21 +26,21 @@ def upload_statement(request):
 
 
 def transaction_table(request):
-    transactions = Transaction.objects.all().prefetch_related('category') # Added prefetch to get category before it's serialized
-    
+    return render(request, 'finance_tracker/transaction_table.html') 
+
+
+def transaction_list_json(request): # NEW view to return JSON data
+    transactions = Transaction.objects.all().prefetch_related('category')
     transaction_data_list = []
     for transaction in transactions:
         transaction_data = {
-            'date': transaction.date.isoformat() if transaction.date else None, # Format date as string
-            'category': transaction.category.name if transaction.category else None, # Get category name
+            'date': transaction.date.isoformat() if transaction.date else None,
+            'category': transaction.category.name if transaction.category else None,
             'description': transaction.description,
-            'amount': str(transaction.amount) # Convert Decimal to string for JSON
+            'amount': str(transaction.amount)
         }
         transaction_data_list.append(transaction_data)
-
-    # 2. Pass the list of dictionaries to the template (no need for serializers.serialize):
-    transactions_json = json.dumps(transaction_data_list) # Serialize manually to JSON
-    return render(request, 'finance_tracker/transaction_table.html', {'transactions_json': transactions_json}) # Replace 'your_template.html' with your template name
+    return JsonResponse(transaction_data_list, safe=False) # Returns JSON response
 
 
 class TransactionListView(ListView):
