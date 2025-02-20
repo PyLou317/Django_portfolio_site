@@ -11,9 +11,6 @@
                 <li class="nav-item">
                     <a class="nav-link {% if request.path == '/finance_tracker/transactions/' %}active{% endif %}" href="{% url 'finance_tracker:transaction-list' %}">View Transactions</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/finance_tracker/transaction_table/' %}active{% endif %}" href="{% url 'finance_tracker:transaction-table' %}">Transaction Table</a>
-                </li>
 
                 <!-- Fix this -->
                 <li class="nav-item ms-auto">

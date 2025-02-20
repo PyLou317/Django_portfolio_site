@@ -3,7 +3,21 @@
 
 {% block content %}
 <div class="container-fluid mx-2">
-    <h4>Transactions</h4>
+    <h4 class="display-5 my-3">All Transactions</h4>
+
+    <div class="row">  {# Bootstrap Row #}
+        <div class="col-12 col-md-3">  {# Bootstrap Column - adjust col-md-3 to control width on medium screens and up #}
+            <form method="get" class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search transactions..." name="search_term" value="{{ request.GET.search_term }}">
+                    {% if request.GET.search_term %}
+                        <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -11,6 +25,7 @@
             <th scope="col">Category</th>
             <th scope="col">Description</th>
             <th scope="col">Amount</th>
+            <th scope="col"></th>
             </tr>
         </thead>
         
@@ -22,6 +37,7 @@
                         <td>{{ transaction.category|upper }}</td>
                         <td>{{ transaction.description }}</td>
                         <td>${{transaction.amount }}</td>
+                        <td>Modify/Delete</td>
                     </tr>
                 {% endfor %} 
             {% else %}
