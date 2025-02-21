@@ -3,7 +3,10 @@
             <!-- Tabs -->
             <ul class="nav nav-tabs mx-2">
                 <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/' or request.path == '/finance_tracker/' %}active{% endif %}" href="{% url 'finance_tracker:home' %}">Dashboard</a>
+                    <a class="nav-link {% if request.path == '/' or request.path == '/finance_tracker/' %}active{% endif %}" href="{% url 'finance_tracker:home' %}">Start Here</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/' or request.path == '/finance_tracker/dashboard/' %}active{% endif %}" href="{% url 'finance_tracker:dashboard' %}">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.path == '/finance_tracker/upload/' %}active{% endif %}" href="{% url 'finance_tracker:file_upload' %}">Upload</a>
@@ -14,7 +17,7 @@
 
                 <!-- Fix this -->
                 <li class="nav-item ms-auto">
-                    <a class="nav-link {% if request.path == '/finance_tracker/transaction_table/' %}active{% endif %}" href="{% url 'finance_tracker:transaction-table' %}">Sign-in</a>
+                    <a class="nav-link {% if request.path == '/finance_tracker/' %}active{% endif %}" href="{% url 'finance_tracker:home' %}">Sign-in</a>
                 </li>
 
             </ul>

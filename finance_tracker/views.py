@@ -11,8 +11,12 @@ from django.db.models import Q
 
 import json
 
-def finance_tracker_home(request):
+def finance_tracker_dashboard(request):
     return render(request, 'finance_tracker/dashboard.html')
+
+
+def finance_tracker_home(request):
+    return render(request, 'finance_tracker/index.html')
 
 
 def upload_statement(request):

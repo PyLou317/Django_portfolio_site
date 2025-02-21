@@ -3,7 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthlyExpensesChart = document.getElementById('monthly-expenses-chart')
     const totalIncomeChart = document.getElementById('total-income-chart')
     const expenseByMonthChart = document.getElementById('expense-by-month-chart')
-
+    
+    
+    fetch('/finance_tracker/transactions_json/')
+        .then(resp => resp.json())
+        .then(transactionsData => { // 'transactionsData' is now the JSON list from Django
+            console.log('Fetched transactionsData:', transactionsData);
+        });
+    
     
     new Chart(totalExpensesChart, {
         type: 'line',
@@ -23,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-
+    
     const monthlyExpense = new Chart(monthlyExpensesChart, {
         type: 'line',
         data: {
@@ -42,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-
+    
     const expenseByMonth = new Chart(expenseByMonthChart, {
         type: 'bar',
         data: {
