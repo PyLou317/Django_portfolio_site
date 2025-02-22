@@ -11,5 +11,6 @@ urlpatterns = [
     path('upload/', views.upload_statement, name='file_upload'),
     # API's
     path('transactions_json/', views.transaction_list_json, name='transaction_list_json'),
+    path('category_expense_json/', views.category_expenses_json, name='category_expense_json'),
     # path('transaction_table/', views.transaction_table, name='transaction-table'),
 ]

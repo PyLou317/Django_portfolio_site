@@ -1,14 +1,15 @@
+from django.views.generic.list import ListView
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, JsonResponse
-
-from django.views.generic.list import ListView
+from .forms import UploadFileForm
 from django.utils import timezone
 
-from .forms import UploadFileForm
 from .models import Transaction
-from django.core import serializers
-from django.db.models import Q 
 
+from django.core import serializers
+from django.db.models import Q, Sum
+
+import datetime
 import json
 
 def finance_tracker_dashboard(request):
@@ -47,6 +48,29 @@ def transaction_list_json(request): # NEW view to return JSON data
         transaction_data_list.append(transaction_data)
     return JsonResponse(transaction_data_list, safe=False) # Returns JSON response
 
+
+def category_expenses_json(request):
+    year = request.GET.get('year') # Get year from request parameters (optional, can default to current year)
+    if not year:
+        year = datetime.date.today().year # Default to current year if year is not provided
+    else:
+        year = int(year) # Convert year to integer
+
+    category_expenses = Transaction.objects.filter(
+        date__year=year  # Filter transactions for the specified year
+    ).values('category__name').annotate( # Group by category name and annotate sum
+        total_expense=Sum('amount') # Calculate sum of amounts for each category group
+    ).order_by('-total_expense') # Optionally order by total expense descending
+
+    # Format the data for JSON response
+    category_data = []
+    for item in category_expenses:
+        category_data.append({
+            'category': item['category__name'], # Category name
+            'total_expense': str(item['total_expense']) # Total expense for the category (convert Decimal to string for JSON)
+        })
+
+    return JsonResponse(category_data, safe=False) # Return JSON response
 
 class TransactionListView(ListView):
     paginate_by = 10
