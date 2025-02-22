@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
     
-            const monthlyExpense = new Chart(monthlyExpensesChart, {
+            const monthlyExpense = new Chart(monthlyIncomeChart, {
                 type: 'line',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],

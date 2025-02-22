@@ -57,11 +57,12 @@ def category_expenses_json(request):
         year = int(year) # Convert year to integer
 
     category_expenses = Transaction.objects.filter(
-        date__year=year  # Filter transactions for the specified year
-    ).values('category__name').annotate( # Group by category name and annotate sum
-        total_expense=Sum('amount') # Calculate sum of amounts for each category group
-    ).order_by('-total_expense') # Optionally order by total expense descending
-
+        date__year=2024
+    ).values('category__name').annotate(
+        total_expense=Sum('amount')
+    ).order_by('-total_expense').exclude( 
+        category__name='income')
+    
     # Format the data for JSON response
     category_data = []
     for item in category_expenses:
