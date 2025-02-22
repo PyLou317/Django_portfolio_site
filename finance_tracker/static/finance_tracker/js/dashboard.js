@@ -62,11 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     
             const monthlyExpense = new Chart(monthlyIncomeChart, {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
-                        label: 'Expenses',
+                        label: 'Total Income',
                         data: [65, 59, 80, 81, 56, 55, 40],
                         borderWidth: 1
                     }]

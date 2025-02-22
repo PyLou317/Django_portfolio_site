@@ -5,3 +5,11 @@
 #welcome-title {
     margin-top: 100px;
 }
+
+#expense-num {
+    color: red;
+}
+
+#profit-num {
+    color: green;
+}

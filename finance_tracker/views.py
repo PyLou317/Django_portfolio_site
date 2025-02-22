@@ -35,7 +35,8 @@ def transaction_table(request):
     return render(request, 'finance_tracker/transaction_table.html') 
 
 
-def transaction_list_json(request): # NEW view to return JSON data
+# NEW view to return JSON data
+def transaction_list_json(request): 
     transactions = Transaction.objects.all().prefetch_related('category')
     transaction_data_list = []
     for transaction in transactions:
