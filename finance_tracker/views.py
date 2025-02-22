@@ -74,6 +74,39 @@ def category_expenses_json(request):
 
     return JsonResponse(category_data, safe=False) # Return JSON response
 
+
+def income_total_json(request):
+    year = request.GET.get('year') # Get year from request parameters (optional, can default to current year)
+    if not year:
+        year = datetime.date.today().year # Default to current year if year is not provided
+    else:
+        year = int(year) # Convert year to integer
+
+    # 1. Filter income transactions for the year
+    income_transactions_for_year = Transaction.objects.filter(
+        date__year=2024,
+        category__name='income'
+    )
+        
+    # 2. Group by month and category, and sum amounts
+    monthly_income_data = income_transactions_for_year.values(
+        'date__month', 'category__name'
+    ).annotate(
+        total_income=Sum('amount')
+    ).order_by('date__month', 'category__name')
+    
+    # Format the data for JSON response
+    income_data = []
+    for item in monthly_income_data:
+        income_data.append({
+            'month': item['date__month'],
+            'category': item['category__name'],
+            'total_income': float(item['total_income'])
+        })
+
+    return JsonResponse(income_data, safe=False) # Return JSON response
+
+
 class TransactionListView(ListView):
     paginate_by = 10
     model = Transaction

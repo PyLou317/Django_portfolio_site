@@ -22,14 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     datasets: [{
                         label: 'Total Expenses per Category',
                         data: categoryExpenseTotals,
-                        backgroundColor: [ // Optional: Customize bar colors
+                        backgroundColor: [
                             'rgba(255, 99, 132, 0.8)',
                             'rgba(54, 162, 235, 0.8)',
                             'rgba(255, 206, 86, 0.8)',
                             'rgba(75, 192, 192, 0.8)',
                             'rgba(153, 102, 255, 0.8)',
                             'rgba(255, 159, 64, 0.8)',
-                            // ... more colors if you have more categories
+                            'rgba(52, 9, 207, 0.8)',
                         ],
                         borderColor: [ // Optional: Customize border colors
                             'rgba(255, 99, 132, 1)',
@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             'rgba(75, 192, 192, 1)',
                             'rgba(153, 102, 255, 1)',
                             'rgba(255, 159, 64, 1)',
+                            'rgb(33, 26, 165)',
                         ],
                         borderWidth: 1
                     }]
@@ -60,43 +61,54 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-    
-            const monthlyExpense = new Chart(monthlyIncomeChart, {
-                type: 'bar',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'Total Income',
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+        
+
+            fetch('/finance_tracker/income_total_json/')
+                .then(resp => resp.json())
+                .then(monthlyIncomeData => {
+                    console.log('Fetched monthlyIncomeData:', monthlyIncomeData);
+
+                    const categoryLabels = monthlyIncomeData.map(item => item.month);
+                    const monthlyIncomeTotals = monthlyIncomeData.map(item => parseFloat(item.total_income));
+
+
+                    const monthlyExpense = new Chart(monthlyIncomeChart, {
+                        type: 'bar',
+                        data: {
+                            labels: categoryLabels,
+                            datasets: [{
+                                label: 'Total Income',
+                                data: monthlyIncomeTotals,
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
                         }
-                    }
-                }
-            });
+                    });
     
-            const expenseByMonth = new Chart(expenseByMonthChart, {
-                type: 'bar',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'Expenses',
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    const expenseByMonth = new Chart(expenseByMonthChart, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                            datasets: [{
+                                label: 'Expenses',
+                                data: [65, 59, 80, 81, 56, 55, 40],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
                         }
-                    }
-                }
-            });
-        });
-});
+                    });
+                });
+        })
+})
