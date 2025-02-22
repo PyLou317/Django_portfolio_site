@@ -3,35 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthlyIncomeChart = document.getElementById('monthly-income-chart')
     const totalIncomeChart = document.getElementById('total-income-chart')
     const expenseByMonthChart = document.getElementById('expense-by-month-chart')
-    const yearSelector = document.getElementById('year-selector');
-
-    // function updateCategoryChart(selectedYear) {
-    //     let fetchUrl = '/finance_tracker/category_expenses_json/';
-    //     if (selectedYear) { // If a year is selected (not "Current Year")
-    //         fetchUrl += `?year=${selectedYear}`; // Add year as query parameter
-    //     }
-
-    fetch(fetchUrl)
+    
+    
+    fetch('/finance_tracker/category_expense_json/')
         .then(resp => resp.json())
         .then(categoryExpensesData => { // 'transactionsData' is now the JSON list from Django
-            console.log(`Fetched category expenses for year`, categoryExpensesData);
-
+            console.log('Fetched categoryExpenseData:', categoryExpensesData);
+            
             // 1. Prepare data for Chart.js
             const categoryLabels = categoryExpensesData.map(item => item.category); // Extract category names
             const categoryExpenseTotals = categoryExpensesData.map(item => parseFloat(item.total_expense)); // Extract total expenses (convert to number)
-
-            // // Destroy existing chart if it exists (to prevent errors on updates)
-            // if (window.expenseChartInstance) { // Check if chart instance exists globally
-            //     window.expenseChartInstance.destroy(); // Destroy previous chart
-            // }
-
-            // Create new Chart.js instance and store it globally for updates
-            window.expenseChartInstance = new Chart(totalExpensesChart, {
+    
+    
+            new Chart(totalExpensesChart, {
                 type: 'bar',
                 data: {
                     labels: categoryLabels,
                     datasets: [{
-                        label: `Total Expenses per Category`,
+                        label: 'Total Expenses per Category',
                         data: categoryExpenseTotals,
                         backgroundColor: [ // Optional: Customize bar colors
                             'rgba(255, 99, 132, 0.8)',
@@ -71,17 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-
-            // // Initial chart load (for current year by default)
-            // updateCategoryChart(); // Call updateCategoryChart with no year argument to load current year data
-
-            // // Event listener for year selection change
-            // yearSelector.addEventListener('change', function () {
-            //     const selectedYear = this.value; // Get the selected year from the dropdown
-            //     updateCategoryChart(selectedYear); // Call updateCategoryChart with the selected year
-            // });
-
-            const monthlyIncome = new Chart(monthlyIncomeChart, {
+    
+            const monthlyExpense = new Chart(monthlyExpensesChart, {
                 type: 'line',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -99,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-
+    
             const expenseByMonth = new Chart(expenseByMonthChart, {
                 type: 'bar',
                 data: {
@@ -119,6 +99,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-
 });
-
