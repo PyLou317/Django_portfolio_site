@@ -4,28 +4,9 @@
 {% block title %}Home - My Portfolio{% endblock %} 
 
 {% block content %}
-<div class="container-fuid bg-dark text-light min-vh-100 mt-5">
-    <div class="container col-xxl-8 px-4 py-5">
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6">
-            <img id="hero-img" src="{% static 'portfolio/images/lucas_portrait.png' %}" class="d-block mx-lg-auto img-fluid" alt="Lucas Patriquin Headshot" loading="lazy">
-        </div>
-        <div class="col-lg-6">
-            <h4 class="lh-1 mb-3">Hi, I'm Lucas!</h4>
-            <h4 class="display-3 fw-bold lh-1 mb-3">Welcome to my Code Lab</h4>
-            <p class="lead">A glimpse into my coding journey, fueled by an unhealthy amount of coffee and a healthy dose of curiosity.</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a href="{% url 'portfolio:home' %}#projects-section" class="text-decoration-none">
-                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">My Work</button>
-                </a>
-                <a href="{% url 'portfolio:home' %}#contact-me" class="text-decoration-none">
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Connect</button>
-                </a>
-            </div>
-        </div>
-        </div>
-    </div>
-</div>
+<header>
+    {% include 'portfolio/hero-banner.html' %}
+</header>
 
 <section id="projects-section">
     <div class="container mb-5">
