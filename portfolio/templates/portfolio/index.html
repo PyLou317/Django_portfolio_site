@@ -5,18 +5,18 @@
 
 {% block content %}
 <header>
-    {% include 'portfolio/hero_banner.html' %}
+    {% include 'portfolio/components/hero_banner.html' %}
 </header>
 
 <section id="projects-section">
-    {% include 'portfolio/project_card.html' %}
+    {% include 'portfolio/components/project_card.html' %}
 </section>
 
 <section id="about-me" class="about-banner">
-    {% include 'portfolio/about.html' %} 
+    {% include 'portfolio/components/about.html' %} 
 </section>
 
 <section id="contact-me" class="contact-banner">
-    {% include 'portfolio/contact_form.html' %}
+    {% include 'portfolio/components/contact_form.html' %}
 </section>
 {% endblock %}

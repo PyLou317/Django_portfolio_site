@@ -89,6 +89,10 @@ main {
     color: black;
 }
 
+#about-me {
+    scroll-margin-top: 50px;
+}
+
 .about-banner {
     min-height: 75vh;
     padding: 100px 20px;
@@ -129,6 +133,10 @@ main {
     font-size: 18px;
     line-height: 1.6;
     color: #555;
+}
+
+#contact-me {
+    scroll-margin-top: 60px;
 }
 
 .contact-banner {
