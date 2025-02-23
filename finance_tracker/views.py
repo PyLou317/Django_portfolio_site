@@ -78,14 +78,15 @@ def category_expenses_json(request):
 def income_total_json(request):
     year = request.GET.get('year') # Get year from request parameters (optional, can default to current year)
     if not year:
-        year = datetime.date.today().year # Default to current year if year is not provided
+        year = 2024
+        # datetime.date.today().year # Default to current year if year is not provided
     else:
         year = int(year) # Convert year to integer
 
     # 1. Filter income transactions for the year
     income_transactions_for_year = Transaction.objects.filter(
-        date__year=2024,
-        category__name='income'
+        date__year = year,
+        category__name = 'income'
     )
         
     # 2. Group by month and category, and sum amounts
@@ -95,11 +96,15 @@ def income_total_json(request):
         total_income=Sum('amount')
     ).order_by('date__month', 'category__name')
     
+    
     # Format the data for JSON response
     income_data = []
     for item in monthly_income_data:
+        month_number = item['date__month']
+        month_name = datetime.date(year=year, month=month_number, day=1).strftime('%B')
+        
         income_data.append({
-            'month': item['date__month'],
+            'month': month_name,
             'category': item['category__name'],
             'total_income': float(item['total_income'])
         })

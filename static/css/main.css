@@ -34,6 +34,10 @@ main {
     transform: translateY(-2px); /* Slightly move the button up */
 }
 
+#projects-section {
+    scroll-margin-top: 100px;
+}
+
 #project-card {
     display: flex;
     width: 375px;

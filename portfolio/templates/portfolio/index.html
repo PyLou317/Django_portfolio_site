@@ -12,18 +12,22 @@
         </div>
         <div class="col-lg-6">
             <h4 class="lh-1 mb-3">Hi, I'm Lucas!</h4>
-            <h4 class="display-3 fw-bold lh-1 mb-3">Code in Progress...</h4>
-            <p class="lead">This is my Coding Journey (So Far)! I create digital solutions for everyday problems. Take a look around!</p>
+            <h4 class="display-3 fw-bold lh-1 mb-3">Welcome to my Code Lab</h4>
+            <p class="lead">A glimpse into my coding journey, fueled by an unhealthy amount of coffee and a healthy dose of curiosity.</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">My Work</button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Connect</button>
+                <a href="{% url 'portfolio:home' %}#projects-section" class="text-decoration-none">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">My Work</button>
+                </a>
+                <a href="{% url 'portfolio:home' %}#contact-me" class="text-decoration-none">
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Connect</button>
+                </a>
             </div>
         </div>
         </div>
     </div>
 </div>
 
-<section id="projects">
+<section id="projects-section">
     <div class="container mb-5">
         <h1 class="display-3 text-center m-5">My Projects</h1>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">  {% if projects %}
