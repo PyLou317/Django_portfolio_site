@@ -12,12 +12,14 @@ from django.db.models import Q, Sum
 import datetime
 import json
 
-def finance_tracker_dashboard(request):
-    return render(request, 'finance_tracker/dashboard.html')
-
 
 def finance_tracker_home(request):
+    income = Transaction.objects.filter(category__name='income')
     return render(request, 'finance_tracker/index.html')
+
+
+def finance_tracker_dashboard(request):
+    return render(request, 'finance_tracker/dashboard.html')
 
 
 def upload_statement(request):
@@ -31,11 +33,6 @@ def upload_statement(request):
     return render(request, 'finance_tracker/upload.html', {'form': form})
 
 
-def transaction_table(request):
-    return render(request, 'finance_tracker/transaction_table.html') 
-
-
-# NEW view to return JSON data
 def transaction_list_json(request): 
     transactions = Transaction.objects.all().prefetch_related('category')
     transaction_data_list = []
@@ -51,45 +48,45 @@ def transaction_list_json(request):
 
 
 def category_expenses_json(request):
-    year = request.GET.get('year') # Get year from request parameters (optional, can default to current year)
+    year = request.GET.get('year')
     if not year:
-        year = datetime.date.today().year # Default to current year if year is not provided
+        year = datetime.date.today().year
     else:
-        year = int(year) # Convert year to integer
+        year = int(year)
 
     category_expenses = Transaction.objects.filter(
         date__year=2024
     ).values('category__name').annotate(
         total_expense=Sum('amount')
-    ).order_by('-total_expense').exclude( 
+    ).order_by('-total_expense').exclude( # don't include income in result
         category__name='income')
     
     # Format the data for JSON response
     category_data = []
     for item in category_expenses:
         category_data.append({
-            'category': item['category__name'], # Category name
-            'total_expense': str(item['total_expense']) # Total expense for the category (convert Decimal to string for JSON)
+            'category': item['category__name'], 
+            'total_expense': str(item['total_expense'])
         })
 
     return JsonResponse(category_data, safe=False) # Return JSON response
 
 
 def income_total_json(request):
-    year = request.GET.get('year') # Get year from request parameters (optional, can default to current year)
+    year = request.GET.get('year')
     if not year:
         year = 2024
-        # datetime.date.today().year # Default to current year if year is not provided
+        # datetime.date.today().year
     else:
-        year = int(year) # Convert year to integer
+        year = int(year)
 
-    # 1. Filter income transactions for the year
+    # Filter income transactions for the year
     income_transactions_for_year = Transaction.objects.filter(
         date__year = year,
         category__name = 'income'
     )
         
-    # 2. Group by month and category, and sum amounts
+    # Group by month and category, and sum amounts
     monthly_income_data = income_transactions_for_year.values(
         'date__month', 'category__name'
     ).annotate(
