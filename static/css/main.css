@@ -12,6 +12,14 @@ main {
     flex: 1;
 }
 
+.navbar.pop-shadow {
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15); /* Light shadow */
+}
+
+.navbar-nav .nav-link.pop-text-shadow {
+    text-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.5); /* Very subtle shadow */
+}
+
 .website-title {
     font-size: 48px;
     color: #f9faf8;
