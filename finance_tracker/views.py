@@ -30,7 +30,7 @@ def upload_statement(request):
             return redirect("/finance_tracker/")
     else:
         form = UploadFileForm()
-    return render(request, 'finance_tracker/upload.html', {'form': form})
+    return render(request, 'finance_tracker/upload.html', {'upload_form': form})
 
 
 def transaction_list_json(request): 

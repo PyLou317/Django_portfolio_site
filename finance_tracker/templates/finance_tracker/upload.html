@@ -1,26 +1,15 @@
 {% extends 'finance_tracker/base.html' %} 
 {% load crispy_forms_tags %}
+{% crispy upload_form upload_form.helper %}
+
 {% load static %} 
 
 {% block content %}
-<h4 class="m-3
-display-6
-text-center
-">Upload Bank Statement</h4>
-<div class="container">
-    <div class="card
-        d-flex
-        justify-content-center">
-        <form method="post" enctype="multipart/form-data"> 
-            {% csrf_token %} 
+<h4 class="mt-3 mb-5 display-6 text-center">Upload Bank Statement</h4>
 
-            <div class="mb-3">
-                {{ form|crispy }}             
-            </div>
-            <button id="upload-buttom" type="submit" class="btn btn-secondary">Upload</button> 
+        <div class="container">
+            {% crispy upload_form %}             
+        </div>
 
-        </form>
-    </div>
-</div>
 {% endblock%}
 

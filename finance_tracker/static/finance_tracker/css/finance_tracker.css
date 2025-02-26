@@ -6,6 +6,7 @@
     margin-top: 100px;
 }
 
+/* Dashboard */
 #expense-num {
     color: red;
 }
@@ -14,10 +15,16 @@
     color: green;
 }
 
-#upload-buttom {
+
+/* crispy upload form */
+#upload-button {
     background-color: rgb(0, 92, 128);
 }
 
 #upload-buttom:hover {
     background-color: rgb(1, 59, 82);
+}
+
+.asteriskField {
+    display: none;
 }

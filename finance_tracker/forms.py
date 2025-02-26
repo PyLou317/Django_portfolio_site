@@ -6,8 +6,11 @@ from decimal import Decimal
 from io import StringIO
 from .utils import categorize_transaction
 
-class UploadFileForm(forms.Form):
-    file = forms.FileField()
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit, Field, Row, Column
+
+class UploadFileForm(forms.Form):        
+    file = forms.FileField(required=True, help_text="Please upload your bank statement here")
 
     def save(self):
         uploaded_file = self.cleaned_data['file']
@@ -52,5 +55,27 @@ class UploadFileForm(forms.Form):
         # Save transactions to the database
         for transaction in transactions:
             transaction.save()
+        
 
-        return None
+        # Form Helper (crispy)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "upload_form"
+        self.helper.form_method = "post"
+        self.helper.form_class = "form-horizontal mt-5"
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-10' 
+        
+        self.helper.layout = Layout(
+            Row(
+                Column(Field('file'), css_class='form-group col-md-12'), # 'col-md-12' to take full width in the row
+                css_class='form-row' # Add form-row for Bootstrap row
+            ),
+            Row( # Row for the submit button to align horizontally if needed
+                Column(Submit('submit', 'Submit'), offset='col-sm-2', css_class='col-sm-10') # Offset to align with fields
+            )
+        )
+        # self.helper.add_input(Submit('submit', 'Submit'))
+    
+        

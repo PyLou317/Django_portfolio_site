@@ -6,12 +6,11 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     image = models.ImageField(upload_to='project_images/', blank=True, null=True)
-    link = models.URLField(blank=True, null=True)
+    github = models.URLField(blank=True, null=True)
     TYPES = (
         ('FINANCE', 'Fiinance Tracker'),
         ('BLOG', 'Personal Blog'),
-        ('FIT_WEATHER', 'Weather App'),
-        ('BUSINESS_FINDER', 'Business Finder'),
+        ('WORKER_MANAGEMENT', 'Contract Worker Management'),
         ('OTHER', 'Other')
         )
     
@@ -24,3 +23,13 @@ class Project(models.Model):
     
     def __str__(self):
         return self.title
+
+class Technology(models.Model):
+    name = models.CharField(max_length=100, unique=True, help_text="Name of the technology (e.g., Python, Django)")
+    icon = models.ImageField(upload_to='technology_icons/', blank=True, null=True)
+    
+    class Meta:
+        verbose_name_plural = "Technologies"
+    
+    def __str__(self):
+        return self.name
