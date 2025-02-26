@@ -40,7 +40,6 @@ main {
 
 #project-card {
     display: flex;
-    width: 375px;
     border-radius: 15px;
     margin-bottom: 10px;
     flex-direction: column; /* Ensure items stack vertically */
@@ -59,7 +58,7 @@ main {
     text-decoration: none;
 }
 
-#project-card img {
+#project-img {
     padding: 50px;
     /* margin-bottom: 1rem; /* Add some space below the image */
 }
@@ -84,9 +83,18 @@ main {
     text-decoration: none;
 }
 
-.card-text {
+#project-description {
     margin-bottom: 0.5rem; /* Add some space below the title */
     color: black;
+    font-size: small;
+}
+
+.technology-icon {
+    width: 24px; /* Adjust icon size */
+    height: 24px;
+    margin-right: 5px; /* Add spacing between icons */
+    vertical-align: middle; /* Align icons vertically with text if needed */
+    border-radius: 50%; /* Make icons circular if desired */
 }
 
 #about-me {
