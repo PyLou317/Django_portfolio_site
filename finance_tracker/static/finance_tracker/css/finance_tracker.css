@@ -1,5 +1,13 @@
-#ft-navbar {
+/* #ft-navbar {
     margin-top: 100px;
+} */
+#menu-button {
+    margin-top: 70px;
+    margin-right: 20px;
+}
+
+#menu-close-btn {
+    color: white;
 }
 
 #welcome-title {

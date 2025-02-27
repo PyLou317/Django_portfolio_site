@@ -8,6 +8,10 @@ body {
     /* padding-top: 50px; Add padding for fixed navbar */
 }
 
+#body {
+    margin-top: 50px;
+}
+
 main {
     flex: 1;
 }
@@ -95,6 +99,16 @@ main {
     margin-bottom: 0.5rem; /* Add some space below the title */
     color: black;
     font-size: small;
+}
+
+#pc-body .card-text { /* Or just .card-text if that's unique enough */
+    overflow: hidden; /* Hide any text that overflows the container */
+    text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
+    display: -webkit-box; /* Required for multi-line ellipsis */
+    -webkit-line-clamp: 3; /* Number of lines to show (adjust this value) */
+    -webkit-box-orient: vertical; /* Orientation of the box */
+    line-height: 1.4em; /* Adjust line height for better readability (optional) */
+    max-height: 4.2em;  /* Roughly the height of 3 lines (line-height * lines) - important for consistent height */
 }
 
 .technology-icon {
