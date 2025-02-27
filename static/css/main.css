@@ -12,6 +12,20 @@ main {
     flex: 1;
 }
 
+.navbar-nav .nav-link.text-gradient {
+    font-size: 16pt;
+    font-weight: 600;
+    background-clip: text; /* Clip the background to the text shape */
+    -webkit-background-clip: text; /* For older Safari versions */
+    color: transparent;
+    background-image: linear-gradient(to bottom right, #adb5bd, #6c757d); /* Light Gray to Medium Gray */
+}
+
+/* --- Hover Effect: Change the Gradient --- */
+.navbar-nav .nav-link.text-gradient:hover {
+    background-image: linear-gradient(to right, #c0c6ce, #99a3a9);
+}
+
 .navbar.pop-shadow {
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15); /* Light shadow */
 }
