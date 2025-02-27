@@ -19,38 +19,38 @@
         <a class="nav-link" href="{% url 'portfolio:home' %}"
         >Portfolio Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'portfolio:home' %}#about-me"
-          >About Me</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'portfolio:home' %}#contact-me"
-          >Contact</a
-        >
-      </li>
       <li class="nav-item dropdown">
-        <a
+          <a
           class="nav-link dropdown-toggle"
           href="#"
           id="navbarDropdown"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-        >
+          >
           Projects
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'finance_tracker:home' %}">AI Finance Tracker</a>
-          <a class="dropdown-item" href="#">Blog</a>
-          <a class="dropdown-item" href="#">Contract Worker Management</a>
-          <hr class="dropdown-divider" />
-          <a
+            <a class="dropdown-item" href="{% url 'finance_tracker:home' %}">AI Finance Tracker</a>
+            <a class="dropdown-item" href="#">Blog</a>
+            <a class="dropdown-item" href="#">Contract Worker Management</a>
+            <hr class="dropdown-divider" />
+            <a
             class="dropdown-item"
             href="{% url 'portfolio:home' %}#projects-section"
             >All Projects</a
-          >
+            >
         </div>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'portfolio:home' %}#about-me"
+            >About Me</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'portfolio:home' %}#contact-me"
+            >Contact</a
+          >
+        </li>
       </li>
     </ul>
   </div>

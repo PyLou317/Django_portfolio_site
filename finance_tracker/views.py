@@ -14,12 +14,18 @@ import json
 
 
 def finance_tracker_home(request):
-    income = Transaction.objects.filter(category__name='income')
     return render(request, 'finance_tracker/index.html')
 
 
 def finance_tracker_dashboard(request):
-    return render(request, 'finance_tracker/dashboard.html')
+    income_transactions = Transaction.objects.filter(category__name='income')
+    income_total_aggregation = income_transactions.aggregate(
+     total_income_amount=Sum('amount')   
+    )
+    context = {
+        'income_summary': income_total_aggregation,
+    }
+    return render(request, 'finance_tracker/dashboard.html', context)
 
 
 def upload_statement(request):

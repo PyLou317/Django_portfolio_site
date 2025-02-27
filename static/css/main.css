@@ -4,12 +4,8 @@ body {
     flex-direction: column;
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    min-height: 100vh; /* Ensure footer sticks to bottom */
+    min-height: 100vh;
     /* padding-top: 50px; Add padding for fixed navbar */
-}
-
-#body {
-    margin-top: 8px;
 }
 
 main {
