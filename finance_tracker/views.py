@@ -18,12 +18,20 @@ def finance_tracker_home(request):
 
 
 def finance_tracker_dashboard(request):
-    income_transactions = Transaction.objects.filter(category__name='income')
+    expense_transactions = Transaction.objects.exclude(category__name='income')
+    expense_total_aggregation = expense_transactions.aggregate(
+        total_expense_amount=Sum('amount')
+        )
+        
+    income_transactions = Transaction.objects.filter(
+        category__name='income')
     income_total_aggregation = income_transactions.aggregate(
-     total_income_amount=Sum('amount')   
-    )
+     total_income_amount=Sum('amount')
+     )
+    
     context = {
         'income_summary': income_total_aggregation,
+        'expense_summary': expense_total_aggregation
     }
     return render(request, 'finance_tracker/dashboard.html', context)
 

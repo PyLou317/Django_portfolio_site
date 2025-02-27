@@ -22,17 +22,17 @@
         
         <div class="db_card card border-0 rounded-3 shadow-sm mx-3 my-3 flex-grow-1 col-lg-3 col-md-4 col-sm-6">
             <div class="card-body">
-                <h5 class="card-title text-primary">Total Expenses</h5>
-                <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
-                <h1 id="expense-num" class="card-text text-end">$90,000</h1>
+                <h5 class="card-title text-primary fw-semibold">Total Expenses</h5>
+                <h6 class="card-subtitles mb-2 text-muted fw-medium">Yearly</h6>
+                <h1 id="expense-num" class="card-text text-end fw-bold">${{ expense_summary.total_expense_amount|floatformat:2 }}</h1>
             </div>
         </div>
         
         <div class="db_card card border-0 rounded-3 shadow-sm mx-3 my-3 flex-grow-1 col-lg-3 col-md-4 col-sm-6">
             <div class="card-body">
-                <h5 class="card-title text-primary">Net Profit</h5>
-                <h6 class="card-subtitles mb-2 text-muted">Yearly</h6>
-                <h1 id="profit-num" class="card-text text-end">${{ income_summary.total_income_amount|add:-10000 }}</h1>
+                <h5 class="card-title text-primary fw-semibold">Net Profit</h5>
+                <h6 class="card-subtitles mb-2 text-muted fw-medium">Yearly</h6>
+                <h1 id="profit-num" class="card-text text-end fw-bold">${{ income_summary.total_income_amount|add:expense_summary.total_expense_amount}}</h1>
             </div>
         </div>
     </div>
