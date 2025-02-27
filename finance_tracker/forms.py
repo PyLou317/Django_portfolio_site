@@ -43,11 +43,20 @@ class UploadFileForm(forms.Form):
 
                     # Categorize transactions
                     category_name = categorize_transaction(description)
-
                     category, created = Category.objects.get_or_create(name=category_name)
 
-                    transaction = Transaction(date=date, description=description, amount=amount, category=category)
-                    transactions.append(transaction)
+                    existing_transaction = Transaction.objects.filter(
+                        date=date,
+                        description=description,
+                        amount=amount,
+                        category=category
+                    ).first()
+                    
+                    if existing_transaction:
+                        print("Duplicate transaction found, not saving.")
+                    else:
+                        transaction = Transaction(date=date, description=description, amount=amount, category=category)
+                        transactions.append(transaction)
 
         except Exception as e:
             raise forms.ValidationError(f"An error occurred during processing: {e}")
@@ -55,6 +64,7 @@ class UploadFileForm(forms.Form):
         # Save transactions to the database
         for transaction in transactions:
             transaction.save()
+            print("Transaction saved successfully.")
         
 
         # Form Helper (crispy)
