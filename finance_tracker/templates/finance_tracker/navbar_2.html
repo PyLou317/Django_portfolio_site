@@ -22,26 +22,19 @@
                 <a href="{% url 'finance_tracker:file_upload' %}" class="nav-link text-truncate text-light">
                     <i class="fs-5 bi bi-cloud-arrow-up-fill"></i><span class="ms-1 d-none d-sm-inline"> Upload</span></a>
                 </li>
-            <li class="nav-item mt-auto">
-                <a href="{% url 'finance_tracker:file_upload' %}" class="nav-link text-truncate text-light">
-                    <i class="fs-5 bi bi-person-circle"></i><span class="ms-1 d-none d-sm-inline"> Sign In</span></a>
-                </li>
+{% comment %} --------- Account ---------- {% endcomment %}
+            <li class="dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-truncate text-light" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fs-5 bi bi-person-circle"></i><span class="ms-1 d-none d-sm-inline">Account</span>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdown">
+                    <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
+                    <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+                    <li><a class="dropdown-item" href="{% url 'account_reset_password' %}">Reset Password</a></li>
+                </ul>
+            </li> 
             </ul>
         </div>
     </div>
         
-        {% comment %} <li class="dropdown">
-            <a href="#" class="nav-link dropdown-toggle  text-truncate" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fs-5 bi-bootstrap"></i><span class="ms-1 d-none d-sm-inline">Bootstrap</span>
-            </a>
-            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdown">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
-            </ul>
-        </li> {% endcomment %}
         

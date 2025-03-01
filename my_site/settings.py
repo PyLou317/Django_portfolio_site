@@ -42,13 +42,17 @@ INSTALLED_APPS = [
     # Third Party
     'crispy_forms',
     'crispy_bootstrap5',
-    'django.contrib.sites', 
+
     'allauth',
     'allauth.account',
+
+    # Optional -- requires install using `django-allauth[socialaccount]`
+    'allauth.socialaccount',
     
     # My Apps
     'portfolio',
-    'finance_tracker'
+    'finance_tracker',
+    'users'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -64,16 +68,6 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware', # All auth
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-# ---------- django-allauth configurations ------------- #
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-]
-
-SITE_ID = 1
-ACCOUNT_EMAIL_VERIFICATION = "none"
-# ---------- django-allauth configurations ------------- #
 
 ROOT_URLCONF = 'my_site.urls'
 
@@ -158,3 +152,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ---------- django-allauth configurations ------------- #
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+SITE_ID = 1
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_EMAIL_REQUIRED = True
+
+SOCIALACCOUNT_PROVIDERS = {}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# ---------- django-allauth configurations ------------- #
