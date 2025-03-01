@@ -3,7 +3,10 @@
 
 {% block content %}
 <div class="container-fluid mx-2">
-    <h4 class="display-5 my-3">All Transactions</h4>
+    <div class="mx-3 my-3">
+        <h2>Finance Tracker</h2>
+        <h5>Searchable Transactions List</h5>
+    </div>
 
     <div class="row">  {# Bootstrap Row #}
         <div class="col-12 col-md-3">  {# Bootstrap Column - adjust col-md-3 to control width on medium screens and up #}
@@ -74,22 +77,5 @@
             </ul>
         </nav>
     </div>
-    {% comment %} <div class="pagination justify-content-center">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}  
-            </span>
-
-            {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div> {% endcomment %}
 </div>
 {% endblock content %}

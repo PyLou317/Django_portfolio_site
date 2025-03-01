@@ -5,11 +5,29 @@
 {% load static %} 
 
 {% block content %}
-<h4 class="mt-3 mb-5 display-6 text-center">Upload Bank Statement</h4>
+<div class="mx-3 my-3">
+    <h2>Finance Tracker</h2>
+    <h5>Upload Your Monthly Bank Statements</h5>
+</div>
 
-        <div class="container">
-            {% crispy upload_form %}             
+{% comment %} ------------ Upload File Card ------------ {% endcomment %}
+<div class="container d-flex justify-content-center align-items-center text-center mb-4">
+    <div class="bg-light rounded-3 shadow-sm p-5 mt-5" style="width: 600px;"> 
+        <h1 style="margin-bottom: 50px;">Upload Your file</h1>
+        <div>
+            <div class="icons bi-4x d-flex justify-content-center mb-4">
+                <i class="bi bi-filetype-csv"></i>
+                <i class="bi bi-filetype-csv"></i>
+                <i class="bi bi-filetype-csv"></i>
+            </div>
+            <form id="upload_form" method="post" class="mt-3">
+                {% csrf_token %}
+                {% crispy upload_form %}
+            </form>           
         </div>
+    </div>
+</div>
+{% comment %} ------------ Upload File Card ------------ {% endcomment %}
 
 {% endblock%}
 

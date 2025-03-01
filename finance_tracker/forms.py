@@ -10,7 +10,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Field, Row, Column
 
 class UploadFileForm(forms.Form):        
-    file = forms.FileField(required=True, help_text="Please upload your bank statement here")
+    file = forms.FileField(required=True, help_text="Please upload your bank statement here (CSV file)")
 
     def save(self):
         uploaded_file = self.cleaned_data['file']
@@ -73,19 +73,15 @@ class UploadFileForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "upload_form"
         self.helper.form_method = "post"
-        self.helper.form_class = "form-horizontal mt-5"
-        self.helper.label_class = 'col-sm-2'
-        self.helper.field_class = 'col-sm-10' 
+        self.helper.form_class = "mt-5"
+        self.helper.label_class = 'visually-hidden'
+        self.helper.field_class = '' 
         
         self.helper.layout = Layout(
             Row(
-                Column(Field('file'), css_class='form-group col-md-12'), # 'col-md-12' to take full width in the row
+                Column(Field('file'), css_class='form-group col-md-9'), # 'col-md-12' to take full width in the row
+                Column(Submit('submit', 'Upload', css_class='btn-secondar'), css_class='form-group col-md-3 d-flex align-self-start justify-content-center'),
                 css_class='form-row' # Add form-row for Bootstrap row
-            ),
-            Row( # Row for the submit button to align horizontally if needed
-                Column(Submit('submit', 'Submit'), offset='col-sm-2', css_class='col-sm-10') # Offset to align with fields
-            )
-        )
-        # self.helper.add_input(Submit('submit', 'Submit'))
+                ),
     
-        
+        )

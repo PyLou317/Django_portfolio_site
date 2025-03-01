@@ -40,3 +40,32 @@
 .asteriskField {
     display: none;
 }
+
+
+/* --------- Upload Form -------------- */
+
+.icons.bi-4x {
+    font-size: 4rem;
+    display: inline-flex; /* To allow horizontal arrangement and transformations */
+}
+
+.icons.bi-4x i.bi-filetype-csv { /* Target all filetype-csv icons within .icons.bi-4x */
+    color: #000000;
+    margin-right: 0.5em; /* Spacing between icons */
+    display: inline-block; /* Ensure they are treated as blocks for transformations */
+}
+
+/* Target the first icon for transformation */
+.icons.bi-4x i.bi-filetype-csv:nth-child(1) {
+    transform: scale(0.8) translateY(0%) translateX(-60%) rotate(-45deg);
+}
+
+/* Target the second icon for transformation */
+.icons.bi-4x i.bi-filetype-csv:nth-child(2) {
+    transform: scale(0.8) translateY(-50%); /* shrink-2 up-4  (scale and vertical move) */
+}
+
+/* Target the third icon for transformation */
+.icons.bi-4x i.bi-filetype-csv:nth-child(3) {
+    transform: scale(0.8) translateY(0%) translateX(60%) rotate(45deg); /* shrink-3 down-2 right-6 rotate-45 */
+}
