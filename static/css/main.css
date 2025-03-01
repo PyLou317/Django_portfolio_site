@@ -5,23 +5,23 @@ body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     min-height: 100vh;
-    /* padding-top: 50px; Add padding for fixed navbar */
 }
 
 main {
     flex: 1;
 }
 
+/* --------- Navbar -------- */
 .navbar-nav .nav-link.text-gradient {
     font-size: 16pt;
     font-weight: 600;
     background-clip: text; /* Clip the background to the text shape */
     -webkit-background-clip: text; /* For older Safari versions */
-    color: transparent;
+    /* color: transparent; */
     background-image: linear-gradient(to bottom right, #adb5bd, #6c757d); /* Light Gray to Medium Gray */
 }
 
-/* --- Hover Effect: Change the Gradient --- */
+/* --- Hover Effect on Navbar: Change the Gradient --- */
 .navbar-nav .nav-link.text-gradient:hover {
     background-image: linear-gradient(to right, #c0c6ce, #99a3a9);
 }
@@ -34,28 +34,32 @@ main {
     text-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.5); /* Very subtle shadow */
 }
 
-.website-title {
-    font-size: 48px;
-    color: #f9faf8;
-    font-weight: 900;
+
+/* ----------- Hero Banner ---------- */
+#hero-banner {
+    padding-top: 150px;
 }
 
-.title-subtext {
-    font-size: 18px;
-    margin: 12px 0 16px 0;
+/* #hero-banner-row {
+    min-height: 100%;
+} */
+
+#left_hero_div {
+    margin-left: 100px;
 }
 
-.hero-banner button {
-    display: flex;
-    background-color: rgb(33, 33, 33);
+#right_hero_div {
+    margin-right: 75px;
 }
 
-.hero-banner button:hover {
-    background-color: #3a3c3f; /* Darker blue on hover */
-    box-shadow: 0 2px 5px rgba(164, 163, 163, 0.2); /* Add a subtle shadow */
-    transform: translateY(-2px); /* Slightly move the button up */
-}
 
+
+/* #hero-img {
+    width: 800px;
+} */
+
+
+/* ----------- Project Cards ---------- */
 #projects-section {
     scroll-margin-top: 100px;
 }
@@ -116,6 +120,7 @@ main {
     text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
     display: -webkit-box; /* Required for multi-line ellipsis */
     -webkit-line-clamp: 3; /* Number of lines to show (adjust this value) */
+    line-clamp: 3;
     -webkit-box-orient: vertical; /* Orientation of the box */
     line-height: 1.4em; /* Adjust line height for better readability (optional) */
     max-height: 4.2em;  /* Roughly the height of 3 lines (line-height * lines) - important for consistent height */

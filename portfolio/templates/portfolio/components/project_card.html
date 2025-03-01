@@ -1,19 +1,30 @@
 <div class="container mb-5">
-        <h1 class="display-3 text-center m-5">My Projects</h1>
+        <h1 class="display-4 text-center m-5">My Projects</h1>
 
         <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-5 mb-4 mx-auto">  {% if projects %}
             {% for project in projects %}
                 <div class="col text-center">  
                     <div id="project-card" class="card h-100">
                         <a href="{% url 'portfolio:project_redirect' pk=project.pk %}">
+
                             {% if project.image %}
-                            <img id="project-img" src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                                <img id="project-img" src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
                             {% endif %}
+
                             <div id="pc-body" class="card-body">
                                 <h5 id="pc-title" class="card-title">{{ project.title }}</h5>
                                 <p id="project-description" class="card-text">{{ project.description }}</p>
                             </div>
-                            <div class="technologies">
+                            
+                            <div class="mb-2">
+                                {% if project.github %}
+                                    <a href="{{ project.github }}" target="blank" class="text-decoration-none">
+                                        <i class="bi bi-github"> github repo</i>
+                                    </a>
+                                {% endif %}
+                            </div>
+
+                            <div class="technologies mb-3">
                                 {% for technology in project.technologies.all %}
                                     <img src="{{ technology.icon.url }}" alt="{{ technology.name }} icon" title="{{ technology.name }}" class="technology-icon">
                                 {% endfor %}

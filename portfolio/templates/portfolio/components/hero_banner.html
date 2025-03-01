@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="container-fuid bg-dark text-light min-vh-100 mt-5">
+{% comment %} <div class="container-fuid bg-dark text-light min-vh-100 mt-5">
     <div class="container col-xxl-8 px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
@@ -19,6 +19,26 @@
                 </a>
             </div>
         </div>
+        </div>
+    </div>
+</div>  {% endcomment %}
+
+<div id="hero-banner" class="bg-dark text-light">
+    <div id="hero-banner-row" class="row align-items-center no-gutters">
+        <div class="col-xl-6 col-lg-6 col-md-8">
+            <div id="left_hero_div" class="py-5 py-lg-0">
+                <h4 class="lh-1 mb-3">👋 Hi, I'm Lucas!</h4>
+                <h1 class="text-white display-4 fw-bold">Welcome to my Code Lab...
+                </h1>
+                <p class="text-white-50 mb-4 lead">
+                    A glimpse into my coding journey, fueled by an unhealthy amount of coffee and a healthy dose of curiosity.
+                </p>
+                <a href="{% url 'portfolio:home' %}#projects-section" id="btn_1" class="btn btn-success me-2">My Work <i class="bi bi-rocket-takeoff"></i></a>
+                <a href="{% url 'portfolio:home' %}#contact-me" id="btn_2" class="btn btn-light">Contact Me <i class="bi bi-envelope-at"></i></a>
+            </div>
+        </div>
+        <div id="right_hero_div" class=" col-xl-5 col-lg-5 col-md-8 col-sm-10 content-align-end">
+            <img src="{% static 'portfolio/images/banner_headshot.png' %}" alt="" class="img-fluid">
         </div>
     </div>
 </div>
