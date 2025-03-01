@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     
     # Third Party
     'crispy_forms',
-    "crispy_bootstrap5",
+    'crispy_bootstrap5',
+    'django.contrib.sites', 
+    'allauth',
+    'allauth.account',
     
     # My Apps
     'portfolio',
@@ -58,8 +61,19 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'allauth.account.middleware.AccountMiddleware', # All auth
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# ---------- django-allauth configurations ------------- #
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = "none"
+# ---------- django-allauth configurations ------------- #
 
 ROOT_URLCONF = 'my_site.urls'
 

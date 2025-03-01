@@ -23,6 +23,7 @@ class Project(models.Model):
         ('FINANCE', 'Fiinance Tracker'),
         ('BLOG', 'Personal Blog'),
         ('WORKER_MANAGEMENT', 'Contract Worker Management'),
+        ('PORTFOLIO_SITE', 'Portfolio Site'),
         ('OTHER', 'Other')
         )
     

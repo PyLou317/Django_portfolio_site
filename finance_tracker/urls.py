@@ -13,5 +13,4 @@ urlpatterns = [
     path('transactions_json/', views.transaction_list_json, name='transaction_list_json'),
     path('category_expense_json/', views.category_expenses_json, name='category_expense_json'),
     path('income_total_json/', views.income_total_json, name='income_total_json'),
-    # path('transaction_table/', views.transaction_table, name='transaction-table'),
 ]
