@@ -61,7 +61,7 @@
                 <div class="card-body">
                     <ul class="list-unstyled">
                         {% get_social_accounts user as accounts %}
-                            {% if accounts == 'Google' %}
+                            {% if accounts.google %}
                                 <li>
                                     <button class="btn btn-secondary btn-block mb-2" disabled>
                                         <i class="bi bi-google me-1"></i> Google Account Connected
