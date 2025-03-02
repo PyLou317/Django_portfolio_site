@@ -1,0 +1,27 @@
+{% extends "finance_tracker/base.html" %}  {# Or your preferred base template #}
+{% load socialaccount %}
+
+{% block title %}Confirm Google Sign-In{% endblock %}  {# Customize title #}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow p-4">
+          <div class="card-body text-center">
+            <h2 class="card-title mb-4">Sign In Via Google</h2>  {# Customize heading #}
+            <p class="card-text">You are about to sign in using your Google account: <strong>{{ sociallogin.account.user.email }}</strong></p> {# Customize text #}
+            <p class="card-text">Do you want to continue?</p> {# Customize question #}
+
+            <form method="post" action="{% url 'socialaccount_login_done' %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary me-2">Continue</button>
+              <a href="{% url 'socialaccount_login_cancelled' %}" class="btn btn-secondary">Cancel</a> {# Customize Cancel button #}
+              <input type="hidden" name="process" value="{{ process }}" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
