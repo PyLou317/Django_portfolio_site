@@ -1,5 +1,6 @@
 {% extends 'finance_tracker/base.html' %} 
 {% load crispy_forms_tags %}
+{% load socialaccount %} 
 {% load static %} 
 
 {% block title %}Login{% endblock %}
@@ -10,13 +11,13 @@
       <div class="col-md-6">
         <div class="card shadow p-4">
           <div class="card-body">
-            <h2 class="card-title text-center mb-4">Login</h2>  {# Customize the heading #}
+            <h2 class="card-title text-center mb-4">Login</h2> 
             <form method="post" action="{% url 'account_login' %}" class="login-form">
-              {% csrf_token %}
-              {% crispy form %}  {# Render the login form using Crispy Forms #}
-              <div class="text-center mt-3">
-                <button type="submit" class="btn btn-dark btn-block">Login</button>
-              </div>
+                {% csrf_token %}
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-dark btn-block">Login</button>
+                </div>
+                {% crispy form %}
             </form>
             <div class="mt-3 text-center">
               <p>

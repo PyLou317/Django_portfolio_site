@@ -2,13 +2,19 @@
 {% load static %} 
 
 {% block content %}
-<div id="welcome-title" 
-class="container
-    d-flex
-    min-vh-100 
-    display-5 
-    text-center
-    justify-content-center">
-    Welcome!
-</div>
+{% if user.is_authenticated %}
+    <div id="welcome-title" 
+    class="container
+        d-flex
+        min-vh-100 
+        display-5 
+        text-center
+        justify-content-center">
+        Welcome!
+    </div>
+{% else %}
+    <div id="welcome_div" class="container align-items-center">
+        {% include 'users/components/login_container.html' %}
+    </div>
+{% endif %}
 {% endblock content %}

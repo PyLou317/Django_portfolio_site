@@ -30,10 +30,7 @@
     </div>
 </div>
 {% else %}
-<div id="not_user_upload" class="container d-flex flex-column justify-content-center align-items-center border shadow-lg rounded-3 text-center m-5 py-5 bg-light mx-auto">
-    <p class="text-dark">Please login to upload your bank statements!</p>
-    <a href='{% url 'account_login' %}' class="btn btn-dark mt-2">Login</a>
-</div>
+    {% include 'users/components/login_container.html' %}
 {% endif %}
 {% comment %} ------------ Upload File Card ------------ {% endcomment %}
 

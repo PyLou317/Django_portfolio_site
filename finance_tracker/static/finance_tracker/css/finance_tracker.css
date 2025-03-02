@@ -1,6 +1,10 @@
-/* #ft-navbar {
-    margin-top: 100px;
-} */
+/* Finance Tracker Home Page */
+#welcome_div {
+    height: 50vh;
+    margin-top: 200px;
+}
+
+/* Sidebar Menu Button */
 #menu-button {
     margin-top: 70px;
     margin-right: 20px;
