@@ -11,6 +11,7 @@
 </div>
 
 {% comment %} ------------ Upload File Card ------------ {% endcomment %}
+{% if user.is_authenticated %}
 <div class="container d-flex justify-content-center align-items-center text-center mb-4">
     <div class="bg-light border rounded-3 shadow-sm p-5 mt-5" style="width: 650px;"> 
         <h1 style="margin-bottom: 60px;">Upload Your File</h1>
@@ -28,6 +29,12 @@
         </div>
     </div>
 </div>
+{% else %}
+<div id="not_user_upload" class="container d-flex flex-column justify-content-center align-items-center border shadow-lg rounded-3 text-center m-5 py-5 bg-light mx-auto">
+    <p class="text-dark">Please login to upload your bank statements!</p>
+    <a href='{% url 'account_login' %}' class="btn btn-dark mt-2">Login</a>
+</div>
+{% endif %}
 {% comment %} ------------ Upload File Card ------------ {% endcomment %}
 
 {% endblock%}

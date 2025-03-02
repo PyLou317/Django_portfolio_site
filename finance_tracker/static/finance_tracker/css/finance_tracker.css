@@ -69,3 +69,8 @@
 .icons.bi-4x i.bi-filetype-csv:nth-child(3) {
     transform: scale(0.8) translateY(0%) translateX(60%) rotate(45deg); /* shrink-3 down-2 right-6 rotate-45 */
 }
+
+#not_user_upload {
+    width: 500px;
+    height: 225px;
+}
