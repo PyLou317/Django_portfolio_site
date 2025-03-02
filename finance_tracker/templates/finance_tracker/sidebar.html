@@ -30,7 +30,7 @@
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdown">
                     <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
                     <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
-                    <li><a class="dropdown-item" href="{% url 'account_reset_password' %}">Reset Password</a></li>
+                    {% comment %} <li><a class="dropdown-item" href="{% url 'account_reset_password' %}">Reset Password</a></li> {% endcomment %}
                 </ul>
             </li> 
             </ul>

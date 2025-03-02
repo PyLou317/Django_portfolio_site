@@ -1,4 +1,8 @@
 #user_div {
-    margin-top: 80px;
+    margin-top: 20px;
     min-height: 60vh;
+}
+
+#menu_div {
+    margin-top: 70px;
 }

@@ -7,6 +7,18 @@
 
 {% block title %}User Profile{% endblock %}
 
+{% block nav_bar %}
+    {{ block.super }}
+    <div id="menu_div" class="container-fluid">
+        <button id="menu-button" class="btn float-start" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
+            <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"> Menu</i>
+        </button>
+    </div>
+
+    {% include 'finance_tracker/sidebar.html' %}
+
+{% endblock %}
+
 {% block content %}
 <div id="user_div" class="container-fluid ms-2">
   <h2>Your Profile</h2>
