@@ -1,0 +1,270 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* --------- Navbar -------- */
+.navbar-nav .nav-link.text-gradient {
+    font-size: 16pt;
+    font-weight: 600;
+    background-clip: text; /* Clip the background to the text shape */
+    -webkit-background-clip: text; /* For older Safari versions */
+    /* color: transparent; */
+    background-image: linear-gradient(to bottom right, #adb5bd, #6c757d); /* Light Gray to Medium Gray */
+}
+
+/* --- Hover Effect on Navbar: Change the Gradient --- */
+.navbar-nav .nav-link.text-gradient:hover {
+    background-image: linear-gradient(to right, #c0c6ce, #99a3a9);
+}
+
+.navbar.pop-shadow {
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15); /* Light shadow */
+}
+
+.navbar-nav .nav-link.pop-text-shadow {
+    text-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.5); /* Very subtle shadow */
+}
+
+
+/* ----------- Hero Banner ---------- */
+#hero-banner {
+    padding-top: 150px;
+}
+
+/* #hero-banner-row {
+    min-height: 100%;
+} */
+
+#left_hero_div {
+    margin-left: 100px;
+}
+
+#right_hero_div {
+    margin-right: 75px;
+}
+
+
+
+/* #hero-img {
+    width: 800px;
+} */
+
+
+/* ----------- Project Cards ---------- */
+#projects-section {
+    scroll-margin-top: 100px;
+}
+
+#project-card {
+    display: flex;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    flex-direction: column; /* Ensure items stack vertically */
+    align-items: center; /* Center horizontally */
+    text-align: center; /* Center text within elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#project-card:hover {
+  transform: translateY(-5px); /* Move the card slightly upwards */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Increase the shadow size */ 
+}
+
+#project-card a {
+    text-decoration: none;
+}
+
+#project-img {
+    padding: 50px;
+    /* margin-bottom: 1rem; /* Add some space below the image */
+}
+
+#pc-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally within card body */
+    text-align: center;
+}
+
+#pc-body a {
+    text-decoration: none;
+}
+
+#pc-title {
+    margin-bottom: 0.5rem; /* Add some space below the title */
+    color: black;
+}
+
+#pc-title a {
+    text-decoration: none;
+}
+
+#project-description {
+    margin-bottom: 0.5rem; /* Add some space below the title */
+    color: black;
+    font-size: small;
+}
+
+#pc-body .card-text { /* Or just .card-text if that's unique enough */
+    overflow: hidden; /* Hide any text that overflows the container */
+    text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
+    display: -webkit-box; /* Required for multi-line ellipsis */
+    -webkit-line-clamp: 3; /* Number of lines to show (adjust this value) */
+    line-clamp: 3;
+    -webkit-box-orient: vertical; /* Orientation of the box */
+    line-height: 1.4em; /* Adjust line height for better readability (optional) */
+    max-height: 4.2em;  /* Roughly the height of 3 lines (line-height * lines) - important for consistent height */
+}
+
+.technology-icon {
+    width: 24px; /* Adjust icon size */
+    height: 24px;
+    margin-right: 5px; /* Add spacing between icons */
+    vertical-align: middle; /* Align icons vertically with text if needed */
+    border-radius: 50%; /* Make icons circular if desired */
+}
+
+#about-me {
+    scroll-margin-top: 50px;
+}
+
+.about-banner {
+    min-height: 75vh;
+    padding: 100px 20px;
+    background-color: #f0f0f0; /* A light background color */
+}
+
+.about-content {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center; /* Vertically align image and text */
+    gap: 50px; /* Space between image and text */
+}
+
+.about-image {
+    flex: 1; /* Take up available space */
+    text-align: center; /* Center the image */
+}
+
+.about-image img {
+    max-width: 300px;
+    border-radius: 50%; /* Make the image circular */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.about-text {
+    flex: 2; /* Take up more space than the image */
+    text-align: left;
+}
+
+.about-text h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.about-text p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+}
+
+#contact-me {
+    scroll-margin-top: 60px;
+}
+
+.contact-banner {
+    padding: 80px 20px; /* Increased top/bottom padding */
+    text-align: center;
+    background-color: #f8f8f8; /* Light background color */
+    height: 100vh;
+}
+
+.contact-title h2 {
+    font-size: 36px;
+    font-weight: bolder;
+    margin-bottom: 40px; /* Increased margin */
+    color: #333; /* Darker heading color */
+}
+
+.contact-banner form {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px; /* Increased max-width */
+    margin: 0 auto;
+    padding: 30px; /* Added padding to the form */
+    background-color: white; /* White form background */
+    border-radius: 8px; /* Rounded corners for the form */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Added a subtle shadow */
+}
+
+.contact-banner input,
+.contact-banner textarea {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 5px;
+    font-size: 16px; /* Increased font size */
+    transition: border-color 0.3s ease; /* Smooth border color transition */
+}
+
+.contact-banner input:focus,
+.contact-banner textarea:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #3882f6; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(56, 130, 246, 0.2); /* Subtle box-shadow on focus */
+}
+
+
+/* Media query for smaller screens (smartphones) */
+@media (max-width: 768px) { /* Adjust 768px as needed */
+
+    .hero-banner {
+        flex-direction: column; /* Stack elements vertically */
+        padding: 50px 20px; /* Reduce padding */
+    }
+
+    .hb-left {
+        text-align: center; /* Center text on smaller screens */
+        margin-bottom: 30px; /* Add space below text */
+    }
+
+    .website-title {
+        font-size: 32px; /* Smaller title */
+    }
+
+    .title-subtext {
+        font-size: 16px; /* Smaller subtext */
+    }
+
+    .hb-right {
+        margin-right: 0; /* Remove right margin */
+        width: 200px; /* Set a fixed width for the image container */
+        height: 200px; /* Set a fixed height for the image container */
+    }
+
+    .contact-banner {
+        padding: 50px 10px; /* Reduce padding */
+    }
+
+    .contact-banner form {
+        max-width: 90%; /* Make form take up most of screen width */
+        padding: 20px; /* Reduce padding */
+    }
+
+    .contact-banner input,
+    .contact-banner textarea {
+        font-size: 14px; /* Smaller font size */
+    }
+}
