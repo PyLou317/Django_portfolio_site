@@ -9,11 +9,11 @@
       <div class="col-md-6">
         <div class="card shadow p-4">
           <div class="card-body text-center">
-            <h2 class="card-title mb-4">Sign In Via Google</h2>  {# Customize heading #}
-            <p class="card-text">You are about to sign in using your Google account: <strong>{{ sociallogin.account.user.email }}</strong></p> {# Customize text #}
+            <h2 class="card-title mb-4">Sign In Via <i class="bi bi-google"></i>oogle</h2>  {# Customize heading #}
+            <p class="card-text">You are about to sign in using your Google account: <strong>{{ sociallogin.account.user.email }}</strong></p>
             <p class="card-text">Do you want to continue?</p> {# Customize question #}
 
-            <form method="post" action="{% url 'socialaccount_login_done' %}">
+            <form method="post">
               {% csrf_token %}
               <button type="submit" class="btn btn-primary me-2">Continue</button>
               <a href="{% url 'socialaccount_login_cancelled' %}" class="btn btn-secondary">Cancel</a> {# Customize Cancel button #}
