@@ -1,8 +1,14 @@
 {% extends "portfolio/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'users/css/users.css' %}">
+{% endblock extra_css%}
 
 {% block title %}User Profile{% endblock %}
 
 {% block content %}
+<div id="user_div" class="container-fluid ms-2">
   <h2>Your Profile</h2>
 
   <p><strong>Username:</strong> {{ user.username }}</p>
@@ -13,5 +19,5 @@
 
   <p><a href="{% url 'account_change_password' %}">Change Password</a></p>
   <p><a href="{% url 'account_logout' %}">Logout</a></p>
-
+<div>
 {% endblock %}
