@@ -16,7 +16,7 @@
             <form method="post">
               {% csrf_token %}
               <button type="submit" class="btn btn-primary me-2">Continue</button>
-              <a href="{% url 'socialaccount_login_cancelled' %}" class="btn btn-secondary">Cancel</a> {# Customize Cancel button #}
+              <a href="{% url 'users:profile_home' %}" class="btn btn-secondary">Cancel</a> {# Customize Cancel button #}
               <input type="hidden" name="process" value="{{ process }}" />
             </form>
           </div>
