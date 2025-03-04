@@ -1,0 +1,36 @@
+{% extends "finance_tracker/base.html" %}  {# Or your preferred base template #}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Sign-Up{% endblock %}  {# Customize title #}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow p-4">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Finish Creating an Account</h2>  {# Customized Heading for Signup #}
+            <form method="post" action="{% url 'account_signup' %}" class="signup-form"> {# Form points to 'account_signup' URL #}
+              {% csrf_token %}
+              <div>
+                {% crispy form %}  {# Render the signup form using Crispy Forms #}
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-dark btn-block">Sign Up</button>  {# Button text changed to "Sign Up" #}
+                </div>
+              </div>
+            </form>
+            <div class="mt-3 text-center">
+              <p>
+                Already have an account? <a href="{% url 'account_login' %}">Log In</a>  {# Link to login page #}
+              </p>
+              <p>
+                <a href="{% url 'account_reset_password' %}">Forgot Password?</a> {# (Optional) Password reset link - consider if relevant for signup #}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

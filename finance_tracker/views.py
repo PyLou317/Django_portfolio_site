@@ -124,7 +124,7 @@ def income_total_json(request):
 
 
 class TransactionListView(ListView):
-    paginate_by = 10
+    paginate_by = 15
     model = Transaction
     ordering = ['-date'] 
     

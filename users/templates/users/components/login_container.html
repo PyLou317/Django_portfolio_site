@@ -1,4 +1,15 @@
-<div class="container d-flex flex-column col-xl-5 col-lg-6 col-md-8 justify-content-center align-items-center border shadow rounded-3 text-center m-5 py-5 bg-light mx-auto">
-    <p class="text-dark">Please login to use the Finance Tracker App 😊</p>
-    <a href='{% url 'account_login' %}' class="btn btn-dark mt-2">Login</a>
+
+<div class="container my-5">  
+    <div class="row justify-content-center"> {# Row to center content horizontally #}
+        <div class="col-md-5"> 
+            <div class="card shadow">
+                <div class="card-header bg-secondary text-white text-center">
+                    <i class="bi bi-box-arrow-in-right me-2"></i> Login to Finance Tracker
+                </div>
+                <div class="card-body text-center my-5">
+                    <a href="{% url 'account_login' %}" class="btn btn-success">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -156,15 +156,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ---------- django-allauth configurations ------------- #
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
+    'django.contrib.auth.backends.ModelBackend',
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-LOGIN_REDIRECT_URL = '/finance_tracker/dashboard/'
+LOGIN_REDIRECT_URL = '/users/profile/'
 LOGOUT_REDIRECT_URL = '/finance_tracker/'
 
-SITE_ID = 1
-ACCOUNT_LOGIN_METHODS = {"email"}
+SOCIALACCOUNT_AUTO_SIGNUP = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# SOCIALACCOUNT_LOGIN_ON_GET = True
+
+# ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_EMAIL_REQUIRED = True
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -174,7 +177,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'email',
         ],
         'AUTH_PARAMS': {
-            'access_type': 'offline',
+            'access_type': 'online',
         }
     },
 }

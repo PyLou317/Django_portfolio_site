@@ -1,0 +1,32 @@
+{% extends 'finance_tracker/base.html' %}
+{% load crispy_forms_tags %}
+{% load socialaccount %} 
+{% load static %} 
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-secondary text-white text-center">
+                    <i class="bi bi-box-arrow-right me-2"></i> Logout Confirmation
+                </div>
+                <div class="card-body text-center">
+                    <p class="card-text mb-4">Are you sure you want to logout of Finance Tracker?</p>
+
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-block">Logout</button>
+                    </form>
+
+                    <div class="mt-3">
+                        <a href="{% url 'users:profile_home' %}" class="btn btn-dark btn-sm">Cancel</a>  {# Link to Cancel/Go Back - adjust URL as needed #}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
