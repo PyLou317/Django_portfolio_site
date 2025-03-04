@@ -5,11 +5,11 @@
 <div class="container-fluid mx-2">
     <div class="mx-3 my-3">
         <h2>Finance Tracker</h2>
-        <h5>Searchable Transactions List</h5>
+        <h5 class="justin-content-center"><i class="bi bi-list-ul"></i> Transactions List</h5>
     </div>
 
-    <div class="row">  {# Bootstrap Row #}
-        <div class="col-12 col-md-3">  {# Bootstrap Column - adjust col-md-3 to control width on medium screens and up #}
+    <div class="row"> 
+        <div class="col-12 col-md-3">
             <form method="get" class="mb-3">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search transactions..." name="search_term" value="{{ request.GET.search_term }}">
@@ -79,3 +79,7 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+{% endblock extra_js %}
