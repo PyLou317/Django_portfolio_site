@@ -2,6 +2,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.urls import reverse_lazy
 
 from .forms import UploadFileForm
 
@@ -150,8 +151,18 @@ class TransactionUpdateView(UpdateView):
         "description", 
         "category",
         "amount"
-        ]
+    ]
     template_name_suffix = "_update_form"
+    
+    # Disable the date field and amount from user
+    def get_form(self, form_class = None):
+        form = super().get_form(form_class)
+        form.fields['date'].disabled = True
+        form.fields['amount'].disabled = True
+        return form
+    
+    def get_success_url(self):
+        return reverse_lazy('finance_tracker:transaction-list')
     
 
 class TransactionDeleteView(DeleteView):

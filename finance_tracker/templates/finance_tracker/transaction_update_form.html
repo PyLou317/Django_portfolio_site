@@ -7,17 +7,19 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow p-4">
-                    <div class="card-header bg-secondary text-white text-center">
+                    <div class="card-header bg-success text-white text-center">
                         <i class="bi bi-pencil-square me-2"></i> Edit Transaction
                     </div>
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4">Update Transaction</h2>
                         <form method="post">
-                            {% csrf_token %}
-                            {% crispy form %}
-                            <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-dark btn-block">Update Transaction</button>
-                                <a href="{% url 'finance_tracker:transaction-list' %}" class="btn btn-secondary">Cancel</a>
+                            <div>
+                                {% csrf_token %}
+                                {% crispy form %}
+                                <div class="text-center mt-3">
+                                    <button type="submit" class="btn btn-dark btn-block">Update Transaction</button>
+                                    <a href="{% url 'finance_tracker:transaction-list' %}" class="btn btn-secondary">Cancel</a>
+                                </div>
                             </div>
                         </form>
                     </div>
