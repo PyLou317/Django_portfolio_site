@@ -1,17 +1,15 @@
 from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
+
 from .forms import UploadFileForm
-from django.utils import timezone
 
 from .models import Transaction
-
-from django.core import serializers
 from django.db.models import Q, Sum
 
 import datetime
-import json
+
 
 
 def finance_tracker_home(request):
@@ -154,3 +152,7 @@ class TransactionUpdateView(UpdateView):
         "amount"
         ]
     template_name_suffix = "_update_form"
+    
+
+class TransactionDeleteView(DeleteView):
+    model = Transaction

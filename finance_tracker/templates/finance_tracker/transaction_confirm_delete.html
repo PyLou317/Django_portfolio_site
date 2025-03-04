@@ -1,0 +1,44 @@
+{% extends 'finance_tracker/base.html' %} 
+{% load crispy_forms_tags %}
+{% load static %} 
+
+{% block content %}
+
+   <div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4 border-danger"> {# Use border-danger to visually emphasize deletion #}
+                <div class="card-header bg-secondary text-white text-center"> {# bg-danger for header background #}
+                    <i class="bi bi-trash-fill me-2"></i> Confirm Delete
+                </div>
+                <div class="card-body text-center">
+                    <h2 class="card-title mb-4">Are you sure you want to delete this?</h2> {# Emphasize the warning #}
+
+                    {% if object %}
+                    <p class="card-text mb-3">
+                        You are about to delete the following item:
+                    </p>
+                    <ul class="list-unstyled mb-3">
+                        <li><strong>Date:</strong> {{ object.date|default:"N/A" }}</li>
+                        <li><strong>Description:</strong> {{ object.description|default:"N/A" }}</li>
+                        <li><strong>Category:</strong> {{ object.category|default:"N/A" }}</li>
+                        <li><strong>Amount:</strong> {{ object.amount|default:"N/A" }}</li>
+                    </ul>
+                    {% endif %}
+
+                    <p class="card-text mb-4">This action cannot be undone.</p> {# Important: emphasize irreversible action #}
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-grid gap-2 d-md-block"> {# Use grid for button layout #}
+                            <button type="submit" class="btn btn-danger me-2">Confirm Delete</button> {# Danger button for deletion #}
+                            <a href="{% url 'finance_tracker:transaction-list' %}" class="btn btn-secondary">Cancel</a> {# Link to cancel, adjust URL as needed #}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
