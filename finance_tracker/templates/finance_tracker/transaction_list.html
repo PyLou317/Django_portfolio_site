@@ -40,7 +40,9 @@
                         <td>{{ transaction.category|upper }}</td>
                         <td>{{ transaction.description }}</td>
                         <td>${{transaction.amount }}</td>
-                        <td>Modify/Delete</td>
+                        <td><a href="{% url 'finance_tracker:transaction_update' transaction.id %}">Edit</a> |
+                            {% comment %} <a href="{% url 'finance_tracker:transaction_delete' transaction.id %}">Delete</a>) {% endcomment %}
+                        </td>
                     </tr>
                 {% endfor %} 
             {% else %}

@@ -1,4 +1,5 @@
 from django.views.generic.list import ListView
+from django.views.generic.edit import UpdateView
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from .forms import UploadFileForm
@@ -142,3 +143,14 @@ class TransactionListView(ListView):
                 Q(category__name__icontains=search_term)
             )
         return queryset
+
+
+class TransactionUpdateView(UpdateView):
+    model = Transaction
+    fields = [
+        "date",
+        "description", 
+        "category",
+        "amount"
+        ]
+    template_name_suffix = "_update_form"

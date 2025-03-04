@@ -1,0 +1,10 @@
+{% extends 'finance_tracker/base.html' %} 
+{% load crispy_forms_tags %}
+{% load static %} 
+
+{% block content %}
+
+    {% csrf_token %}
+    {% crispy form %}
+
+{% endblock content %}
