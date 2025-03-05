@@ -21,67 +21,82 @@
         </div>
     </div>
     
+    
+    {% if page_obj %} 
+    {% for transaction in page_obj %}
+
     {% comment %} ------ Transaction List Table ------ {% endcomment %}
     <table class="table table-striped">
         <thead>
             <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Category</th>
-            <th scope="col">Description</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Action</th>
+                <th scope="col">Date</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
-        
         <tbody>
-            {% if page_obj %} 
-                {% for transaction in page_obj %}
-                    <tr>
-                        <td>{{ transaction.date|date:"Y-m-d" }}</td>
-                        <td>{{ transaction.category|upper }}</td>
-                        <td>{{ transaction.description }}</td>
-                        <td>${{transaction.amount }}</td>
-                        <td><a href="{% url 'finance_tracker:transaction_update' transaction.id %}"><i class="bi bi-pencil-square text-success"></i></a> | 
-                            <a href="{% url 'finance_tracker:transaction_delete' transaction.id %}"> <i class="bi bi-trash3-fill text-secondary"></i></a>
-                        </td>
-                    </tr>
-                {% endfor %} 
-            {% else %}
-                <tr> <td colspan="4">No Transactions yet.</td> </tr>
-            {% endif %}
+            <tr>
+                <td>{{ transaction.date|date:"Y-m-d" }}</td>
+                <td>{{ transaction.category|upper }}</td>
+                <td>{{ transaction.description }}</td>
+                <td>${{transaction.amount }}</td>
+                <td><a href="{% url 'finance_tracker:transaction_update' transaction.id %}"><i class="bi bi-pencil-square text-success"></i></a> | 
+                    <a href="{% url 'finance_tracker:transaction_delete' transaction.id %}"> <i class="bi bi-trash3-fill text-secondary"></i></a>
+                </td>
+            </tr>
         </tbody>
     </table>
+    {% endfor %} 
+    
+    {% comment %} ------ Pagination ------ {% endcomment %}
+        <div class="pagination justify-content-center">
+            <span class="step-links">
+                <nav aria-label="Transaction lists pages"> 
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link bg-secondary text-light" href="?page=1">&laquo; first</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                            </li>
+                        {% endif %}
+    
+                        <li class="page-item active" aria-current="page"> <span class="page-link bg-secondary border-secondary">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} <span class="visually-hidden">(current)</span>
+                            </span>
+                        </li>
+    
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link text-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </span>
+        </div>
 
-    <div class="pagination justify-content-center">
-        <span class="step-links">
-            <nav aria-label="Transaction lists pages"> 
-                <ul class="pagination">
-                    {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link bg-secondary text-light" href="?page=1">&laquo; first</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-                        </li>
-                    {% endif %}
-
-                    <li class="page-item active" aria-current="page"> <span class="page-link bg-secondary border-secondary">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} <span class="visually-hidden">(current)</span>
-                        </span>
-                    </li>
-
-                    {% if page_obj.has_next %}
-                        <li class="page-item">
-                            <a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link text-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </span>
-    </div>
+        {% else %}
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <div class="card shadow p-4">
+                            <div class="mt-3 text-center">
+                                <p>No Transactions yet,</br>
+                                    Please upload your bank statement.</p>
+                                <a href="{% url 'finance_tracker:file_upload' %}" id="btn_1" class="btn btn-success me-2">Upload <i class="bi bi-file-arrow-up"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 </div>
 
 {% endblock content %}
