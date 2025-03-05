@@ -49,12 +49,12 @@ class TransactionListView(LoginRequiredMixin, ListView):
     ordering = ['-date'] 
     
     def get_queryset(self): 
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().filter(owner=self.request.user)
         search_term = self.request.GET.get('search_term') # Get the search term from the request
         clear_search = self.request.GET.get('clear_search') # Get value of 'clear_search'
 
         if clear_search: # Check if 'clear_search' parameter is present
-            return super().get_queryset()
+            return queryset
         
         if search_term: 
             queryset = queryset.filter(
