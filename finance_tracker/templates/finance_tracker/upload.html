@@ -12,27 +12,29 @@
 
 {% comment %} ------------ Upload File Card ------------ {% endcomment %}
 {% if user.is_authenticated %}
-<div class="container d-flex justify-content-center align-items-center text-center mb-4">
-    <div class="bg-light border rounded-3 shadow-sm p-5 mt-5" style="width: 650px;"> 
-        <h1 style="margin-bottom: 60px;">Upload Your File</h1>
-        <div>
-            <div class="icons bi-4x d-flex justify-content-center mb-2">
-                <i class="bi bi-filetype-csv"></i>
-                <i class="bi bi-filetype-csv"></i>
-                <i class="bi bi-filetype-csv"></i>
+<div class="container d-flex justify-content-center align-items-center text-center mb-4 wrapper">
+    <div id="upload_container" class="container">
+        <h1 id="upload_file_header">Upload a file</h1>
+        <div class="upload-container">
+            <div class="border-container">
+                <div class="icons bi-4x d-flex justify-content-center mb-2 fa-4x"> 
+                    <i class="bi bi-filetype-csv"></i>
+                    <i class="bi bi-filetype-csv"></i>
+                    <i class="bi bi-filetype-csv"></i>
+                </div>
             </div>
-            <div>
-                {% csrf_token %}
-                {% crispy upload_form %}
-                <div id="fileTypeError" class="text-danger d-none"></div> 
-            </div>
+        </div>
+        <div> 
+            {% csrf_token %}
+            {% crispy upload_form %}
+            <div id="fileTypeError" class="text-danger d-none"></div>
         </div>
     </div>
 </div>
+
 {% else %}
     {% include 'users/components/login_container.html' %}
 {% endif %}
-{% comment %} ------------ Upload File Card ------------ {% endcomment %}
 
 {% endblock%}
 
