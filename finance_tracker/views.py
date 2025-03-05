@@ -3,13 +3,20 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from decimal import Decimal
+from io import StringIO
+from .utils import categorize_transaction
 
 from .forms import UploadFileForm
 
-from .models import Transaction
+from .models import Transaction, Category
 from django.db.models import Q, Sum
 
-import datetime
+from datetime import datetime
+import csv
 
 
 
@@ -17,6 +24,7 @@ def finance_tracker_home(request):
     return render(request, 'finance_tracker/index.html')
 
 
+@login_required
 def finance_tracker_dashboard(request):
     expense_transactions = Transaction.objects.exclude(category__name='income')
     expense_total_aggregation = expense_transactions.aggregate(
@@ -35,12 +43,112 @@ def finance_tracker_dashboard(request):
     }
     return render(request, 'finance_tracker/dashboard.html', context)
 
+class TransactionListView(LoginRequiredMixin, ListView):
+    paginate_by = 15
+    model = Transaction
+    ordering = ['-date'] 
+    
+    def get_queryset(self): 
+        queryset = super().get_queryset()
+        search_term = self.request.GET.get('search_term') # Get the search term from the request
+        clear_search = self.request.GET.get('clear_search') # Get value of 'clear_search'
 
+        if clear_search: # Check if 'clear_search' parameter is present
+            return super().get_queryset()
+        
+        if search_term: 
+            queryset = queryset.filter(
+                Q(description__icontains=search_term) |
+                Q(category__name__icontains=search_term)
+            )
+        return queryset
+
+
+class TransactionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Transaction
+    fields = [
+        "date",
+        "description", 
+        "category",
+        "amount"
+    ]
+    template_name_suffix = "_update_form"
+    
+    # Disable the date field and amount from user
+    def get_form(self, form_class = None):
+        form = super().get_form(form_class)
+        form.fields['date'].disabled = True
+        form.fields['amount'].disabled = True
+        return form
+    
+    def get_success_url(self):
+        return reverse_lazy('finance_tracker:transaction-list')
+    
+
+class TransactionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Transaction
+    
+
+@login_required
 def upload_statement(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            uploaded_file = form.cleaned_data['file']
+            file_content = uploaded_file.read().decode('utf-8') 
+            csvfile =StringIO(file_content)
+            reader = csv.DictReader(csvfile)
+            
+            transactions_to_create = []
+            
+            for row in reader:
+                date_str = row.get('Date')
+                description = row.get('Sub-description')
+                amount_str = row.get('Amount')
+
+                # Basic data cleaning and conversion
+                if date_str:
+                    try:
+                        date = datetime.strptime(date_str, '%Y-%m-%d')  # Adjust format if needed
+                    except ValueError:
+                        print(f"Invalid date format for transaction: {description}")
+                        continue
+
+                if amount_str:
+                    try:
+                        amount = Decimal(amount_str.replace(',', ''))
+                    except ValueError:
+                        print(f"Invalid amount format for transaction: {description}")
+                        continue
+
+                # Categorize transactions
+                if date and amount and description:
+                    category_name = categorize_transaction(description)
+                    category, created = Category.objects.get_or_create(name=category_name)
+
+                    existing_transaction = Transaction.objects.filter(
+                        date=date,
+                        description=description,
+                        amount=amount,
+                        category=category,
+                        owner=request.user
+                    ).first()
+                
+                    if existing_transaction:
+                        print("Duplicate transaction found, not saving.")
+                    else:
+                        transaction = Transaction(
+                            date=date, 
+                            description=description, 
+                            amount=amount, 
+                            category=category,
+                            owner=request.user
+                            )
+                        transactions_to_create.append(transaction)
+
+            Transaction.objects.bulk_create(transactions_to_create) # Bulk create transactions for efficiency
+            print(f"{len(transactions_to_create)} transactions saved successfully.")
+
             return redirect("/finance_tracker/")
     else:
         form = UploadFileForm()
@@ -123,47 +231,4 @@ def income_total_json(request):
     return JsonResponse(income_data, safe=False) # Return JSON response
 
 
-class TransactionListView(ListView):
-    paginate_by = 15
-    model = Transaction
-    ordering = ['-date'] 
-    
-    def get_queryset(self): 
-        queryset = super().get_queryset()
-        search_term = self.request.GET.get('search_term') # Get the search term from the request
-        clear_search = self.request.GET.get('clear_search') # Get value of 'clear_search'
 
-        if clear_search: # Check if 'clear_search' parameter is present
-            return super().get_queryset()
-        
-        if search_term: 
-            queryset = queryset.filter(
-                Q(description__icontains=search_term) |
-                Q(category__name__icontains=search_term)
-            )
-        return queryset
-
-
-class TransactionUpdateView(UpdateView):
-    model = Transaction
-    fields = [
-        "date",
-        "description", 
-        "category",
-        "amount"
-    ]
-    template_name_suffix = "_update_form"
-    
-    # Disable the date field and amount from user
-    def get_form(self, form_class = None):
-        form = super().get_form(form_class)
-        form.fields['date'].disabled = True
-        form.fields['amount'].disabled = True
-        return form
-    
-    def get_success_url(self):
-        return reverse_lazy('finance_tracker:transaction-list')
-    
-
-class TransactionDeleteView(DeleteView):
-    model = Transaction
