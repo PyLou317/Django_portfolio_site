@@ -28,7 +28,7 @@ def finance_tracker_home(request):
 @login_required
 def finance_tracker_dashboard(request):
     expense_transactions = Transaction.objects.exclude(
-        category__name='income').filter(
+        category__name='Income').filter(
             owner=request.user
         )
     expense_total_aggregation = expense_transactions.aggregate(
@@ -37,7 +37,7 @@ def finance_tracker_dashboard(request):
         
     income_transactions = Transaction.objects.filter(
         owner=request.user,
-        category__name='income')
+        category__name='Income')
     income_total_aggregation = income_transactions.aggregate(
      total_income_amount=Sum('amount')
      )
@@ -209,7 +209,7 @@ def income_total_json(request):
     income_transactions_for_year = Transaction.objects.filter(
         owner=request.user,
         date__year = year,
-        category__name = 'income'
+        category__name = 'Income'
     )
         
     # Group by month and category, and sum amounts
@@ -253,7 +253,6 @@ def monthly_expense_json(request):
     ).values('category__name', 'month').annotate(
         total_expense=Sum('amount')
     ).order_by('category__name', 'month')
-    print(monthly_expenses)
     
     # Format the data for JSON response
     monthly_expense_data = []
