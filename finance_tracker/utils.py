@@ -9,26 +9,19 @@ def load_categories():
 
 
 def categorize_transaction(description):
-    """
-    Categorizes a transaction based on keywords.
-
-    Args:
-        description: The description of the transaction.
-
-    Returns:
-        The category of the transaction.
-    """
     categories = load_categories()  # Get the list of categories
     
+    category_name = "other"
     for category, keywords in categories.items():
         for keyword in keywords:
             if keyword.lower() in description.lower():
-                return category
-    return "other"
-
+                category_name = category
+                break
+            
+    return category_name
 
 if __name__ == "__main__":
-    category = categorize_transaction("barber")
-    print(category)
+    category1 = categorize_transaction("hi")
+    print(category1)
     
 
