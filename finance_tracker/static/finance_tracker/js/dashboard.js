@@ -77,36 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-
-    // fetch('/finance_tracker/monthly_expense_json/')
-    //     .then(resp => resp.json())
-    //     .then(monthlyExpenseData => {
-    //         console.log('Fetched monthlyExpenseData:', monthlyExpenseData);
-
-    //         const categoryLabels = monthlyExpenseData.map(item => item.month);
-    //         const monthlyExpenseTotals = monthlyExpenseData.map(item => parseFloat(item.total_income));
-
-    //         const expenseByMonth = new Chart(expenseByMonthChart, {
-    //             type: 'bar',
-    //             data: {
-    //                 labels: categoryLabels,
-    //                 datasets: [{
-    //                     label: 'Income by Month',
-    //                     data: monthlyExpenseTotals,
-    //                     borderWidth: 1
-    //                 }
-    //                 ]
-    //             },
-    //             options: {
-    //                 responsive: true,
-    //                 scales: {
-    //                     y: {
-    //                         beginAtZero: true
-    //                     }
-    //                 }
-    //             }
-    //         });
-    //     });
     
 
     fetch('/finance_tracker/monthly_expense_json/')

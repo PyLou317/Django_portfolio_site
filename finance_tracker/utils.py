@@ -18,10 +18,10 @@ def categorize_transaction(description):
                 category_name = category
                 break
             
-    return category_name
+    return category_name.title()
 
 if __name__ == "__main__":
-    category1 = categorize_transaction("hi")
+    category1 = categorize_transaction("Aerotek Inc")
     print(category1)
     
 
