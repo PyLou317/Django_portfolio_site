@@ -2,32 +2,33 @@
 {% load static %} 
 
 {% block content %}
-<div class="mx-2">
-    <div class="mx-3 mt-3">
-        <h2>Finance Tracker</h2>
-        <h5>Personal Expense Dashboard</h5>
-    </div>
+<div>
+    <div class="container-fluid min-vh-100">
+        <div class="m-3">
+            <h2>Finance Tracker</h2>
+            <h5>Personal Expense Dashboard</h5>
+        </div>  
 
-  <div class="container-fluid min-vh-100">
+
     <!-- Cards -->
     <div class="d-flex flex-wrap justify-content-center">
-        <div class="db_card card border-0 rounded-3 shadow mx-3 my-3 flex-grow-1 col-lg-3 col-md-4 col-sm-6">
+        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow mx-3 my-3 col-12 col-md-6 col-lg-3">
             <div class="card-body p-4">
-                <h5 class="card-title text-primary fw-semibold">Total Income</h5>
+                <h5 class="card-title text-primary fw-semibold">Income Total</h5>
                 <h6 class="card-subtitles mb-2 text-muted fw-medium">Yearly</h6>
                 <h1 class="card-text text-end fw-bold">${{ income_summary.total_income_amount|floatformat:2 }}</h1>
             </div>
         </div>
         
-        <div class="db_card card border-0 rounded-3 shadow mx-3 my-3 flex-grow-1 col-lg-3 col-md-4 col-sm-6">
+        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow mx-3 my-3 col-12 col-md-6 col-lg-3">
             <div class="card-body">
-                <h5 class="card-title text-primary fw-semibold">Total Expenses</h5>
+                <h5 class="card-title text-primary fw-semibold">Expense Total</h5>
                 <h6 class="card-subtitles mb-2 text-muted fw-medium">Yearly</h6>
                 <h1 id="expense-num" class="card-text text-end fw-bold">${{ expense_summary.total_expense_amount|floatformat:2 }}</h1>
             </div>
         </div>
         
-        <div class="db_card card border-0 rounded-3 shadow mx-3 my-3 flex-grow-1 col-lg-3 col-md-4 col-sm-6">
+        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow mx-3 my-3 col-12 col-md-6 col-lg-3">
             <div class="card-body">
                 <h5 class="card-title text-primary fw-semibold">Net Profit</h5>
                 <h6 class="card-subtitles mb-2 text-muted fw-medium">Yearly</h6>
@@ -38,36 +39,36 @@
     
     <!-- Charts -->
     <div class="d-flex my-3 flex-wrap justify-content-center">
-        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow mx-3 col-lg-5 col-sm-6 my-3">
+        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow card mx-3 col-lg-3 col-sm-12 my-3">
             <div class="card-body">
-                <h5 class="card-title text-primary">Income Total</h5>
-                <h6 class="card-subtitles mb-2 text-muted">By Month</h6>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="card-title text-primary fw-semibold">Expenses</h5>
+                        <h6 class="card-subtitles mb-2 text-muted fw-medium">By Category</h6>
+                    </div>
+                </div>
+                <div class="m-3">
+                    <canvas id="total-expense-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow mx-3 col-lg-6 col-sm-12 my-3">
+            <div class="card-body">
+                <h5 class="card-title text-primary fw-semibold">Income</h5>
+                <h6 class="card-subtitles mb-2 text-muted fw-medium">By Month</h6>
                 <div>
                     <canvas id="monthly-income-chart"></canvas>
                 </div>
             </div>
         </div>
         
-        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow card mx-3 col-lg-5 col-sm-6 my-3">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5 class="card-title text-primary">Expense Total</h5>
-                        <h6 class="card-subtitles mb-2 text-muted">By Category</h6>
-                    </div>
-                </div>
-                <div>
-                    <canvas id="total-expense-chart"></canvas>
-                </div>
-            </div>
-        </div>
         
         <div class="db_card flex-grow-1 card border-0 rounded-3 shadow card mx-3 col-lg-5 col-sm-6 my-3">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="card-title text-primary">Monthly Expense</h5>
-                        <h6 class="card-subtitles mb-2 text-muted">By Category</h6>
+                        <h5 class="card-title text-primary fw-semibold">Monthly Expense</h5>
+                        <h6 class="card-subtitles mb-2 text-muted fw-medium">By Category</h6>
                     </div>
                 </div>
                     <div>

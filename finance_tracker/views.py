@@ -13,25 +13,30 @@ from .utils import categorize_transaction
 from .forms import UploadFileForm
 
 from .models import Transaction, Category
-from django.db.models import Q, Sum
+from django.db.models import Q, Sum, DateTimeField
+from django.db.models.functions import TruncMonth
 
 from datetime import datetime
 import csv
 
 
-
+@login_required
 def finance_tracker_home(request):
     return render(request, 'finance_tracker/index.html')
 
 
 @login_required
 def finance_tracker_dashboard(request):
-    expense_transactions = Transaction.objects.exclude(category__name='income')
+    expense_transactions = Transaction.objects.exclude(
+        category__name='income').filter(
+            owner=request.user
+        )
     expense_total_aggregation = expense_transactions.aggregate(
         total_expense_amount=Sum('amount')
         )
         
     income_transactions = Transaction.objects.filter(
+        owner=request.user,
         category__name='income')
     income_total_aggregation = income_transactions.aggregate(
      total_income_amount=Sum('amount')
@@ -41,7 +46,9 @@ def finance_tracker_dashboard(request):
         'income_summary': income_total_aggregation,
         'expense_summary': expense_total_aggregation
     }
+    
     return render(request, 'finance_tracker/dashboard.html', context)
+
 
 class TransactionListView(LoginRequiredMixin, ListView):
     paginate_by = 15
@@ -49,9 +56,12 @@ class TransactionListView(LoginRequiredMixin, ListView):
     ordering = ['-date'] 
     
     def get_queryset(self): 
-        queryset = super().get_queryset().filter(owner=self.request.user)
-        search_term = self.request.GET.get('search_term') # Get the search term from the request
-        clear_search = self.request.GET.get('clear_search') # Get value of 'clear_search'
+        queryset = super().get_queryset().filter(
+            owner=self.request.user)
+        search_term = self.request.GET.get(
+            'search_term') # Get the search term from the request
+        clear_search = self.request.GET.get(
+            'clear_search') # Get value of 'clear_search'
 
         if clear_search: # Check if 'clear_search' parameter is present
             return queryset
@@ -149,39 +159,28 @@ def upload_statement(request):
             Transaction.objects.bulk_create(transactions_to_create) # Bulk create transactions for efficiency
             print(f"{len(transactions_to_create)} transactions saved successfully.")
 
-            return redirect("/finance_tracker/")
+            return redirect("/finance_tracker/upload")
     else:
         form = UploadFileForm()
     return render(request, 'finance_tracker/upload.html', {'upload_form': form})
 
 
-def transaction_list_json(request): 
-    transactions = Transaction.objects.all().prefetch_related('category')
-    transaction_data_list = []
-    for transaction in transactions:
-        transaction_data = {
-            'date': transaction.date.isoformat() if transaction.date else None,
-            'category': transaction.category.name if transaction.category else None,
-            'description': transaction.description,
-            'amount': str(transaction.amount)
-        }
-        transaction_data_list.append(transaction_data)
-    return JsonResponse(transaction_data_list, safe=False) # Returns JSON response
-
-
+# ----- Category Expense Graph #1 ----- #
+@login_required
 def category_expenses_json(request):
     year = request.GET.get('year')
     if not year:
-        year = datetime.date.today().year
+        year = datetime.today().year
     else:
         year = int(year)
 
-    category_expenses = Transaction.objects.filter(
+    category_expenses = Transaction.objects.exclude(
+        category__name='income').filter(
+        owner=request.user,
         date__year=2024
     ).values('category__name').annotate(
         total_expense=Sum('amount')
-    ).order_by('-total_expense').exclude( # don't include income in result
-        category__name='income')
+    ).order_by('-total_expense')
     
     # Format the data for JSON response
     category_data = []
@@ -190,20 +189,25 @@ def category_expenses_json(request):
             'category': item['category__name'], 
             'total_expense': str(item['total_expense'])
         })
+        
+    return JsonResponse(category_data, safe=False)
 
-    return JsonResponse(category_data, safe=False) # Return JSON response
 
 
+
+# ----- Income Graph #2 ----- #
+@login_required
 def income_total_json(request):
     year = request.GET.get('year')
     if not year:
         year = 2024
-        # datetime.date.today().year
+        # datetime.today().year
     else:
         year = int(year)
 
     # Filter income transactions for the year
     income_transactions_for_year = Transaction.objects.filter(
+        owner=request.user,
         date__year = year,
         category__name = 'income'
     )
@@ -220,7 +224,7 @@ def income_total_json(request):
     income_data = []
     for item in monthly_income_data:
         month_number = item['date__month']
-        month_name = datetime.date(year=year, month=month_number, day=1).strftime('%B')
+        month_name = datetime(year=year, month=month_number, day=1).strftime('%B')
         
         income_data.append({
             'month': month_name,
@@ -231,4 +235,34 @@ def income_total_json(request):
     return JsonResponse(income_data, safe=False) # Return JSON response
 
 
+# ----- Monthly Expense Graph #3 ----- #
+@login_required
+def monthly_expense_json(request):
+    year = request.GET.get('year')
+    if not year:
+        year = datetime.today().year
+    else:
+        year = int(year)
+
+    monthly_expenses = Transaction.objects.exclude(
+        category__name='income').filter(
+        owner=request.user,
+        date__year=2024
+    ).annotate(
+        month=TruncMonth('date')
+    ).values('category__name', 'month').annotate(
+        total_expense=Sum('amount')
+    ).order_by('category__name', 'month')
+    print(monthly_expenses)
+    
+    # Format the data for JSON response
+    monthly_expense_data = []
+    for item in monthly_expenses:
+        monthly_expense_data.append({
+            'category': item['category__name'],
+            'month': item['month'].strftime('%b'), 
+            'total_expense': float(item['total_expense'] or 0)
+        })
+        
+    return JsonResponse(monthly_expense_data, safe=False)
 
