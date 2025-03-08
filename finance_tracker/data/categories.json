@@ -11,10 +11,10 @@
     "circle k",
     "costco gas"
   ],
-  "credit card payment": ["payment", "mb cibc", "Mb-Cibc"],
+  "credit card payment": ["payment", "mb cibc", "Mb-Cibc", "Mb-Capital"],
   "credit card interest": ["interest"],
   "food: restaurants": [
-    "tim_hortons",
+    "tim hortons",
     "starbucks",
     "mcdonalds",
     "nandos",
@@ -28,12 +28,15 @@
     "skobi",
     "sushi",
     "kisoji",
-    "a_w",
+    "a w",
+    "a&w",
     "restaurant",
     "wendys",
     "joey",
     "boathouse",
-    "barely_merchant"
+    "barely_merchant",
+    "booster juice",
+    "original joe's"
   ],
   "groceries": [
     "walmart",
@@ -45,7 +48,8 @@
     "freshco",
     "fresh st",
     "core culture",
-    "superstore"
+    "superstore",
+    "Real Cdn Supers"
   ],
   "insurance": ["bcca", "bcca membership"],
   "personal care": ["barber", "haides"],
@@ -63,10 +67,12 @@
     "seven oaks",
     "winnershomesense",
     "lululemon",
-    "pharmasave"
+    "pharmasave",
+    "etsy",
+    "printify"
   ],
   "subscriptions": ["apple", "equifax", "spotify", "beamjobs", "Mailtrack"],
-  "phone": ["telus_mobility"],
+  "phone": ["telus mobility"],
   "travel": ["air can", "airbnb", "uber"],
   "entertainment": ["cineplex"],
   "interac E-transfer": ["e transfer", "e-transfer"],

@@ -1,10 +1,14 @@
 /* Finance Tracker Home Page */
-#welcome_div {
-    height: 50vh;
-    margin-top: 200px;
+#video-container {
+    margin-left:22vw;
 }
 
-/* Sidebar Menu Button */
+@media all and (min-width:321px) and (max-width: 780px) {
+  
+  /* put your css styles in here */
+}
+
+/* ----- Sidebar Menu Button ----- */
 #menu-button {
     margin-top: 70px;
     margin-right: 20px;
@@ -18,7 +22,7 @@
     margin-top: 50px;
 }
 
-/* Dashboard */
+/* ----- Dashboard ----- */
 .db_card {
     background-color: #f9fafb;
 }
@@ -45,8 +49,6 @@
     display: none;
 }
 
-
-/* ----- Upload Form ----- */
 .icons.bi-4x {
     font-size: 4rem;
     display: inline-flex; /* To allow horizontal arrangement and transformations */
@@ -60,7 +62,7 @@
 
 /* Target the first icon for transformation */
 .icons.bi-4x i.bi-filetype-csv:nth-child(1) {
-    transform: scale(0.8) translateY(20%) translateX(-60%) rotate(-45deg);
+    transform: scale(0.8) translateY(20%) rotate(-45deg);
 }
 
 /* Target the second icon for transformation */
@@ -70,7 +72,7 @@
 
 /* Target the third icon for transformation */
 .icons.bi-4x i.bi-filetype-csv:nth-child(3) {
-    transform: scale(0.8) translateY(20%) translateX(60%) rotate(45deg); /* shrink-3 down-2 right-6 rotate-45 */
+    transform: scale(0.8) translateY(20%) rotate(45deg); /* shrink-3 down-2 right-6 rotate-45 */
 }
 
 #not_user_upload {
@@ -80,7 +82,7 @@
 
 .wrapper {
   margin: auto;
-  max-width: 640px;
+  max-width: 500px;
   padding-top: 60px;
   text-align: center;
 }

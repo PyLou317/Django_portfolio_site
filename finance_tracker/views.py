@@ -20,7 +20,7 @@ from datetime import datetime
 import csv
 
 
-@login_required
+
 def finance_tracker_home(request):
     return render(request, 'finance_tracker/index.html')
 
@@ -245,7 +245,7 @@ def monthly_expense_json(request):
         year = int(year)
 
     monthly_expenses = Transaction.objects.exclude(
-        category__name='income').filter(
+        category__name='Income').filter(
         owner=request.user,
         date__year=2024
     ).annotate(

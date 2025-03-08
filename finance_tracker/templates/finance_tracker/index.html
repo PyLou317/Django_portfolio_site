@@ -1,20 +1,28 @@
-{% extends 'finance_tracker/base.html' %} 
-{% load static %} 
+{% extends 'finance_tracker/base.html' %} {% load static %} {% block content %}
 
-{% block content %}
-{% if user.is_authenticated %}
-    <div id="welcome-title" 
-    class="container
-        d-flex
-        min-vh-100 
-        display-5 
-        text-center
-        justify-content-center">
-        Welcome!
-    </div>
-{% else %}
-    <div id="welcome_div" class="container align-items-center">
-        {% include 'users/components/login_container.html' %}
-    </div>
-{% endif %}
+<div
+  id="welcome-title"
+  class="container d-flex display-5 text-center mb-4 justify-content-center"
+>
+  Start Here!
+</div>
+
+{% comment %} ----- Welcome Video ----- {% endcomment %}
+<div id="video-container">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0">
+    <iframe id="welcome-video"
+      src="https://www.loom.com/embed/ae9f0bd673204acd9876c62a95f266ee?sid=379597b4-6e7f-4fe6-8c47-32d8a4655f64&hideEmbedTopBar=true&hide_speed=true"
+      frameborder="0"
+      webkitallowfullscreen
+      mozallowfullscreen
+      allowfullscreen
+      style="position: absolute; top: 0; left: 0; width: 75%; height: 75%"
+    ></iframe>
+  </div>
+</div>
+
+<div id="welcome_div" class="container align-items-center">
+  {% include 'users/components/login_container.html' %}
+</div>
+
 {% endblock content %}

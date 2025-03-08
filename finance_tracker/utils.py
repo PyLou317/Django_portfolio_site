@@ -11,7 +11,7 @@ def load_categories():
 def categorize_transaction(description):
     categories = load_categories()  # Get the list of categories
     
-    category_name = "other"
+    category_name = "Other"
     for category, keywords in categories.items():
         for keyword in keywords:
             if keyword.lower() in description.lower():

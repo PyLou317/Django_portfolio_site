@@ -39,7 +39,7 @@
             {% for transaction in page_obj %}
             <tr>
                 <td>{{ transaction.date|date:"Y-m-d" }}</td>
-                <td>{{ transaction.category|upper }}</td>
+                <td>{{ transaction.category }}</td>
                 <td>{{ transaction.description }}</td>
                 <td>${{transaction.amount }}</td>
                 <td><a href="{% url 'finance_tracker:transaction_update' transaction.id %}"><i class="bi bi-pencil-square text-success"></i></a> | 
