@@ -11,16 +11,21 @@
 
 {% block content %}
 <div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow mb-4">
-                <div class="card-header bg-secondary text-white">
-                    <i class="bi bi-person-circle me-2"></i> Your Profile Information
+    <div class="card shadow mb-4">
+        <div class="card-header bg-secondary text-white">
+            <i class="bi bi-person-circle me-2"></i> Your Profile Information
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 text-center py-5">
+                    {% if user_profile.avatar %}
+                        <img src="{{ user_profile.avatar.url }}" alt="Profile Avatar" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px;">
+                    {% else %}
+                        <p>No Profile Picture</p>
+                        <i class="bi bi-person-circle" style="font-size: 5rem;"></i> <p class="text-muted">Default Avatar</p>
+                    {% endif %}
                 </div>
-                <div class="card-body">
-                    <div class="card-body w-25 border text-center py-5 mt-2 mb-4">
-                        Profile Picture
-                    </div>
+                <div class="col-md-8 ms-5 align-self-center">
                     <dl class="row">
                         <dt class="col-sm-3 fw-bold">Username:</dt>
                         <dd class="col-sm-9">{{ user.username }}</dd>
@@ -40,48 +45,53 @@
                     </dl>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="card shadow mb-4">
-                <div class="card-header bg-secondary text-white">
-                    <i class="bi bi-gear-fill me-2"></i> Account Actions
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled">
+    <div class="card shadow mb-4">
+        <div class="card-header bg-secondary text-white">
+            <i class="bi bi-gear-fill me-2"></i> Account Actions
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="{% url 'account_change_password' %}" class="btn btn-outline-secondary btn-sm mb-2">
+                        <i class="bi bi-pencil-square"></i> Edit Account
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'account_change_password' %}" class="btn btn-outline-secondary btn-sm mb-2">
+                        <i class="bi bi-lock-fill me-1"></i> Change Password
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'account_logout' %}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-box-arrow-right me-1"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-secondary text-white">
+            <i class="bi bi-person-plus-fill me-2"></i> Connect Social Accounts
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled">
+                {% get_social_accounts user as accounts %}
+                    {% if accounts.google %}
                         <li>
-                            <a href="{% url 'account_change_password' %}" class="btn btn-outline-secondary btn-sm mb-2">
-                                <i class="bi bi-lock-fill me-1"></i> Change Password
+                            <button class="btn btn-secondary btn-block mb-2" disabled>
+                                <i class="bi bi-google me-1"></i> Google Account Connected
+                            </button>
+                        {% else %}
+                            <a href="{% provider_login_url provider.id process='connect' %}" class="btn btn-outline-primary btn-block mb-2">
+                                <i class="bi bi-google me-1"></i> Connect Google Account
                             </a>
                         </li>
-                        <li>
-                            <a href="{% url 'account_logout' %}" class="btn btn-danger btn-sm">
-                                <i class="bi bi-box-arrow-right me-1"></i> Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card shadow">
-                <div class="card-header bg-secondary text-white">
-                    <i class="bi bi-person-plus-fill me-2"></i> Connect Social Accounts
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled">
-                        {% get_social_accounts user as accounts %}
-                            {% if accounts.google %}
-                                <li>
-                                    <button class="btn btn-secondary btn-block mb-2" disabled>
-                                        <i class="bi bi-google me-1"></i> Google Account Connected
-                                    </button>
-                                {% else %}
-                                    <a href="{% provider_login_url provider.id process='connect' %}" class="btn btn-outline-primary btn-block mb-2">
-                                        <i class="bi bi-google me-1"></i> Connect Google Account
-                                    </a>
-                                </li>
-                            {% endif %}
-                    </ul>
-                </div>
-            </div>
+                    {% endif %}
+            </ul>
         </div>
     </div>
 </div>
