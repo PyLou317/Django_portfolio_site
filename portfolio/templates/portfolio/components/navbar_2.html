@@ -1,28 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mainNavbarCollapse"
-            aria-controls="mainNavbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" aria-label="Twelfth navbar example">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
-        <div
-            class="collapse navbar-collapse justify-content-md-center"
-            id="mainNavbarCollapse"
-        >
-            <ul class="navbar-nav">
+
+        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+          <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link text-gradient" href="{% url 'portfolio:home' %}"
-                >Portfolio Home</a>
+                <a class="nav-link text-gradient" href="{% url 'portfolio:home' %}">Portfolio Home</a>
             </li>
             <li class="nav-item dropdown">
-                <a
-                class="nav-link dropdown-toggle text-gradient"
+                <a class="nav-link dropdown-toggle text-gradient"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -32,9 +20,9 @@
                 Projects
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'finance_tracker:home' %}">AI Finance Tracker</a>
+                    <a class="dropdown-item" href="{% url 'finance_tracker:home' %}">Finance Tracker</a>
                     <a class="dropdown-item" href="#">Blog</a>
-                    <a class="dropdown-item" href="#">Contract Worker Management</a>
+                    <a class="dropdown-item" href="#">Employee Management Software</a>
                     <hr class="dropdown-divider" />
                     <a
                     class="dropdown-item"
@@ -43,17 +31,11 @@
                     >
                 </div>
                 <li class="nav-item">
-                <a class="nav-link text-gradient" href="{% url 'portfolio:home' %}#about-me"
-                    >About Me</a
-                >
+                <a class="nav-link text-gradient" href="{% url 'portfolio:home' %}#about-me">About Me</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link text-gradient" href="{% url 'portfolio:home' %}#contact-me"
-                    >Contact</a
-                >
-                </li>
+                <a class="nav-link text-gradient" href="{% url 'portfolio:home' %}#contact-me">Contact</a>
             </li>
-            </ul>
         </div>
-    </div>
+      </div>
 </nav>

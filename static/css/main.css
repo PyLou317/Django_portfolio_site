@@ -13,8 +13,8 @@ main {
 
 /* --------- Navbar -------- */
 .navbar-nav .nav-link.text-gradient {
-    font-size: 16pt;
-    font-weight: 600;
+    /* font-size: 16pt; */
+    /* font-weight: 500; */
     background-clip: text; /* Clip the background to the text shape */
     -webkit-background-clip: text; /* For older Safari versions */
     /* color: transparent; */
