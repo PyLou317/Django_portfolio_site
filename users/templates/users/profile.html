@@ -26,7 +26,11 @@
                         <dd class="col-sm-9">{{ user.username }}</dd>
 
                         <dt class="col-sm-3 fw-bold">Email:</dt>
-                        <dd class="col-sm-9">{{ user.email }}</dd>
+                        {% if user.email %}
+                            <dd class="col-sm-9">{{ user.email }}</dd>
+                        {% else %}
+                            <dd class="col-sm-9">N/A</dd>
+                        {% endif %}
 
                         <dt class="col-sm-3 fw-bold">First Name:</dt>
                         <dd class="col-sm-9">{{ user.first_name|default:"N/A" }}</dd>
