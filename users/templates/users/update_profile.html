@@ -1,10 +1,31 @@
 {% extends 'finance_tracker/base.html' %} 
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags %} 
 {% load socialaccount %} 
 {% load static %} 
 
-{% block title %}Update User Profile{% endblock %}
+{% block title %}Update User Profile{%endblock %} 
 
 {% block content %}
-Update User
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <div class="card-header bg-success text-white text-center">
+                    <i class="bi bi-box-arrow-in-right me-2"></i> Update Profile
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div>
+                            {% crispy form %}
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-dark btn-block">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
