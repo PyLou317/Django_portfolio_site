@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     plugins: {
                         legend: {
                             display: true,
-                            position: 'top'
+                            position: 'right'
                         }
                     }
                 }
@@ -130,6 +130,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 options: {
                     responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'left'
+                        }
+                    }
                 }
             });
         });
