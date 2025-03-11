@@ -2,6 +2,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Field, Row, Column
 
+
 class UploadFileForm(forms.Form):        
     file = forms.FileField(required=True, help_text="Please upload your bank statement here (CSV file)")
 
