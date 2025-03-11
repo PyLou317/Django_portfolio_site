@@ -1,7 +1,7 @@
 from django import forms
 from .models import UserProfile
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, HTML, MultiField, Div, Field
+from crispy_forms.layout import Layout, Submit, HTML, Div, Field
 
 class ProfileUpdateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=32)
