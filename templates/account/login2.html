@@ -1,0 +1,44 @@
+{% extends 'finance_tracker/base.html' %} 
+{% load crispy_forms_tags %}
+{% load socialaccount %} 
+{% load static %} 
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+ <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow p-4">
+            <div class="card-header bg-success text-white text-center">
+                <i class="bi bi-box-arrow-in-right me-2"></i> Login
+            </div>
+            <div class="card-body">
+            {% comment %} <h2 class="card-title text-center mb-4">Login</h2>  {% endcomment %}
+            <form method="post" action="{% url 'account_login' %}" class="login-form">
+                {% csrf_token %}
+                <div>
+                    {% crispy form %}
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-dark btn-block">Login</button>
+                    </div>
+                </div>
+            </form>
+            <div class="mt-3 text-center">
+              <p>
+                New user? <a href="{% url 'account_signup' %}">Create an Account!</a>
+              </p>
+              <p class="mt-3"> 
+                {#---- Google Sign-In Link ----#}
+                <a href="{% provider_login_url 'google' action='reauthenticate' %}" class="btn btn-outline-dark btn-block">
+                  <i class="bi bi-google"></i> 
+                  Login with Google
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
