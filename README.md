@@ -44,7 +44,7 @@ This is my personal portfolio website built using the Django web framework. It s
 
 ### Prerequisites
 
-- Python (version X.X or higher)
+- Python (version 3.10 or higher)
 - pip (Python package manager)
 - Virtual environment (recommended)
 
