@@ -122,10 +122,7 @@ portfolio/
 
 ### Deployment
 
-Heroku: [Link to Heroku deployment guide]
-PythonAnywhere: [Link to PythonAnywhere deployment guide]
-AWS Elastic Beanstalk: [Link to AWS deployment guide]
-DigitalOcean: [Link to DigitalOcean deployment guide]
+Needs updating
 
 
 ### Contact
