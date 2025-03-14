@@ -23,9 +23,10 @@ This is my personal portfolio website built using the Django web framework. It s
 - **About Me:** Provides information about my background and experience.
 - **Contact Form:** Allows visitors to easily contact me.
 - **Responsive Design:** Ensures the site looks good on various devices.
-- **User Authentication:** (If applicable) Allows users to create accounts and log in.
-- **Blog:** (If applicable) Includes a blog section for articles and updates.
-- **Admin Panel:** (If applicable) Provides an admin interface for content management.
+- **User Authentication:** Allows users to create accounts and log in.
+- **Blog:** Includes a blog section for articles and updates.
+- **Finance Tracker App:** A comprehensive dashboard to display user uploaded bank transactions with auto categorization.
+- **Admin Panel:** Provides an admin interface for content management.
 
 ## Technologies Used
 
@@ -35,10 +36,9 @@ This is my personal portfolio website built using the Django web framework. It s
 - **Bootstrap:** CSS framework for responsive design.
 - **PostgreSQL/SQLite:** Database.
 - **Crispy Forms:** For improved form rendering.
-- **django-allauth:** (If applicable) For user authentication.
-- **TinyMCE/CKEditor:** (If applicable) For rich text editing.
-- **django-taggit:** (If applicable) For tagging posts.
-- **[Any other relevant libraries/tools]**
+- **django-allauth:** For user authentication.
+- **TinyMCE/CKEditor:** For rich text editing.
+- **django-taggit:** For tagging posts.
 
 ## Getting Started
 
@@ -87,8 +87,9 @@ This is my personal portfolio website built using the Django web framework. It s
 
 ```bash
 python manage.py runserver
-Open your browser and navigate to http://127.0.0.1:8000/.
 ```
+
+Open your browser and navigate to http://127.0.0.1:8000/.
 
 ### Project Structure
 ```
@@ -120,17 +121,15 @@ portfolio/
 ```
 
 ### Deployment
-```
+
 Heroku: [Link to Heroku deployment guide]
 PythonAnywhere: [Link to PythonAnywhere deployment guide]
 AWS Elastic Beanstalk: [Link to AWS deployment guide]
 DigitalOcean: [Link to DigitalOcean deployment guide]
-```
+
 
 ### Contact
-```
-Email: [Your email address]
-LinkedIn: [Your LinkedIn profile URL]
-GitHub: [Your GitHub profile URL]
-Portfolio: [Your portfolio website URL]
-```
+
+Email: lucas.patriquin@gmail.conm
+LinkedIn: https://www.linkedin.com/in/lucas-patriquin/
+
