@@ -3,10 +3,8 @@
     margin-left:22vw;
 }
 
-@media all and (min-width:321px) and (max-width: 780px) {
-  
-  /* put your css styles in here */
-}
+
+
 
 /* ----- Sidebar Menu Button ----- */
 #menu-button {
@@ -22,6 +20,8 @@
     margin-top: 50px;
 }
 
+
+
 /* ----- Dashboard ----- */
 .db_card {
     background-color: #f9fafb;
@@ -35,9 +35,12 @@
     color: green;
 }
 
-#month-selector {
+/* Month selector button */
+#month-selector { 
     width: 150px;
 }
+
+
 
 /* ----- crispy upload form ----- */
 #upload-button {

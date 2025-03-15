@@ -31,20 +31,42 @@ def finance_tracker_dashboard(request):
         category__name='Income').filter(
             owner=request.user
         )
+    
     expense_total_aggregation = expense_transactions.aggregate(
         total_expense_amount=Sum('amount')
         )
+    
+    months_data = expense_transactions.annotate(
+        month=TruncMonth('date')).values('month')
+    
+    month_names = []
+    seen_months = set() #prevent duplicates.
+    for item in months_data:
+        month_date = item['month']
+        month_name = month_date.strftime("%B %Y")
+        if month_name not in seen_months:
+            month_names.append((month_date, month_name))
+            seen_months.add(month_name)
+    
+    # Custom sort function to sort by month and year
+    def month_sort_key(item):
+        return item[0].year, item[0].month
+
+    month_names.sort(key=month_sort_key)
+
+    months = [name for date, name in month_names] 
         
     income_transactions = Transaction.objects.filter(
         owner=request.user,
         category__name='Income')
     income_total_aggregation = income_transactions.aggregate(
-     total_income_amount=Sum('amount')
+        total_income_amount=Sum('amount')
      )
     
     context = {
         'income_summary': income_total_aggregation,
-        'expense_summary': expense_total_aggregation
+        'expense_summary': expense_total_aggregation,
+        'months': months
     }
     
     return render(request, 'finance_tracker/dashboard.html', context)
@@ -175,7 +197,7 @@ def category_expenses_json(request):
         year = int(year)
 
     category_expenses = Transaction.objects.exclude(
-        category__name='income').filter(
+        category__name='Income').filter(
         owner=request.user,
         date__year=2024
     ).values('category__name').annotate(
@@ -238,11 +260,6 @@ def income_total_json(request):
 # ----- Monthly Expense Graph #3 ----- #
 @login_required
 def monthly_expense_json(request):
-    year = request.GET.get('year')
-    if not year:
-        year = datetime.today().year
-    else:
-        year = int(year)
 
     monthly_expenses = Transaction.objects.exclude(
         category__name='Income').filter(
@@ -258,17 +275,10 @@ def monthly_expense_json(request):
     monthly_expense_data = []
     for item in monthly_expenses:
         monthly_expense_data.append({
-            'month': item['month'].strftime('%b'), 
+            'month': item['month'].strftime('%B %Y'), 
             'category': item['category__name'],
             'total_expense': float(item['total_expense'] or 0)
         })
-
-    # monthly_expense_data = []
-    # for item in monthly_expenses:
-    #     month = item['month'].strftime('%b')
-    #     category = item['category__name']
-    #     total_expense = float(item['total_expense'] or 0)
-    #     monthly_expense_data[month] = {'category': category}
         
     return JsonResponse(monthly_expense_data, safe=False)
 

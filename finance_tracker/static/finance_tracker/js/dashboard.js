@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const totalExpensesChart = document.getElementById('total-expense-chart')
-    const monthlyIncomeChart = document.getElementById('monthly-income-chart')
-    const totalIncomeChart = document.getElementById('total-income-chart')
-    const expenseByMonthChart = document.getElementById('expense-by-month-chart')
-
-
+    const totalExpensesChart = document.getElementById('total-expense-chart');
+    const monthlyIncomeChart = document.getElementById('monthly-income-chart');
+    const totalIncomeChart = document.getElementById('total-income-chart');
+    const expenseByMonthChart = document.getElementById('expense-by-month-chart');
+    let myChart;
+    
+    
+    // ------- Total Expense Chart ------- //
     fetch('/finance_tracker/category_expense_json/')
         .then(resp => resp.json())
         .then(categoryExpensesData => { // 'transactionsData' is now the JSON list from Django
@@ -46,8 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-
-
+        
+        
+    // ------- Monthly Income Chart ------- //
     fetch('/finance_tracker/income_total_json/')
         .then(resp => resp.json())
         .then(monthlyIncomeData => {
@@ -78,86 +81,90 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     
+    const monthSelector = document.getElementById('month-selector');
 
-    fetch('/finance_tracker/monthly_expense_json/')
-        .then(resp => resp.json())
-        .then(monthlyExpenseData => {
-            console.log('Fetched monthlyExpenseData (flat):', monthlyExpenseData);
+    if (monthSelector) {
+        monthSelector.addEventListener('change', renderChart); // Use renderChart function
+        renderChart(); // Initial chart render
+    }
 
-            // const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; // Static month labels
-            const uniqueMonthLabels = monthlyExpenseData.reduce((uniqueMonths, item) => {
-                if (!uniqueMonths.includes(item.month)) {
-                    uniqueMonths.push(item.month);
-                }
-                return uniqueMonths;
-            }, []);
+    function getSelectedMonth() {
+        return monthSelector ? monthSelector.value : null;
+    }
+    
+    // ------- Monthly Expense Chart ------- //
+    function renderChart() {
+        fetch('/finance_tracker/monthly_expense_json/')
+            .then(resp => resp.json())
+            .then(monthlyExpenseData => {
+                console.log('Fetched monthlyExpenseData (flat):', monthlyExpenseData);
 
-            console.log('months:', uniqueMonthLabels);
-
-            const datasets = [];
-            const categoryExpenseMap = {}; // To group expenses by category
-
-            console.log('datasets:', datasets)
-
-            // Group expenses by category
-            monthlyExpenseData.forEach(item => {
-                const category = item.category;
-                const month = item.month;
-                const totalExpense = item.total_expense;
-
-                if (!categoryExpenseMap[category]) {
-                    categoryExpenseMap[category] = {}; // Initialize category if not present
-                }
-                // Take the absolute value of expense totals for chart display:
-                categoryExpenseMap[category][month] = Math.abs(totalExpense); // Store expense for month in category map as absolute value
-            });
-
-            console.log(categoryExpenseMap)
-
-            // Create datasets from categoryExpenseMap
-            for (const categoryName in categoryExpenseMap) {
-                const monthlyExpenseMapForCategory = categoryExpenseMap[categoryName];
-                const expenseDataForChart = uniqueMonthLabels.map((monthLabel, monthIndex) => {
-                    const monthString = monthLabel;
-                    return monthlyExpenseMapForCategory[monthString] || 0; // Get expense for this month or 0 if no data
-                });
-
-                // console.log(monthlyExpenseMapForCategory)
+                // Filter data by selected month
+                const selectedMonth = getSelectedMonth();
+                const filteredData = monthlyExpenseData.filter(item => item.month === selectedMonth);
+                console.log('Filtered data:', filteredData);
                 
-                datasets.push({
-                    label: categoryName,
-                    data: expenseDataForChart,
-                    // ... styling ...
+                
+                // Create Labels
+                const uniqueMonthLabels = filteredData.reduce((uniqueMonths, item) => {
+                    if (!uniqueMonths.includes(item.month)) {
+                        uniqueMonths.push(item.month);
+                    }
+                    return uniqueMonths;
+                }, []);
+
+                const datasets = [];
+                const categoryExpenseMap = {}; // To group expenses by category
+
+                // Group expenses by category
+                filteredData.forEach(item => {
+                    const category = item.category;
+                    const month = item.month;
+                    const totalExpense = item.total_expense;
+
+                    if (!categoryExpenseMap[category]) {
+                        categoryExpenseMap[category] = {}; // Initialize category if not present
+                    }
+                    // Take the absolute value of expense totals for chart display:
+                    categoryExpenseMap[category][month] = Math.abs(totalExpense); // Store expense for month in category map as absolute value
                 });
-                // datasets.push({
-                //     label: categoryName,
-                //     data: expenseDataForChart,
-                //     // ... styling ...
-                // });
-            }
 
+                // Create datasets from categoryExpenseMap
+                for (const categoryName in categoryExpenseMap) {
+                    const monthlyExpenseMapForCategory = categoryExpenseMap[categoryName];
+                    const expenseDataForChart = uniqueMonthLabels.map((monthLabel, monthIndex) => {
+                        const monthString = monthLabel;
+                        return monthlyExpenseMapForCategory[monthString] || 0; // Get expense for this month or 0 if no data
+                    });
+                    
+                    datasets.push({
+                        label: categoryName,
+                        data: expenseDataForChart,
+                    });
+                }
 
-            new Chart(expenseByMonthChart, {
-                type: 'bar',
-                data: {
-                    labels: uniqueMonthLabels,
-                    datasets: datasets
-                },
-                options: {
-                    responsive: true,
-                    parsing: {
-                        xAxisKey: '',
-                        yAxisKey: ''
+                if (myChart) {
+                    myChart.destroy();
+                }
+
+                myChart = new Chart(expenseByMonthChart, {
+                    type: 'bar',
+                    data: {
+                        labels: uniqueMonthLabels,
+                        datasets: datasets
                     },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'left'
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'left'
+                            }
                         }
                     }
-                }
+                });
+                
+                
             });
-        });
+    }
 });
-
-

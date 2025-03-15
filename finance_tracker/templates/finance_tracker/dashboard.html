@@ -70,27 +70,24 @@
                         <h5 class="card-title text-primary fw-semibold">Monthly Expense</h5>
                         <h6 class="card-subtitles mb-2 text-muted fw-medium">By Category</h6>
                     </div>
-                </div>
-                    <div>
-                        <canvas id="expense-by-month-chart"></canvas>
-
-                        <select id="month-selector" class="form-select form-select-sm" aria-label="monthly expense month selector">
-                            <option selected>Month</option>
-                            <option value="1">Jan</option>
-                            <option value="2">Feb</option>
-                            <option value="3">Mar</option>
-                            <option value="3">Apr</option>
-                            <option value="3">May</option>
-                            <option value="3">Jun</option>
-                            <option value="3">Jul</option>
-                            <option value="3">Aug</option>
-                            <option value="3">Sep</option>
-                            <option value="3">Oct</option>
-                            <option value="3">Nov</option>
-                            <option value="3">Dec</option>
+                    <div class="col d-flex justify-content-end">
+                        <select 
+                        id="month-selector" 
+                        class="form-select form-select-sm" 
+                        aria-label="monthly expense month selector"
+                        >
+                        <option selected>Select Month</option>
+                        {% for month in months %}
+                            <option value="{{ month }}">{{ month }}</option>
+                        {% endfor %}
                         </select>
-                        
                     </div>
+                    
+                </div>
+                <div>
+                    <canvas id="expense-by-month-chart"></canvas>
+                </div>
+                
                 </div>
             </div>
         </div>
@@ -100,5 +97,5 @@
 {% endblock content %} 
 
 {% block extra_js %}
-<script src="{% static 'finance_tracker/js/dashboard.js' %}"></script>
+        <script src="{% static 'finance_tracker/js/dashboard.js' %}"></script>
 {% endblock extra_js %}
