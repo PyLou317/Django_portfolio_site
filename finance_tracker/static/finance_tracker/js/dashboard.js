@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const monthlyIncomeTotals = monthlyIncomeData.map(item => parseFloat(item.total_income));
 
 
-            const monthlyExpense = new Chart(monthlyIncomeChart, {
-                type: 'bar',
+            const monthlyIncome = new Chart(monthlyIncomeChart, {
+                type: 'line',
                 data: {
                     labels: categoryLabels,
                     datasets: [{
