@@ -84,10 +84,20 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(monthlyExpenseData => {
             console.log('Fetched monthlyExpenseData (flat):', monthlyExpenseData);
 
-            const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; // Static month labels
-            // const monthLabels = monthlyExpenseData.map(item => item.month);
+            // const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; // Static month labels
+            const uniqueMonthLabels = monthlyExpenseData.reduce((uniqueMonths, item) => {
+                if (!uniqueMonths.includes(item.month)) {
+                    uniqueMonths.push(item.month);
+                }
+                return uniqueMonths;
+            }, []);
+
+            console.log('months:', uniqueMonthLabels);
+
             const datasets = [];
             const categoryExpenseMap = {}; // To group expenses by category
+
+            console.log('datasets:', datasets)
 
             // Group expenses by category
             monthlyExpenseData.forEach(item => {
@@ -107,29 +117,38 @@ document.addEventListener('DOMContentLoaded', () => {
             // Create datasets from categoryExpenseMap
             for (const categoryName in categoryExpenseMap) {
                 const monthlyExpenseMapForCategory = categoryExpenseMap[categoryName];
-                const expenseDataForChart = monthLabels.map((monthLabel, monthIndex) => {
+                const expenseDataForChart = uniqueMonthLabels.map((monthLabel, monthIndex) => {
                     const monthString = monthLabel;
                     return monthlyExpenseMapForCategory[monthString] || 0; // Get expense for this month or 0 if no data
                 });
 
-                console.log(monthlyExpenseMapForCategory)
-
+                // console.log(monthlyExpenseMapForCategory)
+                
                 datasets.push({
                     label: categoryName,
                     data: expenseDataForChart,
                     // ... styling ...
                 });
+                // datasets.push({
+                //     label: categoryName,
+                //     data: expenseDataForChart,
+                //     // ... styling ...
+                // });
             }
 
 
             new Chart(expenseByMonthChart, {
                 type: 'bar',
                 data: {
-                    labels: monthLabels,
+                    labels: uniqueMonthLabels,
                     datasets: datasets
                 },
                 options: {
                     responsive: true,
+                    parsing: {
+                        xAxisKey: '',
+                        yAxisKey: ''
+                    },
                     plugins: {
                         legend: {
                             display: true,

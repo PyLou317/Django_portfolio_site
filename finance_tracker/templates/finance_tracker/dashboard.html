@@ -39,7 +39,7 @@
     
     <!-- Charts -->
     <div class="d-flex my-3 flex-wrap justify-content-center">
-        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow card mx-3 col-lg-4 col-sm-12">
+        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow card mx-3 col-lg-4">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow mx-3 col-lg-4 col-sm-12">
+        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow mx-3 col-lg-7">
             <div class="card-body">
                 <h5 class="card-title text-primary fw-semibold">Income</h5>
                 <h6 class="card-subtitles mb-2 text-muted fw-medium">By Month</h6>
@@ -63,7 +63,7 @@
         </div>
         
         
-        <div class="db_card flex-grow-1 card border-0 rounded-3 shadow card mx-3 col-lg-5 col-sm-6 my-3">
+        <div class="db_card card border-0 rounded-3 shadow card mx-3 col-lg-8 mt-4">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -73,6 +73,23 @@
                 </div>
                     <div>
                         <canvas id="expense-by-month-chart"></canvas>
+
+                        <select id="month-selector" class="form-select form-select-sm" aria-label="monthly expense month selector">
+                            <option selected>Month</option>
+                            <option value="1">Jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Mar</option>
+                            <option value="3">Apr</option>
+                            <option value="3">May</option>
+                            <option value="3">Jun</option>
+                            <option value="3">Jul</option>
+                            <option value="3">Aug</option>
+                            <option value="3">Sep</option>
+                            <option value="3">Oct</option>
+                            <option value="3">Nov</option>
+                            <option value="3">Dec</option>
+                        </select>
+                        
                     </div>
                 </div>
             </div>

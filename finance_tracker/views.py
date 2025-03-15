@@ -258,10 +258,17 @@ def monthly_expense_json(request):
     monthly_expense_data = []
     for item in monthly_expenses:
         monthly_expense_data.append({
-            'category': item['category__name'],
             'month': item['month'].strftime('%b'), 
+            'category': item['category__name'],
             'total_expense': float(item['total_expense'] or 0)
         })
+
+    # monthly_expense_data = []
+    # for item in monthly_expenses:
+    #     month = item['month'].strftime('%b')
+    #     category = item['category__name']
+    #     total_expense = float(item['total_expense'] or 0)
+    #     monthly_expense_data[month] = {'category': category}
         
     return JsonResponse(monthly_expense_data, safe=False)
 

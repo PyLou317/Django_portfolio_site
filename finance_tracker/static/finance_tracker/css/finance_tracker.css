@@ -35,6 +35,9 @@
     color: green;
 }
 
+#month-selector {
+    width: 150px;
+}
 
 /* ----- crispy upload form ----- */
 #upload-button {
