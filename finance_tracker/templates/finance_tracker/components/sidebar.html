@@ -27,10 +27,10 @@
             {% comment %} ------------------- User Account ------------------ {% endcomment %}
             <div id="account_nav" class="dropdown mt-auto">
                 <a href="#" class="nav-link dropdown-toggle text-truncate text-light" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    {% if user.is_authenticated %}
-                    <i class="fs-5 bi bi-person-circle"></i><span class="ms-1 d-none d-sm-inline"> {{ user.username }}</span>
+                    {% if user_profile and user_profile.avatar %}
+                        <img src="{{ user_profile.avatar.url }}" alt="Profile Picture" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 5px;"><span class="ms-1 d-none d-sm-inline"> {{ user.username }}</span>
                     {% else %}
-                    <i class="fs-5 bi bi-person-circle"></i><span class="ms-1 d-none d-sm-inline"> Account</span>
+                        <i class="fs-5 bi bi-person-circle"></i><span class="ms-1 d-none d-sm-inline"> Account</span>
                     {% endif %}
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdown">
@@ -46,5 +46,6 @@
             </ul>
         </div>
     </div>
-        
+</div>
+    
         

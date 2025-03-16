@@ -4,15 +4,9 @@
 }
 
 
-
-
 /* ----- Sidebar Menu Button ----- */
-/* #side_bar {
-    width: 15%;
-} */
-
 #menu-button {
-    margin-top: 70px;
+    margin-top: 20px;
     margin-right: 20px;
 }
 
@@ -147,3 +141,12 @@
   color: #95afc0;
   opacity: 0.55;
 }
+
+  /* -- ===== Transaction Table ===== -- */
+  #table {
+    margin-bottom: 50px;
+  }
+
+  #pagination-div {
+    margin-bottom: 100px;
+  }
