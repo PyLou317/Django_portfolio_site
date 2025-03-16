@@ -20,27 +20,26 @@
                   <img src="{% static 'finance_tracker/images/logo/logo.png' %}" alt="logo" />
                 </a>
                 <p class="ud-widget-desc">
-                  We create digital experiences for brands and companies by
-                  using technology.
+                    Budget, Save, and Live the life you've Dreamt of.
                 </p>
                 <ul class="ud-widget-socials">
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i class="lni lni-facebook-filled"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i class="lni lni-twitter-filled"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i class="lni lni-instagram-filled"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i class="lni lni-linkedin-original"></i>
                     </a>
                   </li>
@@ -53,16 +52,16 @@
                 <h5 class="ud-widget-title">About Us</h5>
                 <ul class="ud-widget-links">
                   <li>
-                    <a href="javascript:void(0)">Home</a>
+                    <a href="{% url 'finance_tracker:home' %}">Home</a>
                   </li>
                   <li>
-                    <a href="javascript:void(0)">Features</a>
+                    <a href="{% url 'finance_tracker:home' %}#features">Features</a>
                   </li>
                   <li>
-                    <a href="javascript:void(0)">About</a>
+                    <a href="{% url 'finance_tracker:home' %}#about">About</a>
                   </li>
                   <li>
-                    <a href="javascript:void(0)">Testimonial</a>
+                    <a href="{% url 'finance_tracker:home' %}#testimonials">Testimonial</a>
                   </li>
                 </ul>
               </div>
@@ -86,90 +85,15 @@
                 </ul>
               </div>
             </div>
-            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-              <div class="ud-widget">
-                <h5 class="ud-widget-title">Our Products</h5>
-                <ul class="ud-widget-links">
-                  <li>
-                    <a
-                      href="https://lineicons.com/"
-                      rel="nofollow noopner"
-                      target="_blank"
-                      >Lineicons
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://ecommercehtml.com/"
-                      rel="nofollow noopner"
-                      target="_blank"
-                      >Ecommerce HTML</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://ayroui.com/"
-                      rel="nofollow noopner"
-                      target="_blank"
-                      >Ayro UI</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://graygrids.com/"
-                      rel="nofollow noopner"
-                      target="_blank"
-                      >Plain Admin</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
             <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
               <div class="ud-widget">
                 <h5 class="ud-widget-title">Partners</h5>
                 <ul class="ud-widget-brands">
                   <li>
                     <a
-                      href="https://ayroui.com/"
+                      href="javascript:void(0)"
                       rel="nofollow noopner"
-                      target="_blank"
-                    >
-                      <img
-                        src="{% static 'finance_tracker/images/footer/brands/ayroui.svg' %}"
-                        alt="ayroui"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://ecommercehtml.com/"
-                      rel="nofollow noopner"
-                      target="_blank"
-                    >
-                      <img
-                        src="{% static 'finance_tracker/images/footer/brands/ecommerce-html.svg' %}"
-                        alt="ecommerce-html"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://graygrids.com/"
-                      rel="nofollow noopner"
-                      target="_blank"
-                    >
-                      <img
-                        src="{% static 'finance_tracker/images/footer/brands/graygrids.svg' %}"
-                        alt="graygrids"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://lineicons.com/"
-                      rel="nofollow noopner"
-                      target="_blank"
+                      {% comment %} target="_blank" {% endcomment %}
                     >
                       <img
                         src="{% static 'finance_tracker/images/footer/brands/lineicons.svg' %}"
@@ -179,9 +103,9 @@
                   </li>
                   <li>
                     <a
-                      href="https://uideck.com/"
+                      href="javascript:void(0)"
                       rel="nofollow noopner"
-                      target="_blank"
+                      {% comment %} target="_blank" {% endcomment %}
                     >
                       <img
                         src="{% static 'finance_tracker/images/footer/brands/uideck.svg' %}"
@@ -191,9 +115,9 @@
                   </li>
                   <li>
                     <a
-                      href="https://tailwindtemplates.co/"
+                      href="javascript:void(0)"
                       rel="nofollow noopner"
-                      target="_blank"
+                      {% comment %} target="_blank" {% endcomment %}
                     >
                       <img
                         src="{% static 'finance_tracker/images/footer/brands/tailwindtemplates.svg' %}"
@@ -225,8 +149,7 @@
             </div>
             <div class="col-md-4">
               <p class="ud-footer-bottom-right">
-                Designed and Developed by
-                <a href="https://uideck.com" rel="nofollow">UIdeck</a>
+                Designed and Developed by LP
               </p>
             </div>
           </div>
