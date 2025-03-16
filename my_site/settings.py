@@ -160,7 +160,7 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-LOGIN_REDIRECT_URL = '/finance_tracker/'
+LOGIN_REDIRECT_URL = '/finance_tracker/dashboard'
 LOGOUT_REDIRECT_URL = '/finance_tracker/'
 
 SOCIALACCOUNT_AUTO_SIGNUP = True

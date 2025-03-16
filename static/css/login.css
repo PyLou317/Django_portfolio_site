@@ -45,6 +45,10 @@ body{
     color: white;
 }
 
+#logo {
+    max-width: 200px;
+}
+
 #login-btn {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
