@@ -1,5 +1,7 @@
-{% extends 'finance_tracker/base.html' %} {% load static %} {% block content %}
+{% extends 'finance_tracker/base.html' %} 
+{% load static %} 
 
+{% block content %}
 <div
   id="welcome-title"
   class="container d-flex display-5 text-center mb-4 justify-content-center"
@@ -24,5 +26,4 @@
 <div id="welcome_div" class="container align-items-center">
   {% include 'users/components/login_container.html' %}
 </div>
-
 {% endblock content %}

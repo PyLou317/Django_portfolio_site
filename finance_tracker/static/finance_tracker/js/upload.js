@@ -1,4 +1,6 @@
 // Error handling for CSV file type only
+"use strict";
+
 document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.getElementById('id_file');
     const fileInputErrorDiv = document.getElementById('fileTypeError');

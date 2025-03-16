@@ -1,3 +1,5 @@
+"use strict";
+
 document.addEventListener('DOMContentLoaded', () => {
     const totalExpensesChart = document.getElementById('total-expense-chart');
     const monthlyIncomeChart = document.getElementById('monthly-income-chart');
