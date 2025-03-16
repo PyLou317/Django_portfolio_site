@@ -10,8 +10,8 @@ body{
     to top,
     rgb(255, 255, 255) 0%,
     rgb(255, 255, 255) 25%,
-    #3D405B 25%,
-    #3D405B 100%
+    #81B29A  25%,
+    #81B29A  100%
   );
 }
 
@@ -31,7 +31,8 @@ body{
 }
 
 #login-btn {
-    background-color: #3D405B;
+    background-color: #81B29A;
+    border-color: #81B29A;
     width: 100%;
     height: 55px;
 }

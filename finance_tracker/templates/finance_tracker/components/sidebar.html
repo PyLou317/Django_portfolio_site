@@ -1,10 +1,11 @@
-<div class="offcanvas offcanvas-start w-25 offcanvas-dark bg-dark" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
+{% comment %} Has inline style for menu width, wouldn't work when linked with ID {% endcomment %}
+<div class="offcanvas offcanvas-start offcanvas-dark bg-dark" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false" style="width: 15%;">
     <div class="offcanvas-header">
-        <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">Menu</h6>
+        <h6 class="offcanvas-title d-none d-sm-block text-light" id="offcanvas">Menu</h6>
         <button  type="button" class="btn-close text-reset btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body px-0">
-        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
+    <div id="side_bar_nav" class="offcanvas-body d-flex flex-column px-0">
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start flex-grow-1" id="menu">
             <li class="nav-item">
                 <a href="{% url 'finance_tracker:home' %}" class="nav-link text-truncate text-light">
                     <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline"> Home</span>
@@ -24,9 +25,13 @@
                 </li>
 
             {% comment %} ------------------- User Account ------------------ {% endcomment %}
-            <li class="dropdown">
+            <div id="account_nav" class="dropdown mt-auto">
                 <a href="#" class="nav-link dropdown-toggle text-truncate text-light" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fs-5 bi bi-person-circle"></i><span class="ms-1 d-none d-sm-inline">Account</span>
+                    {% if user.is_authenticated %}
+                    <i class="fs-5 bi bi-person-circle"></i><span class="ms-1 d-none d-sm-inline"> {{ user.username }}</span>
+                    {% else %}
+                    <i class="fs-5 bi bi-person-circle"></i><span class="ms-1 d-none d-sm-inline"> Account</span>
+                    {% endif %}
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdown">
                     {% if user.is_authenticated %}
@@ -37,7 +42,7 @@
                         <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
                     {% endif %}
                 </ul>
-            </li> 
+            </div> 
             </ul>
         </div>
     </div>

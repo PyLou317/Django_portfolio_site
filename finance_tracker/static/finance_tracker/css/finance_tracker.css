@@ -7,6 +7,10 @@
 
 
 /* ----- Sidebar Menu Button ----- */
+/* #side_bar {
+    width: 15%;
+} */
+
 #menu-button {
     margin-top: 70px;
     margin-right: 20px;
@@ -19,7 +23,6 @@
 #welcome-title {
     margin-top: 50px;
 }
-
 
 
 /* ----- Dashboard ----- */
