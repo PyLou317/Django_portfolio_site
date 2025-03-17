@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from decimal import Decimal
 from io import StringIO
-from .utils import categorize_transaction
+from .utils import categorize_transaction, add_header
 
 from .forms import UploadFileForm
 
@@ -125,10 +125,19 @@ class TransactionDeleteView(LoginRequiredMixin, DeleteView):
 def upload_statement(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
+
         if form.is_valid():
             uploaded_file = form.cleaned_data['file']
+            filename= uploaded_file.name
+            print(filename)
+
+            if 'cibc' in filename.lower():
+                add_header(uploaded_file)
+            else:
+                pass
+
             file_content = uploaded_file.read().decode('utf-8') 
-            csvfile =StringIO(file_content)
+            csvfile =StringIO(file_content) # creates a StringIO object to process it without saving on disk
             reader = csv.DictReader(csvfile)
             
             transactions_to_create = []
@@ -164,7 +173,7 @@ def upload_statement(request):
                         amount=amount,
                         category=category,
                         owner=request.user
-                    ).first()
+                    ).first() # Grabs the first transactions with matching values
                 
                     if existing_transaction:
                         print("Duplicate transaction found, not saving.")

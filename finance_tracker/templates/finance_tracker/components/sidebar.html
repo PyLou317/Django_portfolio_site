@@ -7,8 +7,13 @@
     <div id="side_bar_nav" class="offcanvas-body d-flex flex-column px-0">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start flex-grow-1" id="menu">
             <li class="nav-item">
+                <a href="{% url 'portfolio:home' %}" class="nav-link text-truncate text-light">
+                    <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline"> Portfolio Home</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{% url 'finance_tracker:home' %}" class="nav-link text-truncate text-light">
-                    <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline"> Home</span>
+                    <i class="bi bi-bank"></i><span class="ms-1 d-none d-sm-inline"> Finance Tracker Home</span>
                 </a>
             </li>
             <li class="nav-item">
