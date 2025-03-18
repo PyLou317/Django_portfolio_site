@@ -26,7 +26,7 @@ def categorize_transaction(description: str):
     return category_name.title()
 
 
-def add_header(filename: str):
+def add_header(filename):
     '''
     Add header to CSV bank statement if CIBC
 
@@ -56,8 +56,10 @@ def add_header(filename: str):
 
         df.to_csv(filename, index=False)
 
+        file = df
+
         print(df[:5])
-        return True
+        return file
     except Exception as e:
         print(f'Error processing CSV: {e}')
         return False
