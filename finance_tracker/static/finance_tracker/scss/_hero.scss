@@ -2,14 +2,14 @@
 
 .ud-hero {
   background: var(--primary-color);
-  padding-top: 80px;
+  padding-top: 160px;
 
   @media #{$md} {
     padding-top: 160px;
   }
 
   @media #{$xs} {
-    padding-top: 130px;
+    padding-top: 160px;
   }
 }
 
