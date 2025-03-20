@@ -128,15 +128,22 @@ def upload_statement(request):
 
         if form.is_valid():
             uploaded_file = form.cleaned_data['file']
+            
             filename= uploaded_file.name
             print(filename)
 
             if 'cibc' in filename.lower():
-                add_header(uploaded_file)
+                try:
+                    file_with_header = add_header(uploaded_file)
+                    file_content = file_with_header.read().decode('utf-8') 
+                except NameError as e:
+                    print(f'Cannot read file, error: {e}')
+                except:
+                    print(f'Another error has occured')
             else:
-                pass
+                file_content = uploaded_file.read().decode('utf-8') 
+                
 
-            file_content = uploaded_file.read().decode('utf-8') 
             csvfile =StringIO(file_content) # creates a StringIO object to process it without saving on disk
             reader = csv.DictReader(csvfile)
             
