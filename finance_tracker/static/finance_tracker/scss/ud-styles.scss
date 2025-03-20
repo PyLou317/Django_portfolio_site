@@ -8,22 +8,22 @@
 
 ======== */
 
-@import "variables";
-@import "mixin";
-@import "common";
-@import "header";
-@import "hero";
-@import "features";
-@import "about";
-@import "pricing";
-@import "faq";
-@import "testimonials";
-@import "team";
-@import "contact";
-@import "footer";
-@import "banner";
-@import "login";
-@import "blog";
-@import "blog-details";
-@import "404";
+@use "variables";
+@use "mixin";
+@use "common";
+@use "header";
+@use "hero";
+@use "features";
+@use "about";
+@use "pricing";
+@use "faq";
+@use "testimonials";
+@use "team";
+@use "contact";
+@use "footer";
+@use "banner";
+@use "login";
+@use "blog";
+@use "blog-details";
+@use "404";
 // @import "default";
