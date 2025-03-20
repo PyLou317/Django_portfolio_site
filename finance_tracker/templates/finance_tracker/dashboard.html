@@ -2,6 +2,7 @@
 {% load static %} 
 
 {% block content %}
+{% if expense_summary.total_expense_amount or income_summary.total_income_amount %}
 <div>
     <div class="container-fluid min-vh-100 mb-5">
         <div class="m-3">
@@ -91,6 +92,10 @@
             </div>
         </div>
     </div>
+
+    {% else %}
+    {% include "finance_tracker/components/upload_notify.html" %}
+    {% endif %}
 </div>
 
 
