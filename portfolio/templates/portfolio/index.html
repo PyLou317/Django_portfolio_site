@@ -1,22 +1,24 @@
-{% extends 'portfolio/base.html' %} 
-{% load static %} 
+{% extends 'portfolio/base.html' %}
+{% load static %}
 
-{% block title %}Home - My Portfolio{% endblock %} 
+{% block title %}
+  Home - My Portfolio
+{% endblock %}
 
 {% block content %}
-<header>
+  <header>
     {% include 'portfolio/components/hero_banner.html' %}
-</header>
+  </header>
 
-<section id="projects-section">
+  <section id="projects-section">
     {% include 'portfolio/components/project_card.html' %}
-</section>
+  </section>
 
-<section id="about-me" class="about-banner">
-    {% include 'portfolio/components/about.html' %} 
-</section>
+  <section id="about-me" class="about-banner">
+    {% include 'portfolio/components/about.html' %}
+  </section>
 
-<section id="contact-me" class="contact-banner">
+  <section id="contact-me" class="contact-banner">
     {% include 'portfolio/components/contact_form.html' %}
-</section>
+  </section>
 {% endblock %}
