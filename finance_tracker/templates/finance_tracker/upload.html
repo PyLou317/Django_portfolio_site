@@ -5,15 +5,15 @@
 {% load static %}
 
 {% block content %}
-  <div style="margin-bottom: 100px;">
+  <div>
     <div class="mx-4 my-3">
       <h2>Finance Tracker</h2>
       <h5>Upload Your Monthly Bank Statements</h5>
     </div>
 
-    {% comment %}------------ Upload File Card ------------{% endcomment %}
+    {% comment %}------------ Upload File ------------{% endcomment %}
     {% if user.is_authenticated %}
-      <div class="container d-flex justify-content-center align-items-center text-center mb-4 wrapper">
+      <div id="upload-container-div" class="container d-flex justify-content-center align-items-center text-center wrapper">
         <div id="upload_container" class="container shadow">
           <h1 id="upload_file_header">Upload a file</h1>
           <div class="upload-container">

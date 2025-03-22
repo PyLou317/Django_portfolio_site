@@ -1,3 +1,11 @@
+:root {
+    --font: "Inter", sans-serif;
+    --body-color: #637381;
+    --heading-color: #212b36;
+    --primary-color: #30bad3;
+    --white: #ffffff;
+}
+
 /* Finance Tracker Home Page */
 #video-container {
     margin-left: 22vw;
@@ -40,12 +48,13 @@
 
 
 /* ----- crispy upload form ----- */
-#upload-button {
-    background-color: rgb(0, 92, 128);
+#submit-id-submit {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
-#upload-buttom:hover {
-    background-color: rgb(1, 59, 82);
+#submit-id-submit:hover {
+    background-color: var(--heading-color)
 }
 
 .asteriskField {
@@ -92,6 +101,11 @@
     max-width: 500px;
     padding-top: 60px;
     text-align: center;
+}
+
+#upload-container-div {
+    margin-top: 50px;
+    margin-bottom: 200px;
 }
 
 #upload_container {
