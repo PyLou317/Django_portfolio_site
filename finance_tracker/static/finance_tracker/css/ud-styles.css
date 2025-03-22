@@ -4,7 +4,7 @@
     --font: "Inter", sans-serif;
     --body-color: #637381;
     --heading-color: #212b36;
-    --primary-color: #30bad3;
+    --primary-color: #79D7BE;
     --white: #ffffff;
 }
 
@@ -807,8 +807,8 @@ p {
     color: var(--primary-color);
 }
 
-/* ===== About CSS ===== */
-.ud-about {
+/* ===== Demo CSS ===== */
+.ud-demo {
     background: #f3f4fe;
     padding: 120px 0;
 }
@@ -819,78 +819,62 @@ p {
     }
 }
 
-.ud-about-wrapper {
-    background: var(--white);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    display: flex;
-    justify-content: space-between;
-}
-
 @media only screen and (min-width: 768px) and (max-width: 991px),
 (max-width: 767px) {
-    .ud-about-wrapper {
+    .ud-demo-wrapper {
         display: block;
     }
 }
 
-.ud-about-content-wrapper {
-    padding: 70px;
-}
-
 @media (max-width: 767px) {
-    .ud-about-content-wrapper {
+    .ud-about-demo-wrapper {
         padding: 50px 30px;
     }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
-    .ud-about-content-wrapper {
+    .ud-about-demo-wrapper {
         padding: 50px;
     }
 }
 
-.ud-about-content {
-    max-width: 500px;
+.ud-demo span {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
 }
 
-.ud-about-content .tag {
-    font-weight: 500;
-    font-size: 14px;
-    color: var(--white);
-    background: var(--primary-color);
-    padding: 5px 20px;
-    display: inline-block;
+.ud-demo h2 {
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 55px;
+    text-transform: capitalize;
+    color: var(--heading-color);
     margin-bottom: 20px;
-}
+}    
 
-.ud-about-content h2 {
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 45px;
-    margin-bottom: 30px;
+.ud-demo p {
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 40px;
 }
 
 @media (max-width: 767px) {
-    .ud-about-content h2 {
+    .ud-demo h2 {
         font-size: 26px;
         line-height: 38px;
     }
 }
 
-.ud-about-content p {
-    font-size: 16px;
-    line-height: 28px;
-    margin-bottom: 40px;
-}
-
-.ud-about-content .ud-main-btn:hover {
+.ud-demo-content .ud-main-btn:hover {
     background: #2748b4;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
 (max-width: 767px) {
-    .ud-about-image {
+    .ud-demo-image {
         text-align: center;
     }
 }
@@ -1485,7 +1469,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 
 .ud-footer-bottom {
     padding: 35px 0;
-    border-top: 1px solid rgba(136, 144, 164, 0.43);
+    border-top: 1px solid rgba(255, 255, 255, 0.599);
     margin-left: 25px;
     margin-right: 25px;
 }

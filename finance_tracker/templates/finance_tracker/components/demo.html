@@ -1,0 +1,43 @@
+{% load static %}
+<section id="demo" class="ud-demo">
+  <div class="container">
+    <span>Video Walk-through</span>
+    <h2>demo</h2>
+    <p>
+      A complete Walk-through of my EVERGREEN Personal Finance App. Covering a high-level overview of the tech stack used to build, main features, and the overall goal of my project. 
+    </p>
+  </div>
+  <div class="container">
+    <div class="ud-demo-wrapper wow fadeInUp" data-wow-delay=".2s">
+      <div class="ud-demo-content">
+        {% comment %} ----- Welcome Video ----- {% endcomment %}
+        <div id="video-container">
+          <div
+            style="
+              position: relative;
+              padding-bottom: 56.25%;
+              height: 0;
+              overflow: hidden;
+            "
+          >
+            <iframe
+              id="welcome-video"
+              src="https://www.loom.com/embed/ae9f0bd673204acd9876c62a95f266ee?sid=379597b4-6e7f-4fe6-8c47-32d8a4655f64&hideEmbedTopBar=true&hide_speed=true"
+              frameborder="0"
+              webkitallowfullscreen
+              mozallowfullscreen
+              allowfullscreen
+              style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+              "
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

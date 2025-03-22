@@ -9,8 +9,14 @@
     <title>EVERGREEN | Personal Finance App</title>
 
     <!-- Primary Meta Tags -->
-<meta name="Personal Finance App" content="Personal Finance App - SaaS Product Page">
-<meta name="description" content="Personal Finance App - Track and categorize all of your bank transactions">
+    <meta
+      name="Personal Finance App"
+      content="Personal Finance App - SaaS Product Page"
+    />
+    <meta
+      name="description"
+      content="Personal Finance App - Track and categorize all of your bank transactions"
+    />
 
     <!--====== Favicon Icon ======-->
     <link
@@ -20,22 +26,34 @@
     />
 
     <!-- ===== All CSS files ===== -->
-    <link rel="stylesheet" href="{% static 'finance_tracker/css/animate.css' %}"/>
-    <link rel="stylesheet" href="{% static 'finance_tracker/css/lineicons.css' %}"/>
-    <link rel="stylesheet" href="{% static 'finance_tracker/css/ud-styles.css' %}"/>
-    
+    <link
+      rel="stylesheet"
+      href="{% static 'finance_tracker/css/animate.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'finance_tracker/css/lineicons.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'finance_tracker/css/ud-styles.css' %}"
+    />
+
     <!-- ===== Bootstrap5 CSS file ===== -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-
     <header class="ud-header">
-        {% include 'finance_tracker/components/header.html' %} 
+      {% include 'finance_tracker/components/header.html' %}
     </header>
-    
-    
+
     <!-- ====== Hero Start ====== -->
-        {% include 'finance_tracker/components/hero.html' %} 
+    {% include 'finance_tracker/components/hero.html' %}
     <!-- ====== Hero End ====== -->
 
     <!-- ====== Features Start ====== -->
@@ -124,34 +142,7 @@
     <!-- ====== Features End ====== -->
 
     <!-- ====== About Start ====== -->
-    <section id="about" class="ud-about">
-      <div class="container">
-        <div class="ud-about-wrapper wow fadeInUp" data-wow-delay=".2s">
-          <div class="ud-about-content-wrapper">
-            <div class="ud-about-content">
-              <span class="tag">About Us</span>
-              <h2>Brilliant Toolkit to Build Nextgen Website Faster.</h2>
-              <p>
-                The main ‘thrust’ is to focus on educating attendees on how to
-                best protect highly vulnerable business applications with
-                interactive panel discussions and roundtables led by subject
-                matter experts.
-              </p>
-
-              <p>
-                The main ‘thrust’ is to focus on educating attendees on how to
-                best protect highly vulnerable business applications with
-                interactive panel.
-              </p>
-              <a href="javascript:void(0)" class="ud-main-btn">Learn More</a>
-            </div>
-          </div>
-          <div class="ud-about-image">
-            <img src="{% static 'finance_tracker/images/about/about-image.svg' %}" alt="about-image" />
-          </div>
-        </div>
-      </div>
-    </section>
+    {% include 'finance_tracker/components/demo.html' %}
     <!-- ====== About End ====== -->
 
     <!-- ====== Pricing Start ====== -->
@@ -160,8 +151,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="ud-section-title mx-auto text-center">
-              <span>Pricing</span>
-              <h2>Our Pricing Plans</h2>
+              <h2>Pricing Plans</h2>
               <p>
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
@@ -258,7 +248,10 @@
     <!-- ====== FAQ Start ====== -->
     <section id="faq" class="ud-faq">
       <div class="shape">
-        <img src="{% static 'finance_tracker/images/faq/shape.svg' %}" alt="shape" />
+        <img
+          src="{% static 'finance_tracker/images/faq/shape.svg' %}"
+          alt="shape"
+        />
       </div>
       <div class="container">
         <div class="row">
@@ -544,10 +537,16 @@
               </div>
               <div class="ud-brands-logo">
                 <div class="ud-single-logo">
-                  <img src="{% static 'finance_tracker/images/brands/ayroui.svg' %}" alt="ayroui" />
+                  <img
+                    src="{% static 'finance_tracker/images/brands/ayroui.svg' %}"
+                    alt="ayroui"
+                  />
                 </div>
                 <div class="ud-single-logo">
-                  <img src="{% static 'finance_tracker/images/brands/uideck.svg' %}" alt="uideck" />
+                  <img
+                    src="{% static 'finance_tracker/images/brands/uideck.svg' %}"
+                    alt="uideck"
+                  />
                 </div>
                 <div class="ud-single-logo">
                   <img
@@ -574,192 +573,6 @@
       </div>
     </section>
     <!-- ====== Testimonials End ====== -->
-
-    <!-- ====== Team Start ====== -->
-    <section id="team" class="ud-team">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ud-section-title mx-auto text-center">
-              <span>Our Team</span>
-              <h2>Meet The Team</h2>
-              <p>
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xl-3 col-lg-3 col-sm-6">
-            <div class="ud-single-team wow fadeInUp" data-wow-delay=".1s">
-              <div class="ud-team-image-wrapper">
-                <div class="ud-team-image">
-                  <img src="{% static 'finance_tracker/images/team/team-01.png' %}" alt="team" />
-                </div>
-
-                <img
-                  src="{% static 'finance_tracker/images/team/dotted-shape.svg' %}"
-                  alt="shape"
-                  class="shape shape-1"
-                />
-                <img
-                  src="{% static 'finance_tracker/images/team/shape-2.svg' %}"
-                  alt="shape"
-                  class="shape shape-2"
-                />
-              </div>
-              <div class="ud-team-info">
-                <h5>Adveen Desuza</h5>
-                <h6>UI Designer</h6>
-              </div>
-              <ul class="ud-team-socials">
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-facebook-filled"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-twitter-filled"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-instagram-filled"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-sm-6">
-            <div class="ud-single-team wow fadeInUp" data-wow-delay=".15s">
-              <div class="ud-team-image-wrapper">
-                <div class="ud-team-image">
-                  <img src="{% static 'finance_tracker/images/team/team-02.png' %}" alt="team" />
-                </div>
-
-                <img
-                  src="{% static 'finance_tracker/images/team/dotted-shape.svg' %}"
-                  alt="shape"
-                  class="shape shape-1"
-                />
-                <img
-                  src="{% static 'finance_tracker/images/team/shape-2.svg' %}"
-                  alt="shape"
-                  class="shape shape-2"
-                />
-              </div>
-              <div class="ud-team-info">
-                <h5>Jezmin uniya</h5>
-                <h6>Product Designer</h6>
-              </div>
-              <ul class="ud-team-socials">
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-facebook-filled"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-twitter-filled"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-instagram-filled"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-sm-6">
-            <div class="ud-single-team wow fadeInUp" data-wow-delay=".2s">
-              <div class="ud-team-image-wrapper">
-                <div class="ud-team-image">
-                  <img src="{% static 'finance_tracker/images/team/team-03.png' %}" alt="team" />
-                </div>
-
-                <img
-                  src="{% static 'finance_tracker/images/team/dotted-shape.svg' %}"
-                  alt="shape"
-                  class="shape shape-1"
-                />
-                <img
-                  src="{% static 'finance_tracker/images/team/shape-2.svg' %}"
-                  alt="shape"
-                  class="shape shape-2"
-                />
-              </div>
-              <div class="ud-team-info">
-                <h5>Andrieo Gloree</h5>
-                <h6>App Developer</h6>
-              </div>
-              <ul class="ud-team-socials">
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-facebook-filled"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-twitter-filled"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-instagram-filled"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-sm-6">
-            <div class="ud-single-team wow fadeInUp" data-wow-delay=".25s">
-              <div class="ud-team-image-wrapper">
-                <div class="ud-team-image">
-                  <img src="{% static 'finance_tracker/images/team/team-04.png' %}" alt="team" />
-                </div>
-
-                <img
-                  src="{% static 'finance_tracker/images/team/dotted-shape.svg' %}"
-                  alt="shape"
-                  class="shape shape-1"
-                />
-                <img
-                  src="{% static 'finance_tracker/images/team/shape-2.svg' %}"
-                  alt="shape"
-                  class="shape shape-2"
-                />
-              </div>
-              <div class="ud-team-info">
-                <h5>Jackie Sanders</h5>
-                <h6>Content Writer</h6>
-              </div>
-              <ul class="ud-team-socials">
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-facebook-filled"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-twitter-filled"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/MusharofChy">
-                    <i class="lni lni-instagram-filled"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ====== Team End ====== -->
 
     <!-- ====== Contact Start ====== -->
     <section id="contact" class="ud-contact">
@@ -851,9 +664,9 @@
 
     <!-- ====== Footer Start ====== -->
     <footer class="text-center text-white bg-dark" data-bs-theme="dark">
-            {% include 'finance_tracker/components/footer.html' %} 
+      {% include 'finance_tracker/components/footer.html' %}
     </footer>
-     <!-- ====== Footer End ====== -->
+    <!-- ====== Footer End ====== -->
 
     <!-- ====== Back To Top Start ====== -->
     <a href="javascript:void(0)" class="back-to-top">
@@ -866,16 +679,20 @@
     <script src="{% static 'finance_tracker/js/main.js' %}"></script>
 
     <!-- ====== Bootstrap Files ====== -->
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-     <script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script>
       // ==== for menu scroll
-      const pageLink = document.querySelectorAll(".ud-menu-scroll");
+      const pageLink = document.querySelectorAll('.ud-menu-scroll');
 
       pageLink.forEach((elem) => {
-        elem.addEventListener("click", (e) => {
+        elem.addEventListener('click', (e) => {
           e.preventDefault();
-          document.querySelector(elem.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
+          document.querySelector(elem.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth',
             offsetTop: 1 - 60,
           });
         });
@@ -883,7 +700,7 @@
 
       // section menu active
       function onScroll(event) {
-        const sections = document.querySelectorAll(".ud-menu-scroll");
+        const sections = document.querySelectorAll('.ud-menu-scroll');
         const scrollPos =
           window.pageYOffset ||
           document.documentElement.scrollTop ||
@@ -891,7 +708,7 @@
 
         for (let i = 0; i < sections.length; i++) {
           const currLink = sections[i];
-          const val = currLink.getAttribute("href");
+          const val = currLink.getAttribute('href');
           const refElement = document.querySelector(val);
           const scrollTopMinus = scrollPos + 73;
           if (
@@ -899,16 +716,16 @@
             refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
           ) {
             document
-              .querySelector(".ud-menu-scroll")
-              .classList.remove("active");
-            currLink.classList.add("active");
+              .querySelector('.ud-menu-scroll')
+              .classList.remove('active');
+            currLink.classList.add('active');
           } else {
-            currLink.classList.remove("active");
+            currLink.classList.remove('active');
           }
         }
       }
 
-      window.document.addEventListener("scroll", onScroll);
+      window.document.addEventListener('scroll', onScroll);
     </script>
   </body>
 </html>

@@ -5,11 +5,11 @@
 {% load static %}
 
 {% block content %}
-  <div>
+  {% comment %} <div>
     <div class="mx-4 my-3">
       <h2>Finance Tracker</h2>
       <h5>Upload Your Monthly Bank Statements</h5>
-    </div>
+    </div> {% endcomment %}
 
     {% comment %}------------ Upload File ------------{% endcomment %}
     {% if user.is_authenticated %}

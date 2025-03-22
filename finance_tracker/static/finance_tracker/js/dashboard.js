@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
 
             new Chart(totalExpensesChart, {
-                type: 'doughnut',
+                type: 'polarArea',
                 data: {
                     labels: categoryLabels, // Use category labels for x-axis
                     datasets: [{
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     responsive: true,
                     plugins: {
                         legend: {
-                            display: true,
+                            display: false,
                             position: 'right'
                         }
                     }
