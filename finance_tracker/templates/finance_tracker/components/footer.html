@@ -1,85 +1,53 @@
 {% load static %}
+
 <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
-    <div class="ud-footer-widgets">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-5 col-lg-6 col-md-7">
-                    <div class="ud-widget">
-                        <a href="index.html" class="ud-footer-logo"><img src="{% static 'finance_tracker/images/logo/logo-2.png' %}" alt="logo" /></a>
-                    </div>
-                </div>
-                
-                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
-                <div class="ud-widget">
-                    <h5 class="ud-widget-title">About Us</h5>
-                    <ul class="ud-widget-links">
-                    <li>
-                        <a href="{% url 'finance_tracker:home' %}">Home</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'finance_tracker:home' %}#features">Features</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'finance_tracker:home' %}#about">About</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'finance_tracker:home' %}#testimonials">Testimonial</a>
-                    </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
-                <div class="ud-widget">
-                    <h5 class="ud-widget-title">Partners</h5>
-                    <ul class="ud-widget-brands">
-                        <li>
-                            <a href="javascript:void(0)" rel="nofollow noopner"><img src="{% static 'finance_tracker/images/footer/brands/lineicons.svg' %}" alt="lineicons" /></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" rel="nofollow noopner"><img src="{% static 'finance_tracker/images/footer/brands/uideck.svg' %}" alt="uideck" /></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" rel="nofollow noopner"><img src="{% static 'finance_tracker/images/footer/brands/tailwindtemplates.svg' %}" alt="tailwindtemplates" /></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  <div class="ud-footer-widgets">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-5 col-lg-6 col-md-7">
+          <div class="ud-widget ms-4">
+            <a href="index.html" class="ud-footer-logo"
+              ><img
+                src="{% static 'finance_tracker/images/logo/logo.png' %}"
+                alt="logo"
+            /></a>
+          </div>
         </div>
-        <div class="ud-footer-bottom mb-auto">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8">
-                        <ul class="ud-footer-bottom-left">
-                            {% comment %} <ul class="ud-widget-socials"> {% endcomment %}
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-twitter-filled"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-instagram-filled"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Privacy policy</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Support policy</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Terms of service</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="ud-footer-bottom-right">
-                            Designed and Developed by LP</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
+  <div class="ud-footer-bottom mt-auto">
+    <div class="container-fluid">
+      <div class="row">
+        <ul class="ud-footer-bottom-left">
+          <li>
+            <a href="javascript:void(0)"
+              ><i class="lni lni-facebook-filled"></i
+            ></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><i class="lni lni-twitter-filled"></i
+            ></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><i class="lni lni-instagram-filled"></i
+            ></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><i class="lni lni-linkedin-original"></i
+            ></a>
+          </li>
+          <p class="ud-footer-bottom-right ms-auto">
+            © 2025 Copyright:
+            <a class="text-white" href="https://lucaspatriquin.com/"
+              >LucasPatriquin.dev</a
+            >
+          </p>
+        </ul>
+      </div>
+    </div>
+  </div>
 </footer>

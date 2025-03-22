@@ -1455,11 +1455,10 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 
 /* ===== Footer CSS ===== */
 .ud-footer {
-    background: var(--heading-color);
-    padding-top: 50px;
+    background: var(--primary-color);
+    padding-top: 50px;;
     position: relative;
     z-index: 1;
-    overflow: hidden;
 }
 
 .ud-widget {
@@ -1467,71 +1466,15 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 }
 
 .ud-widget .ud-footer-logo {
-    width: 500px;
+    width: 450px;
     display: block;
     margin-bottom: auto;
+    padding-bottom: 150px;
 }
 
 .ud-widget .ud-footer-logo img {
     width: 100%;
-    margin-bottom: auto;
-    margin-left: 25px;
-}
-
-.ud-widget .ud-widget-desc {
-    font-size: 15px;
-    line-height: 24px;
-    color: #f3f4fe;
-    margin-bottom: 30px;
-    max-width: 500px;
-}
-
-.ud-widget .ud-widget-socials {
-    display: flex;
-    align-items: center;
-}
-
-.ud-widget .ud-widget-socials a {
-    font-size: 16px;
-    color: #dddddd;
-    margin-right: 20px;
-}
-
-.ud-widget .ud-widget-socials a:hover {
-    color: var(--primary-color);
-}
-
-.ud-widget .ud-widget-title {
-    font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 35px;
-    color: var(--white);
-}
-
-.ud-widget .ud-widget-links a {
-    display: inline-block;
-    margin-bottom: 12px;
-    font-size: 15px;
-    line-height: 30px;
-    color: #f3f4fe;
-}
-
-.ud-widget .ud-widget-links a:hover {
-    color: var(--primary-color);
-    padding-left: 10px;
-}
-
-.ud-widget .ud-widget-brands {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.ud-widget .ud-widget-brands a {
-    display: block;
-    max-width: 120px;
-    margin-bottom: 20px;
-    margin-right: 20px;
+    margin-top: auto;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
@@ -1543,6 +1486,8 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 .ud-footer-bottom {
     padding: 35px 0;
     border-top: 1px solid rgba(136, 144, 164, 0.43);
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 .ud-footer-bottom .ud-footer-bottom-left {
@@ -1556,6 +1501,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
     }
 }
 
+/* --- Social Icons --- */
 .ud-footer-bottom .ud-footer-bottom-left a {
     font-weight: normal;
     font-size: 15px;
