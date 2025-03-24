@@ -124,37 +124,26 @@ class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     
     
 
-class CategoryList(ListView):
+class CategoryList(LoginRequiredMixin, ListView):
     template_name = 'finance_tracker/category_list.html'
     # paginate_by = 10
     model = Category
-    ordering = ['-transaction__amount']
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        categories = Category.objects.annotate(
-            total_expense=Sum('transaction__amount')
-        ).values('id', 'name', 'total_expense')
-        context['categories'] = categories
-        return context
+    ordering = ['transaction__amount']
+    context_object_name = 'categories'
     
     def get_queryset(self): 
-        queryset = super().get_queryset()
+        queryset = Category.objects.exclude(name='Income')
         
-        search_term = self.request.GET.get(
-            'search_term') # Get the search term from the request
-        clear_search = self.request.GET.get(
-            'clear_search') # Get value of 'clear_search'
+        search_term = self.request.GET.get('search_term').capitalize()
+        clear_search = self.request.GET.get('clear_search')
 
-        if clear_search: # Check if 'clear_search' parameter is present
-            return queryset
+        if clear_search:
+            return queryset.annotate(total_expense=Sum('transaction__amount'))
         
         if search_term: 
-            queryset = queryset.filter(
-                Q(description__icontains=search_term) |
-                Q(category__name__icontains=search_term)
-            )
-        return queryset
+            queryset = queryset.filter(Q(name__icontains=search_term))
+            
+        return queryset.annotate(total_expense=Sum('transaction__amount'))
     
 
 @login_required

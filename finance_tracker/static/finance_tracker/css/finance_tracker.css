@@ -175,3 +175,9 @@
 #category-pill {
     font-size: 1em;
 }
+
+
+/* -----===== Category Table =====----- */
+#category-list-div {
+    margin-bottom: 100px;
+}
