@@ -126,9 +126,7 @@ class TransactionDeleteView(LoginRequiredMixin, DeleteView):
 
 class CategoryList(LoginRequiredMixin, ListView):
     template_name = 'finance_tracker/category_list.html'
-    # paginate_by = 10
     model = Category
-    ordering = ['transaction__amount']
     context_object_name = 'categories'
     
     def get_queryset(self): 
@@ -138,12 +136,12 @@ class CategoryList(LoginRequiredMixin, ListView):
         clear_search = self.request.GET.get('clear_search')
 
         if clear_search:
-            return queryset.annotate(total_expense=Sum('transaction__amount'))
+            return queryset.annotate(total_expense=Sum('transaction__amount')).order_by('total_expense')
         
         if search_term: 
             queryset = queryset.filter(Q(name__icontains=search_term))
             
-        return queryset.annotate(total_expense=Sum('transaction__amount'))
+        return queryset.annotate(total_expense=Sum('transaction__amount')).order_by('total_expense')
     
 
 @login_required

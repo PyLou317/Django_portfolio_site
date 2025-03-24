@@ -12,42 +12,36 @@
     </div>
 
    {% comment %}------ Search Field ------{% endcomment %}
-    <div class="row">
-      <div class="col-12 col-md-3">
-        <form method="get" class="mb-3">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search Categories..." name="search_term" value="{{ request.GET.search_term }}" />
-            {% if request.GET.search_term %}
-              <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
-            {% endif %}
-          </div>
-        </form>
-      </div>
+   <div class="row">
+       <div class="col-12 col-md-4">
+           <form method="get" class="mb-3">
+               <div class="input-group">
+                   <input type="text" class="form-control" placeholder="Search Categories..." name="search_term" value="{{ request.GET.search_term }}" />
+                   {% if request.GET.search_term %}
+                   <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
+                   {% endif %}
+                </div>
+            </form>
+        </div>
     </div>
-
-
-    {% comment %} {% for category in categories %}
-    <ul class="list-group">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <span class="fw-bold">{{ category.name }}</span>
-      <span class="text-danger"> -8,946.38</span>
-    </li>
-    {% endfor %}  {% endcomment %}
-
+    
+    {% comment %}------ Category Card ------{% endcomment %}
     <div class="container">
-        <div class="row p-0 col-lg-6 col-sm-12">
+        <div class="row p-0 col-lg-4 col-sm-12">
             {% for category in categories %}
             <div class="card text-start g-1">
-            <div class="card-body p-1">
-                <div class="row align-items-center">
+            <div class="card-body p-2">
+                <div class="row align-items-center mx-1">
                     <div class="col-8">
                         <span class="fw-bold">{{ category.name }}</span>
-                        {% comment %} <h5>{{ category.name }}</h5> {% endcomment %}
                     </div>
                     {% if category.total_expense %}
                     <div class="col d-flex justify-content-end">
-                        <span class="badge rounded-pill text-bg-secondary">{{ category.total_expense|floatformat:2 }}</span>
-                        {% comment %} <p>{{ category.total_expense|floatformat:2 }}</p> {% endcomment %}
+                        {% if category.total_expense < 0 %}
+                            <span id="cat-number-badge" class="fw-bold text-danger">{{ category.total_expense|floatformat:2 }}</span>
+                        {% else %}
+                            <span id="cat-number-badge" class="fw-bold text-success">{{ category.total_expense|floatformat:2 }}</span>
+                        {% endif %}
                     </div>
                     {% else %}
                     <div class="col d-flex justify-content-end">

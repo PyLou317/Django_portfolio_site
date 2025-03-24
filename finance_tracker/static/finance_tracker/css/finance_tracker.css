@@ -181,3 +181,7 @@
 #category-list-div {
     margin-bottom: 100px;
 }
+
+#cat-number-badge {
+    font-size: .85em;
+}
