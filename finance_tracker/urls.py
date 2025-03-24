@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.finance_tracker_home, name='home'),
     path('dashboard/', views.finance_tracker_dashboard, name='dashboard'),
     path('transactions/', views.TransactionListView.as_view(), name='transaction-list'),
+    path('categories/', views.CategoryList.as_view(), name='categories'),
     path('upload/', views.upload_statement, name='file_upload'),
     path('transactions/<pk>/update/', views.TransactionUpdateView.as_view(success_url = reverse_lazy('transaction-list')), name='transaction_update'),
     path('transactions/<pk>/delete/', views.TransactionDeleteView.as_view(success_url = reverse_lazy('transaction-list')), name='transaction_delete'),

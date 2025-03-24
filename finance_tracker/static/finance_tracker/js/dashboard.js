@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalIncomeChart = document.getElementById('total-income-chart');
     const expenseByMonthChart = document.getElementById('expense-by-month-chart');
     let myChart;
-    
-    
+
+
     // ------- Total Expense Chart ------- //
     fetch('/finance_tracker/category_expense_json/')
         .then(resp => resp.json())
@@ -18,18 +18,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const categoryExpenseTotals = categoryExpensesData.map(item => parseFloat(item.total_expense));
 
             const backgroundColors = [ // Define enough colors for your categories
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
-                'rgba(75, 192, 192, 0.8)',
-                'rgba(153, 102, 255, 0.8)',
-                'rgba(255, 159, 64, 0.8)',
-                'rgba(52, 9, 207, 0.8)',
+                'rgba(255, 99, 132, 0.8)',   // Light Red
+                'rgba(54, 162, 235, 0.8)',  // Light Blue
+                'rgba(255, 206, 86, 0.8)',  // Light Yellow
+                'rgba(75, 192, 192, 0.8)',  // Light Teal
+                'rgba(153, 102, 255, 0.8)', // Light Purple
+                'rgba(255, 159, 64, 0.8)',  // Light Orange
+                'rgba(52, 9, 207, 0.8)',    // Dark Blue
+                'rgba(201, 203, 207, 0.8)', // Light Gray
+                'rgba(144, 238, 144, 0.8)', // Light Green (LightSeaGreen)
+                'rgba(255, 255, 0, 0.8)',   // Yellow
+                'rgba(0, 255, 255, 0.8)',   // Cyan
+                'rgba(128, 128, 128, 0.8)', // Gray
+                'rgba(173, 216, 230, 0.8)', // Light Blue (LightSkyBlue)
+                'rgba(255, 228, 196, 0.8)', // Bisque
+                'rgba(224, 255, 255, 0.8)', // Light Cyan
+                'rgba(255, 218, 185, 0.8)', // Light Goldenrod Yellow
+                'rgba(211, 211, 211, 0.8)', // Light Gray (LightSteelGray)
                 // ... add more colors if needed ...
             ];
 
             new Chart(totalExpensesChart, {
-                type: 'polarArea',
+                type: 'doughnut',
                 data: {
                     labels: categoryLabels, // Use category labels for x-axis
                     datasets: [{
@@ -45,13 +55,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         legend: {
                             display: false,
                             position: 'right'
-                        }
-                    }
+                        },
+                        tooltip: {
+                            enabled: true,
+                        },
+                    },
+                    
                 }
             });
         });
-        
-        
+
+
     // ------- Monthly Income Chart ------- //
     fetch('/finance_tracker/income_total_json/')
         .then(resp => resp.json())
@@ -82,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-    
+
     const monthSelector = document.getElementById('month-selector');
 
     if (monthSelector) {
@@ -93,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function getSelectedMonth() {
         return monthSelector ? monthSelector.value : null;
     }
-    
+
     // ------- Monthly Expense Chart ------- //
     function renderChart() {
         fetch('/finance_tracker/monthly_expense_json/')
@@ -105,8 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const selectedMonth = getSelectedMonth();
                 const filteredData = monthlyExpenseData.filter(item => item.month === selectedMonth);
                 console.log('Filtered data:', filteredData);
-                
-                
+
+
                 // Create Labels
                 const uniqueMonthLabels = filteredData.reduce((uniqueMonths, item) => {
                     if (!uniqueMonths.includes(item.month)) {
@@ -138,13 +152,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         const monthString = monthLabel;
                         return monthlyExpenseMapForCategory[monthString] || 0; // Get expense for this month or 0 if no data
                     });
-                    
+
                     datasets.push({
                         label: categoryName,
                         data: expenseDataForChart,
                     });
                 }
 
+                // Destroy blank  chart to allow for a new cahrt to render with data
                 if (myChart) {
                     myChart.destroy();
                 }
@@ -156,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         datasets: datasets
                     },
                     options: {
+                        tooltip: {
+                            enabled: true,
+                        },
                         responsive: true,
                         plugins: {
                             legend: {
@@ -165,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                 });
-                
-                
+
+
             });
     }
 });

@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
@@ -116,9 +117,44 @@ class TransactionUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('finance_tracker:transaction-list')
     
+    
 
 class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     model = Transaction
+    
+    
+
+class CategoryList(ListView):
+    template_name = 'finance_tracker/category_list.html'
+    # paginate_by = 10
+    model = Category
+    ordering = ['-transaction__amount']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = Category.objects.annotate(
+            total_expense=Sum('transaction__amount')
+        ).values('id', 'name', 'total_expense')
+        context['categories'] = categories
+        return context
+    
+    def get_queryset(self): 
+        queryset = super().get_queryset()
+        
+        search_term = self.request.GET.get(
+            'search_term') # Get the search term from the request
+        clear_search = self.request.GET.get(
+            'clear_search') # Get value of 'clear_search'
+
+        if clear_search: # Check if 'clear_search' parameter is present
+            return queryset
+        
+        if search_term: 
+            queryset = queryset.filter(
+                Q(description__icontains=search_term) |
+                Q(category__name__icontains=search_term)
+            )
+        return queryset
     
 
 @login_required

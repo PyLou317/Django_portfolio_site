@@ -4,7 +4,8 @@
     --font: "Inter", sans-serif;
     --body-color: #637381;
     --heading-color: #212b36;
-    --primary-color: #79D7BE;
+    --primary-color: #355E3B;
+    /* --primary-color: #79D7BE; */
     --white: #ffffff;
 }
 
@@ -934,7 +935,7 @@ p {
 }
 
 .ud-single-pricing.last-item::after {
-    background: #13c296;
+    background: var(--primary-color);
     top: -2px;
     right: -2px;
     border-radius: 0px 8px 0px 55px;
