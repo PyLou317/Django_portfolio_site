@@ -1,3 +1,4 @@
+from django.db import models
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
@@ -130,18 +131,22 @@ class CategoryList(LoginRequiredMixin, ListView):
     context_object_name = 'categories'
     
     def get_queryset(self): 
-        queryset = Category.objects.exclude(name='Income')
+        user = self.request.user
+        queryset = Category.objects.exclude(
+            name='Income').annotate(
+            total_amount=Sum('transaction__amount', filter=models.Q(transaction__owner=self.request.user))
+        )
         
-        search_term = self.request.GET.get('search_term').capitalize()
+        search_term = self.request.GET.get('search_term')
         clear_search = self.request.GET.get('clear_search')
 
         if clear_search:
-            return queryset.annotate(total_expense=Sum('transaction__amount')).order_by('total_expense')
+            return queryset
         
         if search_term: 
-            queryset = queryset.filter(Q(name__icontains=search_term))
+            queryset = queryset.filter(Q(name__icontains=search_term.capitalize()))
             
-        return queryset.annotate(total_expense=Sum('transaction__amount')).order_by('total_expense')
+        return queryset
     
 
 @login_required

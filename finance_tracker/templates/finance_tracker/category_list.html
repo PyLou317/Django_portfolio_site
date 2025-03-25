@@ -7,8 +7,8 @@
 <div id="category-list-div" class="container mt-4 mx-auto">
     <div class="mb-5 mt-2">
         <h2 class="justin-content-center">
-        <i class="bi bi-tag-fill"></i> Categories
-        </h2>
+        <i class="bi bi-tag-fill"></i> Categories</h2>
+        <p>Transaction Categories for {{ user }}</p>
     </div>
 
    {% comment %}------ Search Field ------{% endcomment %}
@@ -35,17 +35,17 @@
                     <div class="col-8">
                         <span class="fw-bold">{{ category.name }}</span>
                     </div>
-                    {% if category.total_expense %}
+                    {% if category.total_amount %}
                     <div class="col d-flex justify-content-end">
-                        {% if category.total_expense < 0 %}
-                            <span id="cat-number-badge" class="fw-bold text-danger">{{ category.total_expense|floatformat:2 }}</span>
+                        {% if category.total_amount < 0 %}
+                            <span id="cat-number-badge" class="fw-bold text-danger">{{ category.total_amount|floatformat:2 }}</span>
                         {% else %}
-                            <span id="cat-number-badge" class="fw-bold text-success">{{ category.total_expense|floatformat:2 }}</span>
+                            <span id="cat-number-badge" class="fw-bold text-success">{{ category.total_amount|floatformat:2 }}</span>
                         {% endif %}
                     </div>
                     {% else %}
                     <div class="col d-flex justify-content-end">
-                        <p>{{ category.total_expense }}</p>
+                        <p>{{ category.total_amount }}</p>
                     </div>
                     {% endif %}
                 </div>
