@@ -14,15 +14,8 @@
                     <i class="bi bi-box-arrow-in-right me-2"></i> Update Profile
                 </div>
                 <div class="card-body">
-                    {% comment %} <form method="post"> {% endcomment %}
-                        {% csrf_token %}
-                        {% comment %} <div> {% endcomment %}
-                        {% crispy form %}
-                            {% comment %} <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-dark btn-block">Save Changes</button>
-                            </div> {% endcomment %}
-                        {% comment %} </div> {% endcomment %}
-                    {% comment %} </form> {% endcomment %}
+                    {% csrf_token %}
+                    {% crispy form %}
                 </div>
             </div>
         </div>

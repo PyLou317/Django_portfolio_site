@@ -7,7 +7,8 @@
       <div class="container-fluid min-vh-100 mb-5">
         <div class="m-3">
           <h2>Dashboard</h2>
-          <h5>Personal Expense App</h5>
+          {% firstof user.first_name user as name %}
+            <h5>{{ name }}'s Personal Expense App</h5>
         </div>
 
         <!-- Cards -->

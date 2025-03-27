@@ -5,7 +5,9 @@
 {% if page_obj %}
   <div class="container mx-auto">
     <div class="mb-5 mt-2">
-      <h2 class="justin-content-center"><i class="bi bi-list-ul"></i> Transactions List</h2>
+      <h2 class="justin-content-center"><i class="bi bi-list-ul"></i> Transactions</h2>
+      {% firstof user.first_name user as name %}
+            <h5>Transaction Details for {{ name }}</h5>
     </div>
 
     {% comment %}------ Search Field ------{% endcomment %}

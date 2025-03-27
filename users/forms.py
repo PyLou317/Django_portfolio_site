@@ -20,7 +20,7 @@ class ProfileUpdateForm(forms.ModelForm):
         self.helper.field_class = 'col-lg-9'
         self.helper.layout = Layout(
                 HTML("""
-                    <div class="form-group text-center">
+                    <div class="form-group text-center mb-3">
                         {% if form.instance.avatar %}
                             <img src="{{ form.instance.avatar.url }}" alt="Current Avatar" class="img-fluid my-3" style="max-width: 200px; max-height: 200px; border-radius: 50%;">
                         {% else %}
