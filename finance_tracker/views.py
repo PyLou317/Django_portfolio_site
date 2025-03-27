@@ -134,7 +134,8 @@ class CategoryList(LoginRequiredMixin, ListView):
         # user = self.request.user
         queryset = Category.objects.exclude(
             name='Income').annotate(
-            total_amount=Sum('transaction__amount', filter=models.Q(transaction__owner=self.request.user))
+            total_amount=Sum('transaction__amount', filter=models.Q(
+                transaction__owner=self.request.user))
             ).exclude(total_amount=0 or None)
         
         search_term = self.request.GET.get('search_term')

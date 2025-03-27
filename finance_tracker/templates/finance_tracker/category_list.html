@@ -8,7 +8,8 @@
     <div class="mb-5 mt-2">
         <h2 class="justin-content-center">
         <i class="bi bi-tag-fill"></i> Categories</h2>
-        <p>Transaction Categories for {{ user }}</p>
+        {% firstof user.first_name user as name %}
+            <p>Transaction Categories for {{ name }}</p>
     </div>
 
    {% comment %}------ Search Field ------{% endcomment %}
