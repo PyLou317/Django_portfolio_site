@@ -27,7 +27,7 @@
     </div>
     
     {% comment %}------ Category Card ------{% endcomment %}
-    <div class="container">
+    <div class="d-flex container">
         <div class="row p-0 col-lg-4 col-sm-12">
             {% for category in categories %}
             <div class="card text-start g-1">
@@ -54,39 +54,38 @@
             </div>
             {% endfor %} 
         </div>
+
+        {% comment %} ---==== Transactions List ===--- {% endcomment %}
+        <div class="container ms-5 border border-top-0">
+            <table id="table" class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for transaction in page_obj %}
+                    <tr>
+                    <td>{{ transaction.date|date:'M-d-Y' }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td><span id="category-pill" class="badge badge-pill bg-info">{{ transaction.category }}</span></td>
+                    <td>${{ transaction.amount }}</td>
+                    <td>
+                        <a href="{% url 'finance_tracker:transaction_update' transaction.id %}"><i class="bi bi-pencil-square text-success"></i></a> |
+                        <a href="{% url 'finance_tracker:transaction_delete' transaction.id %}"><i class="bi bi-trash3-fill text-secondary"></i></a>
+                    </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
     </div>
   
-  {% comment %}------ Transaction List Table ------{% endcomment %}
-  {% comment %}
-  <table id="table" class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Category</th>
-        <th scope="col">Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for category in page_obj %}
-      <tr>
-        <td>{{ category.name }}</td>
-        <td>${{ category.amount }}</td>
-        {% comment %}
-        <td>
-          <a
-            href="{% url 'finance_tracker:transaction_update' transaction.id %}"
-            ><i class="bi bi-pencil-square text-success"></i
-          ></a>
-          |
-          <a
-            href="{% url 'finance_tracker:transaction_delete' transaction.id %}"
-            ><i class="bi bi-trash3-fill text-secondary"></i
-          ></a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% endcomment %} 
   
   {% comment %}------ Pagination ------{% endcomment %}
   {% comment %} <div id="pagination-div" class="pagination justify-content-center">
