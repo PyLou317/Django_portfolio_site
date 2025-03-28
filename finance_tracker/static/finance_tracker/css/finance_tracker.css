@@ -177,11 +177,23 @@
 }
 
 
-/* -----===== Category Table =====----- */
+/* -----===== Category View =====----- */
 #category-list-div {
     margin-bottom: 100px;
 }
 
+#category-div {
+    width: 35%;
+}
+
 #cat-number-badge {
     font-size: .85em;
+}
+
+.trans-table-2 {
+    font-size: .85rem;
+}
+
+#date-col {
+    width: 125px;
 }

@@ -4,63 +4,71 @@
 
 {% block content %}
 {% if categories %}
-<div id="category-list-div" class="container mt-4 mx-auto">
-    <div class="mb-5 mt-2">
-        <h2 class="justin-content-center">
-        <i class="bi bi-tag-fill"></i> Categories</h2>
-        {% firstof user.first_name user as name %}
-            <h5>Transaction Categories for {{ name }}</h5>
-    </div>
 
-   {% comment %}------ Search Field ------{% endcomment %}
-   <div class="row">
-       <div class="col-12 col-md-4">
-           <form method="get" class="mb-3">
-               <div class="input-group">
-                   <input type="text" class="form-control" placeholder="Search Categories..." name="search_term" value="{{ request.GET.search_term }}" />
-                   {% if request.GET.search_term %}
-                   <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
-                   {% endif %}
-                </div>
-            </form>
-        </div>
+<div class="mx-4">
+    <div class="container-fluid my-4">
+        <h2 class="justify-content-center">
+            <i class="bi bi-tag-fill"></i> Categories</h2>
+            {% firstof user.first_name user as name %}
+        <h5>Transaction Categories for {{ name }}</h5>
     </div>
-    
-    {% comment %}------ Category Card ------{% endcomment %}
-    <div class="d-flex container">
-        <div class="row p-0 col-lg-4 col-sm-12">
-            {% for category in categories %}
-            <div class="card text-start g-1">
-            <div class="card-body p-2">
-                <div class="row align-items-center mx-1">
-                    <div class="col-8">
-                        <span class="fw-bold">{{ category.name }}</span>
-                    </div>
-                    {% if category.total_amount %}
-                    <div class="col d-flex justify-content-end">
-                        {% if category.total_amount < 0 %}
-                            <span id="cat-number-badge" class="fw-bold text-danger">{{ category.total_amount|floatformat:2 }}</span>
-                        {% else %}
-                            <span id="cat-number-badge" class="fw-bold text-success">{{ category.total_amount|floatformat:2 }}</span>
+        
+        
+        
+    {% comment %}------ Search Field ------{% endcomment %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <form method="get" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search Categories..." name="search_term" value="{{ request.GET.search_term }}" />
+                        {% if request.GET.search_term %}
+                        <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
                         {% endif %}
                     </div>
-                    {% else %}
-                    <div class="col d-flex justify-content-end">
-                        <p>{{ category.total_amount }}</p>
+                </form>
+            </div>
+        </div>
+    </div>
+        
+    <div class="d-flex container-fluid">
+        {% comment %}------ Category Card ------{% endcomment %}
+        <div id="category-div" class="container">
+            <div class="row">
+                {% for category in categories %}
+                    <a href="{% url 'finance_tracker:categories' %}?category_id={{ category.id }}">
+                    <div class="card text-start g-1">
+                        <div class="card-body p-2">
+                            <div class="row align-items-center mx-1">
+                                <div class="col-8">
+                                    <span class="fw-bold">{{ category.name }}</span>
+                                </div>
+                                {% if category.total_amount %}
+                                <div class="col d-flex justify-content-end">
+                                    {% if category.total_amount < 0 %}
+                                        <span id="cat-number-badge" class="fw-bold text-danger">{{ category.total_amount|floatformat:2 }}</span>
+                                    {% else %}
+                                        <span id="cat-number-badge" class="fw-bold text-success">{{ category.total_amount|floatformat:2 }}</span>
+                                    {% endif %}
+                                </div>
+                                {% else %}
+                                <div class="col d-flex justify-content-end">
+                                    <p>0.00</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    {% endif %}
-                </div>
+                {% endfor %} 
             </div>
-            </div>
-            {% endfor %} 
         </div>
 
         {% comment %} ---==== Transactions List ===--- {% endcomment %}
-        <div class="container ms-5 border border-top-0">
-            <table id="table" class="table table-striped">
+        <div class="container border border-top-0 ms-3">
+            <table id="table" class="table table-striped trans-table-2">
                 <thead>
                 <tr>
-                    <th scope="col">Date</th>
+                    <th id="date-col" scope="col">Date</th>
                     <th scope="col">Description</th>
                     <th scope="col">Category</th>
                     <th scope="col">Amount</th>
@@ -68,10 +76,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for transaction in page_obj %}
+                {% for transaction in transactions %}
                     <tr>
                     <td>{{ transaction.date|date:'M-d-Y' }}</td>
-                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.description|truncatechars:50 }}</td>
                     <td><span id="category-pill" class="badge badge-pill bg-info">{{ transaction.category }}</span></td>
                     <td>${{ transaction.amount }}</td>
                     <td>
@@ -82,58 +90,43 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+            {% comment %}------ Pagination ------{% endcomment %}
+            <div id="pagination-div" class="pagination justify-content-center">
+                <span class="step-links">
+                <nav aria-label="Transaction lists pages">
+                    <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link bg-secondary text-light" href="?page=1">&laquo; first</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link bg-secondary border-secondary">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        <span class="visually-hidden">(current)</span></span>
+                    </li>
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                    </li>
+                    {% endif %}
+                    </ul>
+                </nav>
+                </span>
+            </div>
         </div>
-        
     </div>
-  
-  
-  {% comment %}------ Pagination ------{% endcomment %}
-  {% comment %} <div id="pagination-div" class="pagination justify-content-center">
-    <span class="step-links">
-      <nav aria-label="Transaction lists pages">
-        <ul class="pagination">
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link bg-secondary text-light" href="?page=1"
-              >&laquo; first</a
-            >
-          </li>
-          <li class="page-item">
-            <a
-              class="page-link text-secondary"
-              href="?page={{ page_obj.previous_page_number }}"
-              >Previous</a
-            >
-          </li>
-          {% endif %}
+</div>
+    
 
-          <li class="page-item active" aria-current="page">
-            <span class="page-link bg-secondary border-secondary"
-              >Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-              <span class="visually-hidden">(current)</span></span
-            >
-          </li>
-
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a
-              class="page-link text-secondary"
-              href="?page={{ page_obj.next_page_number }}"
-              >Next</a
-            >
-          </li>
-          <li class="page-item">
-            <a
-              class="page-link text-secondary"
-              href="?page={{ page_obj.paginator.num_pages }}"
-              >Last &raquo;</a
-            >
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
-    </span>
-  </div> {% endcomment %}
   {% else %} 
     {% include 'finance_tracker/components/upload_notify.html' %} 
   {%endif %}

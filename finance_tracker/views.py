@@ -125,29 +125,57 @@ class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     
     
 
-class CategoryList(LoginRequiredMixin, ListView):
-    template_name = 'finance_tracker/category_list.html'
-    model = Category
-    context_object_name = 'categories'
+# class CategoryList(LoginRequiredMixin, ListView):
+#     template_name = 'finance_tracker/category_list.html'
+#     model = Category
+#     context_object_name = 'categories'
     
-    def get_queryset(self): 
-        # user = self.request.user
-        queryset = Category.objects.exclude(
-            name='Income').annotate(
-            total_amount=Sum('transaction__amount', filter=models.Q(
-                transaction__owner=self.request.user))
-            ).exclude(total_amount=0 or None).order_by('name')
+#     def get_queryset(self): 
+#         # user = self.request.user
+#         queryset = Category.objects.exclude(
+#             name='Income').annotate(
+#             total_amount=Sum('transaction__amount', filter=models.Q(
+#                 transaction__owner=self.request.user))
+#             ).exclude(total_amount=0 or None).order_by('name')
         
-        search_term = self.request.GET.get('search_term')
-        clear_search = self.request.GET.get('clear_search')
+#         search_term = self.request.GET.get('search_term')
+#         clear_search = self.request.GET.get('clear_search')
 
-        if clear_search:
-            return queryset
+#         if clear_search:
+#             return queryset
         
-        if search_term: 
-            queryset = queryset.filter(Q(name__icontains=search_term.capitalize()))
+#         if search_term: 
+#             queryset = queryset.filter(Q(name__icontains=search_term.capitalize()))
             
-        return queryset
+#         return queryset
+
+
+@login_required
+def category_view(request):
+    
+    categories = Category.objects.exclude(
+        name='Income').annotate(
+        total_amount=Sum('transaction__amount', filter=models.Q(
+            transaction__owner=request.user))
+        ).exclude(total_amount=0 or None).order_by('name')
+        
+    # transactions = Transaction.objects.exclude(
+    #     category__name='Income').filter(owner=request.user)
+    
+    category_id = request.GET.get('category_id')
+    print(category_id)
+
+    if category_id:
+        transactions = Transaction.objects.filter(category_id=category_id, owner=request.user)
+    else:
+        transactions = Transaction.objects.filter(owner=request.user)
+    
+    context = {
+        'categories': categories,
+        'transactions': transactions
+    }
+    
+    return render(request, 'finance_tracker/category_list.html', context)
     
 
 @login_required
