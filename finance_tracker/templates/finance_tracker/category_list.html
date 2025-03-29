@@ -31,8 +31,8 @@
         </div>
     </div>
         
+    {% comment %}------ Category Card ------{% endcomment %}
     <div class="d-flex container-fluid">
-        {% comment %}------ Category Card ------{% endcomment %}
         <div id="category-div" class="container">
             <div class="row">
                 {% for category in categories %}
@@ -61,71 +61,7 @@
                     </div>
                 {% endfor %} 
             </div>
-        </div>
-
-        {% comment %} ---==== Transactions List ===--- {% endcomment %}
-        <div class="container border border-top-0 ms-3">
-            <table id="table" class="table table-striped trans-table-2">
-                <thead>
-                <tr>
-                    <th id="date-col" scope="col">Date</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for transaction in transactions %}
-                    <tr>
-                    <td>{{ transaction.date|date:'M-d-Y' }}</td>
-                    <td>{{ transaction.description|truncatechars:50 }}</td>
-                    <td><span id="category-pill" class="badge badge-pill bg-info">{{ transaction.category }}</span></td>
-                    <td>${{ transaction.amount }}</td>
-                    <td>
-                        <a href="{% url 'finance_tracker:transaction_update' transaction.id %}"><i class="bi bi-pencil-square text-success"></i></a> |
-                        <a href="{% url 'finance_tracker:transaction_delete' transaction.id %}"><i class="bi bi-trash3-fill text-secondary"></i></a>
-                    </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
-            {% comment %}------ Pagination ------{% endcomment %}
-            <div id="pagination-div" class="pagination justify-content-center">
-                <span class="step-links">
-                <nav aria-label="Transaction lists pages">
-                    <ul class="pagination">
-                    {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link bg-secondary text-light" href="?page=1">&laquo; first</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-                    </li>
-                    {% endif %}
-
-                    <li class="page-item active" aria-current="page">
-                        <span class="page-link bg-secondary border-secondary">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                        <span class="visually-hidden">(current)</span></span>
-                    </li>
-
-                    {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
-                    </li>
-                    {% endif %}
-                    </ul>
-                </nav>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-    
+        </div>    
 
   {% else %} 
     {% include 'finance_tracker/components/upload_notify.html' %} 
