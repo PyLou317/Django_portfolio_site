@@ -4,8 +4,8 @@
     --font: "Inter", sans-serif;
     --body-color: #637381;
     --heading-color: #212b36;
-    --primary-color: #355E3B;
-    /* --primary-color: #79D7BE; */
+    /* --primary-color: #355E3B; */
+    --primary-color: #79D7BE;
     --white: #ffffff;
 }
 
@@ -537,12 +537,12 @@ p {
 /* ===== Hero CSS ===== */
 .ud-hero {
     background: var(--primary-color);
-    padding-top: 160px;
+    padding-top: 130px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .ud-hero {
-        padding-top: 160px;
+        padding-top: 150px;
     }
 }
 
@@ -639,7 +639,7 @@ p {
     opacity: 0.5;
 }
 
-.ud-hero-brands-wrapper {
+/* .ud-hero-brands-wrapper {
     text-align: center;
     margin-bottom: 40px;
 }
@@ -652,7 +652,7 @@ p {
 
 .ud-hero-brands-wrapper img:hover {
     opacity: 1;
-}
+} */
 
 .ud-hero-image {
     max-width: 845px;
