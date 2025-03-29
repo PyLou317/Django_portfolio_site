@@ -105,9 +105,7 @@ class TransactionListView(LoginRequiredMixin, ListView):
         category_id = self.request.GET.get('category_id')
         print(category_id)
         
-        if category_id == 'show_all':
-            filtered_transactions = Transaction.objects.filter(owner=self.request.user)
-        elif category_id:
+        if category_id:
             filtered_transactions = Transaction.objects.filter(category_id=category_id, owner=self.request.user)
         else:
             filtered_transactions = Transaction.objects.filter(owner=self.request.user)

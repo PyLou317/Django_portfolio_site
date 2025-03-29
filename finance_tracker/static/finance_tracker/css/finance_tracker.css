@@ -177,6 +177,23 @@
     font-size: 1em;
 }
 
+.hidden {
+    display: none;
+}
+
+#category_filters {
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+#filter_btn {
+    cursor: pointer;
+}
+
+#cat_btn:hover {
+    font-size: .8rem;
+}
+
 
 /* -----===== Category View =====----- */
 #category-list-div {

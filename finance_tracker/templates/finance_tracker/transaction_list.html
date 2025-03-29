@@ -25,13 +25,14 @@
     </div>
 
     {% comment %}------ Categories ------{% endcomment %}
-    <div>
-        <a href="{% url 'finance_tracker:transaction-list' %}?category_id={{ show_all }}" class="me-1 mb-1">
-        <span class="badge rounded-pill text-bg-secondary">Show All</span>
+    <span id="filter_btn" class="badge rounded-pill bg-warning">Filter Categories <i class="bi bi-caret-down-fill"></i></span>
+    <div id="category_filters" class="hidden p-1 mt-1 text-center">
+        <a href="{% url 'finance_tracker:transaction-list' %}" class="me-1 mb-1">
+        <span class="badge rounded-pill text-bg-dark">Show All</span>
         </a>
         {% for category in categories %}
         <a href="{% url 'finance_tracker:transaction-list' %}?category_id={{ category.id }}" class="me-1 mb-1">
-        <span class="badge rounded-pill text-bg-success">{{ category }}</span>
+        <span id="cat_btn" class="badge rounded-pill bg-info">{{ category }}</span>
         </a>
         {% endfor %}
     </div> 
@@ -54,7 +55,7 @@
                         <tr>
                             <td>{{ transaction.date|date:'M-d-Y' }}</td>
                             <td>{{ transaction.description }}</td>
-                            <td><span id="category-pill" class="badge badge-pill bg-info">{{ transaction.category }}</span></td>
+                            <td><span id="category-pill" class="badge badge-pill bg-warning">{{ transaction.category }}</span></td>
                             <td>${{ transaction.amount }}</td>
                             <td>
                                 <a href="{% url 'finance_tracker:transaction_update' transaction.id %}"><i class="bi bi-pencil-square text-success"></i></a> |
@@ -117,5 +118,5 @@
 {% endblock %}
 
 {% block extra_js %}
-  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <script src="{% static 'finance_tracker/js/transaction_list.js' %}"></script>
 {% endblock %}
