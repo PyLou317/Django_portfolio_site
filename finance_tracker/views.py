@@ -100,17 +100,20 @@ class TransactionListView(LoginRequiredMixin, ListView):
         
         categories = Category.objects.exclude(name='Income').annotate(
             total_amount=Sum('transaction__amount', filter=models.Q(transaction__owner=self.request.user))
-        ).exclude(total_amount=0 or None).order_by('name')
+        ).exclude(total_amount__isnull=True).exclude(total_amount=0).order_by('name')
     
         category_id = self.request.GET.get('category_id')
+        print(category_id)
         
-        if category_id:
+        if category_id == 'show_all':
+            filtered_transactions = Transaction.objects.filter(owner=self.request.user)
+        elif category_id:
             filtered_transactions = Transaction.objects.filter(category_id=category_id, owner=self.request.user)
         else:
             filtered_transactions = Transaction.objects.filter(owner=self.request.user)
         
         context['categories'] = categories
-        context['fTransactions'] = filtered_transactions
+        context['filtered_transactions'] = filtered_transactions
         
         return context
 
