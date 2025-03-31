@@ -83,14 +83,52 @@ document.addEventListener('DOMContentLoaded', () => {
                     datasets: [{
                         label: 'Total Income',
                         data: monthlyIncomeTotals,
-                        borderWidth: 1
+                        borderWidth: 4,
+                        fill: {
+                            target: 'origin',
+                            above: 'rgba(75, 192, 192, 0.46)'
+                        },
+                        borderColor: 'rgb(75, 192, 192)',
                     }]
                 },
                 options: {
                     responsive: true,
                     scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                            },
+                          },
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            grid: {
+                                display: false,
+                            },
+                          },
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            usePointStyle: true,
+                            callbacks: {
+                                labelPointStyle: function (context) {
+                                    return {
+                                        pointStyle: 'triangle',
+                                        rotation: 0
+                                    };
+                                },
+                                labelColor: function(context) {
+                                    return {
+                                        borderColor: 'rgb(75, 192, 192)',
+                                        backgroundColor: 'rgb(75, 192, 192)',
+                                        borderWidth: 2,
+                                        borderDash: [2, 2],
+                                        borderRadius: 2,
+                                    };
+                                }
+                            }
                         }
                     }
                 }
