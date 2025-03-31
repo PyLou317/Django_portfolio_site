@@ -8,9 +8,9 @@
     --white: #ffffff;
 }
 
-body {
-    /* background-color: var(--background-color); */
-}
+/* body {
+    background-color: var(--background-color);
+} */
 
 /* -----===== Demo Video =====----- */
 
@@ -48,6 +48,10 @@ body {
 #month-selector {
     width: 150px;
 }
+
+.income_chart {
+    max-height: 250px;
+} 
 
 
 

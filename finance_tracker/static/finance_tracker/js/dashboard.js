@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         y: {
                             beginAtZero: true,
                             grid: {
-                                display: false,
+                                display: true,
                             },
                           },
                     },

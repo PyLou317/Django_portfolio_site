@@ -11,8 +11,8 @@
     "circle k",
     "costco gas"
   ],
-  "credit card payment": ["payment", "mb cibc", "Mb-Cibc", "Mb-Capital"],
-  "credit card interest": ["interest"],
+  "credit card: payment": ["payment", "mb cibc", "Mb-Cibc", "Mb-Capital"],
+  "credit card: interest": ["interest"],
   "food: restaurants": [
     "tim hortons",
     "starbucks",
@@ -38,7 +38,7 @@
     "booster juice",
     "original joe's"
   ],
-  "groceries": [
+  "food: groceries": [
     "walmart",
     "wal mart",
     "costco wholesale",
@@ -53,7 +53,7 @@
   ],
   "insurance": ["bcca", "bcca membership"],
   "personal care": ["barber", "haides"],
-  "fitness: health": ["supplement king", "gym", "momentous", "goodlife"],
+  "fitness": ["supplement king", "gym", "momentous", "goodlife"],
   "shopping": [
     "golf_town",
     "home depot",
@@ -77,8 +77,7 @@
   "entertainment": ["cineplex"],
   "interac E-transfer": ["e transfer", "e-transfer"],
   "income": ["aerotek", "school district no 35"],
-  "savings": ["bank the rest"],
+  "savings": ["bank the rest", "wealthsimple", "investment"],
   "strata fees": ["itf bcs2236"],
-  "investments": ["wealthsimple", "investment"],
   "bank fees": ["monthly fees"]
 }

@@ -1459,8 +1459,14 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 
 .ud-widget .ud-footer-logo img {
     width: 100%;
-    margin-top: auto;
 }
+
+@media screen {
+    .ud-widget .ud-footer-logo img {
+        width: 80%;
+    }
+}
+
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
     .ud-widget .ud-widget-brands a {
