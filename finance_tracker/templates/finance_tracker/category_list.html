@@ -5,7 +5,7 @@
 {% block content %}
 {% if categories %}
 
-<div class="mx-4">
+<div class="mx-4 mb-5">
     <div class="container-fluid my-4">
         <h2 class="justify-content-center">
             <i class="bi bi-tag-fill"></i> Categories</h2>
@@ -31,11 +31,11 @@
         </div>
     </div>
         
-    {% comment %}------ Category Card ------{% endcomment %}
-    <div class="d-flex container-fluid">
-        <div id="category-div" class="container">
-            <div class="row">
-                {% for category in categories %}
+        {% comment %}------ Category Card ------{% endcomment %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for category in categories %}
+                <div class="col-md-6 mb-2">  {# Use col-md-6 for two columns on medium screens and up, mb-2 for margin #}
                     <div class="card text-start g-1">
                         <div class="card-body p-2">
                             <div class="row align-items-center mx-1">
@@ -43,25 +43,29 @@
                                     <span class="fw-bold">{{ category.name }}</span>
                                 </div>
                                 {% if category.total_amount %}
-                                <div class="col d-flex justify-content-end">
-                                    {% if category.total_amount < 0 %}
-                                        <span id="cat-number-badge" class="fw-bold text-danger">{{ category.total_amount|floatformat:2 }}</span>
-                                    {% else %}
-                                        <span id="cat-number-badge" class="fw-bold text-success">{{ category.total_amount|floatformat:2 }}</span>
-                                    {% endif %}
-                                </div>
+                                    <div class="col d-flex justify-content-end">
+                                        {% if category.total_amount < 0 %}
+                                            <span id="cat-number-badge" class="fw-bold text-danger">{{ category.total_amount|floatformat:2 }}</span>
+                                        {% else %}
+                                            <span id="cat-number-badge" class="fw-bold text-success">{{ category.total_amount|floatformat:2 }}</span>
+                                        {% endif %}
+                                    </div>
                                 {% else %}
-                                <div class="col d-flex justify-content-end">
-                                    <p>0.00</p>
-                                </div>
+                                    <div class="col d-flex justify-content-end">
+                                        <p>0.00</p>
+                                    </div>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
-                {% endfor %} 
-            </div>
-        </div>    
-
+                </div>
+                {% if forloop.counter|divisibleby:2 and not forloop.last %}
+                    </div><div class="row"> {# Close row and open a new one after every two items, unless it's the last item #}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+            
   {% else %} 
     {% include 'finance_tracker/components/upload_notify.html' %} 
   {%endif %}
