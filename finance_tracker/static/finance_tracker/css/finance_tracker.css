@@ -188,6 +188,11 @@
     margin-bottom: 50px;
 }
 
+.transactions-row {
+    height: 60px;
+    align-items: center;
+}
+
 #pagination-div {
     margin-bottom: 100px;
 }

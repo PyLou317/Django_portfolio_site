@@ -8,7 +8,7 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start flex-grow-1" id="menu">
             <li class="nav-item">
                 <a href="{% url 'finance_tracker:home' %}" class="nav-link text-truncate text-light">
-                    <i class="bi bi-bank"></i><span class="ms-1 d-none d-sm-inline"> Home</span>
+                    <i class="bi bi-house-door"></i><span class="ms-1 d-none d-sm-inline"> Product Page</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -17,7 +17,7 @@
             </li>
             <li class="nav-item">
                 <a href="{% url 'finance_tracker:transaction-list' %}" class="nav-link text-truncate text-light">
-                    <i class="fs-5 bi-table"></i><span class="ms-1 d-none d-sm-inline"> Transactions</span></a>
+                    <i class="bi bi-view-list"></i><span class="ms-1 d-none d-sm-inline"> Transactions</span></a>
             </li>
             <li class="nav-item">
                 <a href="{% url 'finance_tracker:categories' %}" class="nav-link text-truncate text-light">
@@ -30,6 +30,11 @@
 
             {% comment %} ------------------- User Account ------------------ {% endcomment %}
             <div id="account_nav" class="dropdown mt-auto">
+                <li class="nav-item">
+                    <a href="{% url 'portfolio:home' %}" class="nav-link text-truncate text-light">
+                        <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline"> Portfolio Home</span>
+                    </a>
+                </li>
                 <a href="#" class="nav-link dropdown-toggle text-truncate text-light" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     {% if user_profile and user_profile.avatar %}
                         <img src="{{ user_profile.avatar.url }}" alt="Profile Picture" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 5px;"><span class="ms-1 d-none d-sm-inline"> {{ user.username }}</span>
@@ -46,11 +51,6 @@
                         <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
                     {% endif %}
                 </ul>
-                <li class="nav-item">
-                    <a href="{% url 'portfolio:home' %}" class="nav-link text-truncate text-light">
-                        <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline"> Portfolio Home</span>
-                    </a>
-                </li>
             </div> 
             </ul>
         </div>
