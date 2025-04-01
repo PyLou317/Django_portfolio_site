@@ -211,11 +211,6 @@
     display: none;
 }
 
-#category_filter_div {
-    background-color: #ffffff;
-    border-radius: 8px;
-}
-
 .badge.category-badge {
     font-size: .9em;
     background-color: var(--primary-color);
@@ -237,6 +232,10 @@
 .show-all-badge:hover {
     font-size: .8rem;
 }
+
+/* .stats-bar {
+    height: 200px;
+} */
 
 
 /* -----===== Category View =====----- */

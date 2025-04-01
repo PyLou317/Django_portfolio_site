@@ -8,22 +8,31 @@
       <h2 class="justin-content-center"><i class="bi bi-list-ul"></i> Transactions</h2>
     </div>
 
-    {% comment %}------ Search Field ------{% endcomment %}
-    <div class="row">
-      <div class="col-12 col-md-3">
-        <form method="get" class="mb-3">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search transactions..." name="search_term" value="{{ request.GET.search_term }}" />
-            {% if request.GET.search_term %}
-              <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
-            {% endif %}
+    {% comment %}------ Header ------{% endcomment %}
+    <div class="row d-flex">
+        {% comment %}------ Search Field ------{% endcomment %}
+        <div class="col-lg-3 col-md-6 col-sm-12 align-self-end">
+            <form method="get" class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search transactions..." name="search_term" value="{{ request.GET.search_term }}" />
+                    {% if request.GET.search_term %}
+                    <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+        {% comment %}------ Stats Bar ------{% endcomment %}
+        <div class="hstack col gap-3 justify-content-center align-self-center" style="height: 100px;">
+            <div class="py-2 px-4"><h4>Jan 1, 2024 - Dec 31 2024</h4></div>
+            <div class="vr"></div>
+            <div class="py-2 px-4"><h4>{{ filtered_transactions|length }} Transactions</h4></div>
+            <div class="vr"></div>
+            <div class="py-2 px-4"><h4>$55,983 Spent</h4></div>
           </div>
-        </form>
-      </div>
     </div>
 
     {% comment %}------ Categories ------{% endcomment %}
-    <span id="toggleFilters" class="filter-badge my-2"><i id="category-filter-caret" class="bi bi-caret-right-fill"></i> Filter Categories</span>
+    <span id="toggleFilters" class="filter-badge mt-2"><i id="category-filter-caret" class="bi bi-caret-right-fill"></i> Filter {{ categories|length }} Categories</span>
     <div id="filtersDiv" class="hidden p-1 mt-1 text-center">
         <a href="{% url 'finance_tracker:transaction-list' %}" class="me-1 mb-1">
         <span class="badge rounded-pill text-bg-dark show-all-badge">Show All</span>
@@ -34,10 +43,6 @@
         </a>
         {% endfor %}
     </div> 
-
-    <div class="mt-3">
-        <p>{{ filtered_transactions|length }} transactions</p>
-    </div>
 
     {% comment %}------ Transaction List Table ------{% endcomment %}
     <div id="trans_table" class="table-responsive">
