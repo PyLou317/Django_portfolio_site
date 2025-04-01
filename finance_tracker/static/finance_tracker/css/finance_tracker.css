@@ -4,7 +4,8 @@
     --background-color: black;
     --heading-color: #212b36;
     /* --primary-color: #355E3B; */
-    --primary-color: #79D7BE;
+    --primary-color-2: #79D7BE;
+    --primary-color: rgb(75, 192, 192);
     --white: #ffffff;
 }
 
@@ -62,6 +63,15 @@
 .income_chart {
     max-height: 250px;
 } 
+
+.btnViewMore {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btnViewMore:hover {
+    border-color: var(--primary-color);
+}
 
 
 
@@ -197,24 +207,34 @@
     margin-bottom: 100px;
 }
 
-#category-pill {
-    font-size: 1em;
-}
-
 .hidden {
     display: none;
 }
 
-#category_filters {
+#category_filter_div {
     background-color: #ffffff;
     border-radius: 8px;
 }
 
-#filter_btn {
+.badge.category-badge {
+    font-size: .9em;
+    background-color: var(--primary-color);
+}
+
+.filter-badge {
     cursor: pointer;
 }
 
-#cat_btn:hover {
+.badge.category-filter-badge {
+    cursor: pointer;
+    background-color: var(--primary-color);
+}
+
+.category-filter-badge:hover {
+    font-size: .8rem;
+}
+
+.show-all-badge:hover {
     font-size: .8rem;
 }
 

@@ -45,7 +45,7 @@
                 <div class="db_card flex-grow-1 card border-0 rounded-3 shadow my-2 mx-2 col-lg-6 col-md-12">
                     <div class="card-body">
                         <h5 class="card-title text-primary fw-semibold">Income</h5>
-                        <h6 class="card-subtitles mb-2 text-muted fw-medium">By Month</h6>
+                        <h6 class="card-subtitles mb-2 text-muted fw-medium">Total by Month</h6>
                         <div>
                             <canvas class="income_chart" id="monthly-income-chart"></canvas>
                         </div>
@@ -55,8 +55,15 @@
                 <!--===== Top Categoreis List =====-->
                 <div class="db_card flex-grow-1 card border-0 rounded-3 shadow my-2 mx-2 col-lg-5 col-md-12">
                     <div class="card-body">
-                        <h5 class="card-title text-primary fw-semibold">Categories</h5>
-                        <h6 class="card-subtitles mb-2 text-muted fw-medium">Top 5 Categories</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="card-title text-primary fw-semibold">Expenses</h5>
+                                <h6 class="card-subtitles mb-2 text-muted fw-medium">Top 5 Spending Categories</h6>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end align-items-start">
+                                <a class="btn btn-sm btnViewMore" href="{% url 'finance_tracker:categories' %}" role="button">More...</a>
+                            </div>
+                        </div>
                         <div>
                             <div class="list-group">
                                 {% for category in categories %}
@@ -123,9 +130,6 @@
                             <div class="col-md-6">
                                 <h5 class="card-title text-primary fw-semibold">Expenses</h5>
                                 <h6 class="card-subtitles mb-2 text-muted fw-medium">By Category</h6>
-                            </div>
-                            <div class="col-md-6 d-flex justify-content-end align-items-start">
-                                <a class="btn btn-sm btn-secondary" href="{% url 'finance_tracker:categories' %}" role="button">See Details</a>
                             </div>
                         </div>
                         <div class="m-3">

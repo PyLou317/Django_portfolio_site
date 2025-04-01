@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     datasets: [{
                         label: 'Total Income',
                         data: monthlyIncomeTotals,
-                        borderWidth: 4,
+                        borderWidth: 3,
                         fill: {
                             target: 'origin',
                             above: 'rgba(75, 192, 192, 0.46)'
