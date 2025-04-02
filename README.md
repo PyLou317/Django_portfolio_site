@@ -53,8 +53,8 @@ This is my personal portfolio website built using the Django web framework. It s
 1.  **Clone the repository:**
 
     ```bash
-    git clone [repository URL]
-    cd [repository name]
+    git clone https://github.com/PyLou317/Django_portfolio_site
+    cd Django_portfolio_site
     ```
 
 2.  **Create a virtual environment (recommended):**
