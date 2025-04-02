@@ -22,15 +22,27 @@
             </form>
         </div>
         {% comment %}------ Stats Bar ------{% endcomment %}
-        <div class="hstack col gap-3 justify-content-center align-self-center" style="height: 100px;">
-            <div class="py-2 px-4"><h4>Jan 1, 2024 - Dec 31 2024</h4></div> <!--TODO-->
+        <div class="hstack col-9 gap-3 justify-content-center align-self-center" style="height: auto;">
+            <div class="flex-grow-1 py-2 px-4">
+                <p class="fw-lighter">Dates</p>
+                <h4>Jan 1, 2024 - Dec 31 2024</h4> <!--TODO-->
+            </div> 
             <div class="vr"></div>
-            <div class="py-2 px-4"><h4>{{ page_obj|length }} Transactions</h4></div> 
+            <div class="flex-grow-1 py-2 px-4">
+                <p class="fw-lighter">Transactions</p>
+                <h4>{{ page_obj|length }}</h4>
+            </div> 
             <div class="vr"></div>
                 {% if expense_summary.total_expense_amount > 0 %}
-                    <div class="py-2 px-4"><h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Earned</h4></div>
+                    <div class="flex-grow-1 py-2 px-4">
+                        <p class="fw-lighter">Total</p>
+                        <h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Earned</h4>
+                    </div>
                     {% else %}
-                    <div class="py-2 px-4"><h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Spent</h4></div>
+                    <div class="flex-grow-1 py-2 px-4">
+                        <p class="fw-lighter">Total</p>
+                        <h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Spent</h4>
+                    </div>
                 {% endif %}
           </div>
     </div>
