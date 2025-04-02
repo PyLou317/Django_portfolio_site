@@ -123,6 +123,9 @@ class TransactionListView(LoginRequiredMixin, ListView):
         category_id = self.request.GET.get('category_id')
         print(category_id)
         
+        # Queryset length (transactions)
+        length = self.get_queryset().count
+        
         # Filter transactions based on category selected in filters
         if category_id:
             if category_id == "52":
@@ -138,6 +141,7 @@ class TransactionListView(LoginRequiredMixin, ListView):
                 total_expense_amount=Sum('amount'))
         
         # Pass data to template
+        context['length'] = length
         context['expense_summary'] = expense_transactions_sum
         context['categories'] = categories
         # context['filtered_transactions'] = filtered_transactions
