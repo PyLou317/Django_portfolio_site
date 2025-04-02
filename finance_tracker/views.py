@@ -31,21 +31,19 @@ def finance_tracker_home(request):
 def finance_tracker_dashboard(request):
     expense_transactions = Transaction.objects.exclude(
         category__name='Income').filter(
-            owner=request.user
-        )
+            owner=request.user)
     
     expense_total_aggregation = expense_transactions.aggregate(
-        total_expense_amount=Sum('amount')
-        )
+        total_expense_amount=Sum('amount'))
     
+    # Pass months to template for drop down btn selector
     months_data = expense_transactions.annotate(
         month=TruncMonth('date')).values('month')
-    
     month_names = []
     seen_months = set() #prevent duplicates.
     for item in months_data:
         month_date = item['month']
-        month_name = month_date.strftime("%B %Y")
+        month_name = month_date.strftime("%B %Y") # ex: Jan 2024
         if month_name not in seen_months:
             month_names.append((month_date, month_name))
             seen_months.add(month_name)
@@ -60,6 +58,7 @@ def finance_tracker_dashboard(request):
     income_transactions = Transaction.objects.filter(
         owner=request.user,
         category__name='Income')
+    
     income_total_aggregation = income_transactions.aggregate(
         total_income_amount=Sum('amount')
      )
@@ -81,7 +80,7 @@ def finance_tracker_dashboard(request):
 
 
 class TransactionListView(LoginRequiredMixin, ListView):
-    paginate_by = 15
+    paginate_by = 10
     model = Transaction
     ordering = ['-date'] 
     
@@ -90,6 +89,17 @@ class TransactionListView(LoginRequiredMixin, ListView):
         search_term = self.request.GET.get('search_term') # Get the search term from the request
         clear_search = self.request.GET.get('clear_search') # Get value of 'clear_search'
 
+        # Category ID
+        category_id = self.request.GET.get('category_id')
+        
+        if category_id:
+            queryset = super().get_queryset().filter(
+                category_id=category_id, 
+                owner=self.request.user)
+        else:
+            queryset = super().get_queryset().filter(
+                owner=self.request.user)
+        
         if clear_search: # Check if 'clear_search' parameter is present
             return queryset
         
@@ -104,20 +114,33 @@ class TransactionListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        categories = Category.objects.exclude(name='Income').annotate(
+        # Categories for filter btn
+        categories = Category.objects.annotate(
             total_amount=Sum('transaction__amount', filter=models.Q(transaction__owner=self.request.user))
         ).exclude(total_amount__isnull=True).exclude(total_amount=0).order_by('name')
-    
+
+        # Category ID
         category_id = self.request.GET.get('category_id')
         print(category_id)
         
+        # Filter transactions based on category selected in filters
         if category_id:
-            filtered_transactions = Transaction.objects.filter(category_id=category_id, owner=self.request.user)
+            if category_id == "52":
+                expense_transactions_sum = self.get_queryset().aggregate(
+                    total_expense_amount=Sum('amount'))
+            else:
+                expense_transactions_sum = self.get_queryset().exclude(
+                    category__name='Income').aggregate(
+                    total_expense_amount=Sum('amount'))
         else:
-            filtered_transactions = Transaction.objects.filter(owner=self.request.user)
+            expense_transactions_sum = self.get_queryset().exclude(
+                category__name='Income').aggregate(
+                total_expense_amount=Sum('amount'))
         
+        # Pass data to template
+        context['expense_summary'] = expense_transactions_sum
         context['categories'] = categories
-        context['filtered_transactions'] = filtered_transactions
+        # context['filtered_transactions'] = filtered_transactions
         
         return context
 
