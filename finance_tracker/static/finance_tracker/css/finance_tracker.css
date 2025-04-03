@@ -73,19 +73,22 @@
     max-height: 250px;
 } 
 
-.expense-btn-div.btn {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    cursor: pointer;
-    /* Gradient Text Styles */
-    background-image: linear-gradient(to right, #FF7F50, #FF6347, #FF4500) !important;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.btnViewMore {
+    background-image: var(--gradient-color);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
-.expense-btn-div.btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+.btnViewMore:hover {
+    background-image: linear-gradient(to right, #FF8C69, #FF6A4A, #FF5733);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
