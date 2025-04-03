@@ -905,7 +905,7 @@ p {
 }
 
 .ud-single-pricing.active {
-    background: linear-gradient(180deg, #3056d3 0%, #179bee 100%);
+    background: linear-gradient(180deg, #2A9D8F 0%, #FF7F50 100%);
     border: none;
     padding: 55px 30px;
 }
@@ -967,6 +967,11 @@ p {
 
 .ud-single-pricing .ud-pricing-body {
     margin-bottom: 40px;
+    height: 250px;
+}
+
+.pricing-list{
+    padding-left: 0!important;
 }
 
 .ud-single-pricing .ud-pricing-body li {

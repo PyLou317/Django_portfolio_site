@@ -24,8 +24,8 @@
         {% comment %}------ Stats Bar ------{% endcomment %}
         <div class="hstack col-9 gap-3 justify-content-center align-self-center" style="height: auto;">
             <div class="flex-grow-1 py-2 px-4">
-                <p class="fw-lighter">Dates</p>
-                <h4>Jan 1, 2024 - Dec 31 2024</h4> <!--TODO-->
+                <p class="fw-lighter">Date Range</p>
+                <h4>{{ start_date|date:"M j, Y" }} - {{ end_date|date:"M j, Y"     }}</h4> <!--TODO-->
             </div> 
             <div class="vr"></div>
             <div class="flex-grow-1 py-2 px-4">

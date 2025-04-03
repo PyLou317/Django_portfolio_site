@@ -89,7 +89,7 @@ class TransactionListView(LoginRequiredMixin, ListView):
         search_term = self.request.GET.get('search_term') # Get the search term from the request
         clear_search = self.request.GET.get('clear_search') # Get value of 'clear_search'
 
-        # Category ID
+        # Filter queryset based on category selcted 
         category_id = self.request.GET.get('category_id')
         
         if category_id:
@@ -119,14 +119,15 @@ class TransactionListView(LoginRequiredMixin, ListView):
             total_amount=Sum('transaction__amount', filter=models.Q(transaction__owner=self.request.user))
         ).exclude(total_amount__isnull=True).exclude(total_amount=0).order_by('name')
 
-        # Category ID
-        category_id = self.request.GET.get('category_id')
-        print(category_id)
+        # Return start and end date for filtered transactions for stat bar
+        end_date = self.get_queryset().latest('date').date
+        start_date = self.get_queryset().earliest('date').date
         
-        # Queryset length (transactions)
+        # Return queryset length (transactions) for stats bar
         length = self.get_queryset().count
         
-        # Filter transactions based on category selected in filters
+        # Return transactions sum for stats bar
+        category_id = self.request.GET.get('category_id')
         if category_id:
             if category_id == "52":
                 expense_transactions_sum = self.get_queryset().aggregate(
@@ -141,6 +142,8 @@ class TransactionListView(LoginRequiredMixin, ListView):
                 total_expense_amount=Sum('amount'))
         
         # Pass data to template
+        context['end_date'] = end_date
+        context['start_date'] = start_date
         context['length'] = length
         context['expense_summary'] = expense_transactions_sum
         context['categories'] = categories
