@@ -4,9 +4,8 @@
     --font: "Inter", sans-serif;
     --body-color: #637381;
     --heading-color: #212b36;
-    /* --primary-color: #355E3B; */
-    --primary-color-2: #79D7BE;
     --primary-color: rgb(75, 192, 192);
+    --accent-color: #FF7F50;
     --white: #ffffff;
 }
 
@@ -538,18 +537,18 @@ p {
 /* ===== Hero CSS ===== */
 .ud-hero {
     background: var(--primary-color);
-    padding-top: 130px;
+    padding-top: 120px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .ud-hero {
-        padding-top: 150px;
+        padding-top: 120px;
     }
 }
 
 @media (max-width: 767px) {
     .ud-hero {
-        padding-top: 160px;
+        padding-top: 130px;
     }
 }
 
@@ -579,6 +578,7 @@ p {
     .ud-hero-content .ud-hero-title {
         font-size: 26px;
         line-height: 38px;
+        margin-bottom: 75px;
     }
 }
 
@@ -601,10 +601,21 @@ p {
     }
 }
 
+.enter-site-btn {
+    background: linear-gradient(to right, #FF7F50, #FF6347, #FF4500);
+    color: white !important;
+    transition: background-image 0.3s ease !important;
+}
+
+.enter-site-btn:hover {
+    background: linear-gradient(to right, #FF6A4A, #FF5733, #E63900) !important; /* Darker Accent Color */
+  }
+
 .ud-hero-buttons {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 50px;
 }
 
 .ud-hero-buttons .ud-main-btn {
@@ -905,7 +916,7 @@ p {
 }
 
 .ud-single-pricing.active {
-    background: linear-gradient(180deg, #2A9D8F 0%, #FF7F50 100%);
+    background: linear-gradient(180deg, #2A9D8F 0%, var(--accent-color) 100%);
     border: none;
     padding: 55px 30px;
 }

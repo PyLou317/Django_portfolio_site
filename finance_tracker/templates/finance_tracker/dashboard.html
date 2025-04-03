@@ -8,7 +8,7 @@
         <div class="container-fluid min-vh-100 mb-5">
             <div class="m-3">
                 {% firstof user.first_name user as name %}
-                <h2>Good {{ now|greeting }}, {{ name }}!</h2>   
+                <h2 class="dashboard-greeting-msg">Good {{ now|greeting }}, {{ name }}!</h2>   
                 <h5>This is your financial overview</h5>
             </div>
 
@@ -60,7 +60,7 @@
                                 <h5 class="card-title text-primary fw-semibold">Expenses</h5>
                                 <h6 class="card-subtitles mb-2 text-muted fw-medium">Top 5 Spending Categories</h6>
                             </div>
-                            <div class="col-md-6 d-flex justify-content-end align-items-start">
+                            <div class="expense-btn-div col-md-6 d-flex justify-content-end align-items-start">
                                 <a class="btn btn-sm btnViewMore" href="{% url 'finance_tracker:categories' %}" role="button">More...</a>
                             </div>
                         </div>
