@@ -19,18 +19,21 @@
 
 
 
-/* -----===== Sidebar Menu Button =====----- */
-#menu-button {
-    margin-top: 20px;
-    margin-right: 20px;
-}
-
+/* -----===== Sidebar =====----- */
 #menu-close-btn {
     color: white;
 }
 
 #welcome-title {
     margin-top: 50px;
+}
+
+.offcanvas {
+    font-size: 1.1rem;
+}
+
+.offcanvas .nav-link:hover {
+    font-size: 1.3rem;
 }
 
 
@@ -64,7 +67,6 @@
     font-size: 1.4rem;
 }
 
-/* Month selector button */
 #month-selector {
     width: 150px;
 }
@@ -212,8 +214,36 @@
 }
 
 /* -----===== Transaction Table =====----- */
+.transaction-search-field {
+    background-image: var(--search-icon-url);
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-size: 16px 16px;
+    padding-left: 30px;
+    border-radius: 30px;
+}
+
+.filter-badge {
+    background-image: var(--gradient-color);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+    
+.filter-badge:hover {
+    background-image: linear-gradient(to right, #FF8C69, #FF6A4A, #FF5733);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 #trans_table {
-    margin-top: 30px;
+    /* margin-top: 30px; */
     margin-bottom: 50px;
 }
 
@@ -251,10 +281,6 @@
 .show-all-badge:hover {
     font-size: .8rem;
 }
-
-/* .stats-bar {
-    height: 200px;
-} */
 
 
 /* -----===== Category View =====----- */
