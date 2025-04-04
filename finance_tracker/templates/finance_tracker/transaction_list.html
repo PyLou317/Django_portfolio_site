@@ -4,25 +4,14 @@
 {% block content %}
 {% if page_obj %}
   <div class="container mx-auto">
-    <div class="mb-3 mt-2">
+    {% comment %} <div class="mb-3 mt-2">
       <h2 class="justin-content-center"><i class="bi bi-list-ul"></i> Transactions</h2>
-    </div>
+    </div> {% endcomment %}
 
     {% comment %}------ Header ------{% endcomment %}
-    <div class="row d-flex">
-        {% comment %}------ Search Field ------{% endcomment %}
-        <div class="col-lg-3 col-md-6 col-sm-12 align-self-end">
-            <form method="get" class="mb-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search transactions..." name="search_term" value="{{ request.GET.search_term }}" />
-                    {% if request.GET.search_term %}
-                    <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
-                    {% endif %}
-                </div>
-            </form>
-        </div>
+    <div class="row d-flex mt-4">
         {% comment %}------ Stats Bar ------{% endcomment %}
-        <div class="hstack col-9 gap-3 justify-content-center align-self-center" style="height: auto;">
+        <div class="hstack col-9 gap-3 justify-content-center align-self-center mx-auto" style="height: auto;">
             <div class="flex-grow-1 py-2 px-4">
                 <p class="fw-lighter">Date Range</p>
                 <h4>{{ start_date|date:"M j, Y" }} - {{ end_date|date:"M j, Y"     }}</h4> <!--TODO-->
@@ -47,19 +36,34 @@
           </div>
     </div>
 
-    {% comment %}------ Categories ------{% endcomment %}
-    <span id="toggleFilters" class="filter-badge mt-2"><i id="category-filter-caret" class="bi bi-caret-right-fill"></i> Filter {{ categories|length }} Categories</span>
-    <div id="filtersDiv" class="hidden p-1 mt-1 text-center">
-        <a href="{% url 'finance_tracker:transaction-list' %}" class="me-1 mb-1">
-        <span class="badge rounded-pill text-bg-dark show-all-badge">Show All</span>
-        </a>
-        {% for category in categories %}
-        <a href="{% url 'finance_tracker:transaction-list' %}?category_id={{ category.id }}" class="me-1 mb-1">
-        <span class="badge rounded-pill category-filter-badge">{{ category }}</span>
-        </a>
-        {% endfor %}
+    <div class="row justify-content-between mt-5">
+        {% comment %}------ Search Field ------{% endcomment %}
+        <div class="col-lg-3 col-md-6 col-sm-12 align-self-end">
+            <form method="get" class="mb-3">
+                <div class="input-group" style="--search-icon-url: url({% static 'finance_tracker/images/transaction_list/search.svg' %});">
+                    <input type="text" class="form-control transaction-search-field" placeholder="Search transactions..." name="search_term" value="{{ request.GET.search_term }}" />
+                    {% if request.GET.search_term %}
+                    <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+        {% comment %}------ Categories ------{% endcomment %}
+        <div class="col-auto">
+            <span id="toggleFilters" class="filter-badge"><i class="bi bi-filter"></i> Filter</span>
+        </div> 
+        <div id="filtersDiv" class="hidden text-center">
+            <a href="{% url 'finance_tracker:transaction-list' %}" class="me-1 mb-1">
+            <span class="badge rounded-pill text-bg-dark show-all-badge">Show All</span>
+            </a>
+            {% for category in categories %}
+            <a href="{% url 'finance_tracker:transaction-list' %}?category_id={{ category.id }}" class="me-1 mb-1">
+            <span class="badge rounded-pill category-filter-badge">{{ category }}</span>
+            </a>
+            {% endfor %}
+        </div> 
     </div> 
-
+        
     {% comment %}------ Transaction List Table ------{% endcomment %}
     <div id="trans_table" class="table-responsive">
         <table class="table table-hover" style="width: 100%;">
