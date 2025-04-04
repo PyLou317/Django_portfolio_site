@@ -1,5 +1,5 @@
 {% comment %} Has inline style for menu width, wouldn't work when linked with ID {% endcomment %}
-<div class="offcanvas offcanvas-start offcanvas-dark bg-dark" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false" style="width: 15%;">
+<div class="offcanvas offcanvas-start offcanvas-dark bg-dark" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false" style="width: 20%;">
     <div class="offcanvas-header">
         <h6 class="offcanvas-title d-none d-sm-block text-light" id="offcanvas">Menu</h6>
         <button  type="button" class="btn-close text-reset btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -13,11 +13,11 @@
             </li>
             <li class="nav-item">
                 <a href="{% url 'finance_tracker:dashboard' %}" class="nav-link text-truncate text-light">
-                    <i class="bi bi-send-dash"></i><span class="ms-1 d-none d-sm-inline"> Dashboard</span> </a>
+                    <i class="bi bi-piggy-bank"></i><span class="ms-1 d-none d-sm-inline"> Dashboard</span> </a>
             </li>
             <li class="nav-item">
                 <a href="{% url 'finance_tracker:transaction-list' %}" class="nav-link text-truncate text-light">
-                    <i class="bi bi-view-list"></i><span class="ms-1 d-none d-sm-inline"> Transactions</span></a>
+                    <i class="bi bi-list"></i><span class="ms-1 d-none d-sm-inline"> Transactions</span></a>
             </li>
             <li class="nav-item">
                 <a href="{% url 'finance_tracker:categories' %}" class="nav-link text-truncate text-light">
@@ -26,7 +26,7 @@
             <li class="nav-item">
                 <a href="{% url 'finance_tracker:file_upload' %}" class="nav-link text-truncate text-light">
                     <i class="fs-5 bi bi-cloud-arrow-up"></i><span class="ms-1 d-none d-sm-inline"> Upload</span></a>
-                </li>
+            </li>
 
             {% comment %} ------------------- User Account ------------------ {% endcomment %}
             <div id="account_nav" class="dropdown mt-auto">
