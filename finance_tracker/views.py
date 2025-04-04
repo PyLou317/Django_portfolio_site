@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
@@ -152,14 +153,23 @@ class TransactionListView(LoginRequiredMixin, ListView):
         return context
 
 
+class TransactionForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = [
+            "date",
+            "description",
+            "category",
+            "notes",
+            "amount"
+        ]
+        widgets = {
+            'notes': forms.Textarea(attrs={'rows': 2, 'cols': 40}),  # Adjust rows and cols as needed
+        }
+
 class TransactionUpdateView(LoginRequiredMixin, UpdateView):
     model = Transaction
-    fields = [
-        "date",
-        "description", 
-        "category",
-        "amount"
-    ]
+    form_class = TransactionForm
     template_name_suffix = "_update_form"
     
     # Disable the date field and amount from user
