@@ -3,18 +3,18 @@
 
 {% block content %}
 {% if page_obj %}
-  <div class="container mx-auto">
-    {% comment %} <div class="mb-3 mt-2">
+  <div class="container container-fluid-mobile mx-auto px-sm-0">
+    <div class="mb-5 mt-2">
       <h2 class="justin-content-center"><i class="bi bi-list-ul"></i> Transactions</h2>
-    </div> {% endcomment %}
+    </div>
 
     {% comment %}------ Header ------{% endcomment %}
     <div class="row d-flex mt-4">
         {% comment %}------ Stats Bar ------{% endcomment %}
-        <div class="hstack col-9 gap-3 justify-content-center align-self-center mx-auto" style="height: auto;">
+        <div class="stats-bar hstack col-lg-9 col-sm-12 justify-content-center align-self-center mx-auto" style="height: auto;">
             <div class="flex-grow-1 py-2 px-4">
                 <p class="fw-lighter">Date Range</p>
-                <h4>{{ start_date|date:"M j, Y" }} - {{ end_date|date:"M j, Y"     }}</h4> <!--TODO-->
+                <h4>{{ start_date|date:"M j, Y" }} - {{ end_date|date:"M j, Y"     }}</h4>
             </div> 
             <div class="vr"></div>
             <div class="flex-grow-1 py-2 px-4">
@@ -65,7 +65,7 @@
     </div> 
         
     {% comment %}------ Transaction List Table ------{% endcomment %}
-    <div id="trans_table" class="table-responsive">
+    <div id="transaction-table" class="table-responsive">
         <table class="table table-hover" style="width: 100%;">
         <thead>
             <tr>
@@ -79,11 +79,14 @@
         <tbody class="table-group-divider table align-middle">
             {% for transaction in page_obj %}
             <tr>
-                <td>{{ transaction.date|date:'M-d-Y' }}</td>
-                <td>{{ transaction.description }}</td>
+                <td class="transaction-date">
+                    <span class="desktop-date">{{ transaction.date|date:"M-d-Y" }}</span>
+                    <span class="mobile-date">{{ transaction.date|date:"m/d" }}</span>
+                </td>
+                <td class="transaction-description">{{ transaction.description }}</td>
                 <td><span id="category-pill" class="badge badge-pill category-badge text-light">{{ transaction.category }}</span></td>
                 <td>${{ transaction.amount }}</td>
-                <td>
+                <td class="transaction-action">
                 <a href="{% url 'finance_tracker:transaction_update' transaction.id %}"><i class="bi bi-pencil-square text-success"></i></a> |
                 <a href="{% url 'finance_tracker:transaction_delete' transaction.id %}"><i class="bi bi-trash3-fill text-secondary"></i></a>
                 </td>
@@ -94,7 +97,7 @@
     </div> 
 
       <!--TODO--> {% comment %}------ Pagination ------{% endcomment %}
-      <div id="pagination-div" class="pagination justify-content-center">
+      <div id="pagination-div" class="pagination pagination-btns justify-content-center">
         <span class="step-links">
           <nav aria-label="Transaction lists pages">
             <ul class="pagination">
@@ -103,17 +106,17 @@
                   <a class="page-link bg-secondary text-light" href="?page=1">&laquo; first</a>
                 </li>
                 <li class="page-item">
-                  <a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                  <a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
                 </li>
               {% endif %}
 
               <li class="page-item active" aria-current="page">
-                <span class="page-link bg-secondary border-secondary">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} <span class="visually-hidden">(current)</span></span>
+                <span class="page-link bg-secondary border-secondary">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }} <span class="visually-hidden">(current)</span></span>
               </li>
 
               {% if page_obj.has_next %}
                 <li class="page-item">
-                  <a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
+                  <a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
                 </li>
                 <li class="page-item">
                   <a class="page-link text-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>

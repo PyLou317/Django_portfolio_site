@@ -29,13 +29,16 @@
 }
 
 .offcanvas {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .offcanvas .nav-link:hover {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
+.menu-divider {
+    width: 200%;
+}
 
 /* -----===== Dashboard =====----- */
 .dashboard-greeting-msg {
@@ -243,13 +246,65 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-#trans_table {
-    /* margin-top: 30px; */
+#transaction-table {
     margin-bottom: 50px;
 }
 
+.transaction-description, .transaction-date, .transaction-action {
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden;     /* Hide overflowing content */
+    text-overflow: ellipsis; /* Display an ellipsis (...) */
+    max-width: 100%; 
+}
+
+.mobile-date {
+    display: none; /* Hide the mobile date by default */
+}
+
+@media only screen and (max-width: 767px) {
+    .containter {
+        display: none !important;
+    }
+
+    .container-fluid-mobile {
+        display: block !important;
+    }
+
+    #transaction-table {
+        font-size: .70rem;
+    }
+
+    .stats-bar h4, .stats-bar p {
+        font-size: .8rem;
+    }
+
+    .transaction-description {
+        max-width: 100px;
+    }
+
+    .mobile-date {
+        display: block;
+    }
+    
+    .desktop-date {
+        display: none;
+    }
+
+    .pagination-btns a, .pagination-btns span {
+        font-size: .7rem;
+    }
+  }
+
+@media (min-width: 600px) {
+    .desktop-date {
+        display: inline;
+    }
+    .mobile-date {
+        display: none;
+    }
+}
+
 .transactions-row {
-    height: 60px;
     align-items: center;
 }
 

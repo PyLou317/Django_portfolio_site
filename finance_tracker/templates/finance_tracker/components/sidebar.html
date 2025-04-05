@@ -1,5 +1,5 @@
 {% comment %} Has inline style for menu width, wouldn't work when linked with ID {% endcomment %}
-<div class="offcanvas offcanvas-start offcanvas-dark bg-dark" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false" style="width: 20%;">
+<div class="offcanvas offcanvas-start offcanvas-dark bg-dark" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
     <div class="offcanvas-header">
         <h6 class="offcanvas-title d-none d-sm-block text-light" id="offcanvas">Menu</h6>
         <button  type="button" class="btn-close text-reset btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -35,7 +35,7 @@
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline"> Portfolio Home</span>
                     </a>
                 </li>
-                <hr class="border border-1">
+                <hr class="menu-divider border border-1">
                 <div>
                     <a href="#" class="nav-link dropdown-toggle text-truncate text-light" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         {% if user_profile and user_profile.avatar %}
