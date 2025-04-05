@@ -6,10 +6,10 @@
         <div class="col-lg-12">
         <div class="ud-hero-content wow fadeInUp" data-wow-delay=".2s">
             <h1 class="ud-hero-title">
-            A Personal Expense Tracker, with AI Categorizing, and Budgeting
+            A Personal Finance Tracker with AI Categorizing and Budgeting
             </h1>
             <p class="ud-hero-desc">
-            Budget, Categorize, and Monitor Your Personal Finances all in One Place.
+            Monitor your personal finances with ease so you can build the future you deserve.
             </p>
             <ul class="ud-hero-buttons">
             <li>
@@ -27,19 +27,39 @@
         >
             <img src="{% static 'finance_tracker/images/hero/brand.svg' %}" alt="brand" />
         </div> {% endcomment %}
-        <div class="ud-hero-image wow fadeInUp" data-wow-delay=".25s">
+        {% comment %} <div class="ud-hero-image wow fadeInUp" data-wow-delay=".25s">
             <img src="{% static 'finance_tracker/images/hero/hero-image.png' %}" alt="hero-image" />
-            <img
-            src="{% static 'finance_tracker/images/hero/dotted-shape.svg' %}"
-            alt="shape"
-            class="shape shape-1"
-            />
-            <img
-            src="{% static 'finance_tracker/images/hero/dotted-shape.svg' %}"
-            alt="shape"
-            class="shape shape-2"
-            />
-        </div>
+            <img src="{% static 'finance_tracker/images/hero/dotted-shape.svg' %}" alt="shape" class="shape shape-1" />
+            <img src="{% static 'finance_tracker/images/hero/dotted-shape.svg' %}" alt="shape" class="shape shape-2" />
+        </div> {% endcomment %}
+        <div class="ud-hero-image wow fadeInUp" data-wow-delay=".25s">
+            <img src="{% static 'finance_tracker/images/hero/dotted-shape.svg' %}" alt="shape" class="shape shape-1" />
+            <div id="carouselExampleAutoplaying" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active" data-bs-interval="3000">
+                    <img src="{% static 'finance_tracker/images/hero/hero-image-2.png' %}" class="d-block w-100" alt="hero-image-1">
+                  </div>
+                  <div class="carousel-item" data-bs-interval="4000">
+                    <img src="{% static 'finance_tracker/images/hero/hero-image-3.png' %}" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item" data-bs-interval="4000">
+                    <img src="{% static 'finance_tracker/images/hero/hero-image-4.png' %}" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item" data-bs-interval="4000">
+                    <img src="{% static 'finance_tracker/images/hero/hero-image-5.png' %}" class="d-block w-100" alt="...">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+              <img src="{% static 'finance_tracker/images/hero/dotted-shape.svg' %}" alt="shape" class="shape shape-2" />
+            </div>
         </div>
     </div>
     </div>
