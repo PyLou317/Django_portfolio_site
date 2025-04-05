@@ -37,7 +37,13 @@
 }
 
 .menu-divider {
-    width: 200%;
+    width: 230%;
+}
+
+@media screen and (max-width: 767) {
+    .side-menu-mobile {
+        width: 50% !important;
+    }
 }
 
 /* -----===== Dashboard =====----- */
@@ -295,7 +301,7 @@
     }
   }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
     .desktop-date {
         display: inline;
     }
