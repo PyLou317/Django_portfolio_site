@@ -32,7 +32,7 @@
     }
   };
 
-  //===== close navbar-collapse when a  clicked
+  //===== close navbar-collapse when clicked
   let navbarToggler = document.querySelector(".navbar-toggler");
   const navbarCollapse = document.querySelector(".navbar-collapse");
 
