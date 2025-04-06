@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
           extraInfo = '<span class="text-warning ms-1">(High Expense)</span>';
         }
 
+            // TODO add number of transaction to category card
+            // TODO link each card to category detail view
         const markup =`
                 <div class="card rounded-3 border-0 bg-light shadow-sm">
                     <div class="card-body p-3">
@@ -65,11 +67,21 @@ document.addEventListener('DOMContentLoaded', () => {
                             <i class="bi bi-chevron-right"></i>
                         </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-muted">Transactions:</span>
-                        <h5 class="mb-0">67</h5>
-                        <span class="text-muted">Total:</span>
-                        <h5 class="mb-0">${formattedExpTotal}</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="text-muted">Transactions:</span>
+                            </div>
+                            <div class="col-6 text-end">
+                                <h5 class="mb-0">67</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="text-muted">Total:</span>
+                            </div>
+                            <div class="col-6 text-end">
+                                <h5 class="mb-0">${formattedExpTotal}</h5>
+                            </div>
                         </div>
                     </div>
                 </div>

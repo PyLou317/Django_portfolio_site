@@ -194,24 +194,6 @@ class CategoryList(LoginRequiredMixin, ListView):
     model = Category
     context_object_name = 'categories'
     
-    def get_queryset(self): 
-        # user = self.request.user
-        queryset = Category.objects.exclude(
-            name='Income').annotate(
-            total_amount=Sum('transaction__amount', filter=models.Q(
-                transaction__owner=self.request.user))
-            ).exclude(total_amount=0 or None).order_by('name')
-        
-        search_term = self.request.GET.get('search_term')
-        clear_search = self.request.GET.get('clear_search')
-
-        if clear_search:
-            return queryset
-        
-        if search_term: 
-            queryset = queryset.filter(Q(name__icontains=search_term.capitalize()))
-            
-        return queryset
     
 
 @login_required
