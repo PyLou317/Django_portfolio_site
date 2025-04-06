@@ -3,7 +3,6 @@
 {% load static %} 
 
 {% block content %}
-{% if categories %}
 
 <div class="mx-4 mb-5">
     <div class="container-fluid my-4">
@@ -31,20 +30,23 @@
         </div>
     </div>
         
-        {% comment %}------ Category Card ------{% endcomment %}
-    <div class="container">
-        <div id="category-card" class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-        </div>
+    {% comment %}------ Category Card ------{% endcomment %}
+    <div class="loader-div">
+        <div class="loader"></div>
+    </div>
+
+    <div class="page-content mx-4">
+        <div id="category-card" class="row row-cols-1 row-cols-md-2 row-cols-lg-3"></div>
     </div>
             
-  {% else %} 
+  {% comment %} {% else %} 
     {% include 'finance_tracker/components/upload_notify.html' %} 
-  {%endif %}
+  {%endif %} {% endcomment %}
 </div>
 
 {% endblock %} 
 
 {% block extra_js %}
-<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+{% comment %} <script src="https://unpkg.com/htmx.org@2.0.4"></script> {% endcomment %}
 <script src="{% static 'finance_tracker/js/category_list.js' %}"></script>
 {% endblock %}

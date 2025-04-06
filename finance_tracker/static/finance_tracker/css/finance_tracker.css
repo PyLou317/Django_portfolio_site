@@ -372,3 +372,34 @@
         width: calc(calc(100% / 3) - 10px); /* Three per row */
     }
 }
+
+.category-list-icon {
+    width: 30px; 
+    height: 30px;
+    background-image: var(--gradient-color);
+}
+
+.loader-div {
+    height: 50vh;
+    display: flex;
+    width: 100vw;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 11px solid #f3f3f3; /* Light grey */
+    border-top: 11px solid var(--accent-color);
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    justify-content: center;
+    align-items: center;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
