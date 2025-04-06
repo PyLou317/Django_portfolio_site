@@ -346,10 +346,29 @@
 
 
 /* -----===== Category View =====----- */
-#category-list-div {
-    margin-bottom: 100px;
+#category-card {
+    gap: 15px; /* This is the gap between items */
+    margin-top: 20px;
 }
 
-#cat-number-badge {
-    font-size: .85em;
+#category-card .card {
+    width: calc(100% - 15px); /* Default full width */
+}
+
+@media (min-width: 576px) {
+    #category-card .card {
+        width: calc(50% - 7.5px); /* Two per row */
+    }
+}
+
+@media (min-width: 768px) {
+    #category-card .card {
+        width: calc(calc(100% / 3) - 10px); /* Three per row, subtracting gap */
+    }
+}
+
+@media (min-width: 992px) {
+    #category-card .card {
+        width: calc(calc(100% / 3) - 10px); /* Three per row */
+    }
 }

@@ -212,22 +212,6 @@ class CategoryList(LoginRequiredMixin, ListView):
             queryset = queryset.filter(Q(name__icontains=search_term.capitalize()))
             
         return queryset
-
-
-# @login_required
-# def category_view(request):
-    
-#     categories = Category.objects.exclude(
-#         name='Income').annotate(
-#         total_amount=Sum('transaction__amount', filter=models.Q(
-#             transaction__owner=request.user))
-#         ).exclude(total_amount=0 or None).order_by('name')
-    
-#     context = {
-#         'categories': categories
-#     }
-    
-#     return render(request, 'finance_tracker/category_list.html', context)
     
 
 @login_required

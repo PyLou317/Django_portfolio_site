@@ -1307,7 +1307,7 @@ p {
 
 /* ===== Contact CSS ===== */
 .ud-contact {
-    padding: 120px 0px;
+    padding: 150px 0px;
     position: relative;
 }
 
@@ -1352,7 +1352,7 @@ p {
     margin-bottom: 20px;
 }
 
-.ud-contact-title h2 {
+.ud-contact-title h1 {
     font-weight: 600;
     font-size: 35px;
     line-height: 41px;
