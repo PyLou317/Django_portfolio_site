@@ -283,7 +283,27 @@ def upload_statement(request):
     return render(request, 'finance_tracker/upload.html', {'upload_form': form})
 
 
-# ----- Category Expense Graph #1 ----- #
+# ----===== Transactions API =====---- #
+@login_required
+def transactions_api(request):
+    transactions = Transaction.objects.exclude(
+        category__name='Income').filter(
+        owner=request.user
+    )
+    
+    # Format the data for JSON response
+    transaction_data = []
+    for item in transactions:        
+        transaction_data.append({
+            'transactions': item
+        })
+    
+    print(transaction_data)
+        
+    return JsonResponse(transaction_data, safe=False)
+
+
+# ----===== Categories API =====---- #
 @login_required
 def category_expenses_json(request):
     transactions = Transaction.objects.exclude(
@@ -310,7 +330,7 @@ def category_expenses_json(request):
 
 
 
-# ----- Income Graph #2 ----- #
+# -----===== Income API (Graph #2) ======----- #
 @login_required
 def income_total_json(request):
     year = request.GET.get('year')
@@ -350,14 +370,13 @@ def income_total_json(request):
     return JsonResponse(income_data, safe=False) # Return JSON response
 
 
-# ----- Monthly Expense Graph #3 ----- #
+# -----===== Monthly Expense API (Graph #3) =====----- #
 @login_required
 def monthly_expense_json(request):
 
     monthly_expenses = Transaction.objects.exclude(
         category__name='Income').filter(
         owner=request.user,
-        date__year=2024
     ).annotate(
         month=TruncMonth('date')
     ).values('category__name', 'month').annotate(
