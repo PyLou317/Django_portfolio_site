@@ -31,6 +31,7 @@ urlpatterns = [
     path('finance_tracker/', include('finance_tracker.urls')), 
     path('accounts/', include('allauth.urls')),
     path('users/', include('users.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 if settings.DEBUG:

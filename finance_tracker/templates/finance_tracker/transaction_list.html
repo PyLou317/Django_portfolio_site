@@ -43,7 +43,7 @@
                 <div class="input-group" style="--search-icon-url: url({% static 'finance_tracker/images/transaction_list/search.svg' %});">
                     <input type="text" class="form-control transaction-search-field" placeholder="Search transactions..." name="search_term" value="{{ request.GET.search_term }}" />
                     {% if request.GET.search_term %}
-                    <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true">Clear Search</button>
+                    <button class="btn btn-outline-secondary" type="submit" name="clear_search" value="true"><i class="bi bi-x"></i></button>
                     {% endif %}
                 </div>
             </form>

@@ -43,11 +43,9 @@ INSTALLED_APPS = [
     # Third Party
     'crispy_forms',
     'crispy_bootstrap5',
-
+    'rest_framework',
     'allauth',
     'allauth.account',
-
-    # Optional -- requires install using `django-allauth[socialaccount]`
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     

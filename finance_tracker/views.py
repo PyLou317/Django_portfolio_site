@@ -198,6 +198,9 @@ class TransactionUpdateView(LoginRequiredMixin, UpdateView):
 class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     model = Transaction
     
+    def get_success_url(self):
+        return reverse_lazy('finance_tracker:transaction-list')
+    
 
 class CategoryList(LoginRequiredMixin, ListView):
     template_name = 'finance_tracker/category_list.html'
