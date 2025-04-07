@@ -27,11 +27,12 @@
         </div>
     </div>
         
-    {% comment %}------ Category Card ------{% endcomment %}
+    {% comment %}------ Loader ------{% endcomment %}
     <div class="loader-div">
         <div class="loader"></div>
     </div>
-
+    
+    {% comment %}------ Category Card ------{% endcomment %}
     <div class="page-content">
         <div id="category-card-container" class="row"></div>
     </div>  
@@ -78,6 +79,5 @@
 {% endblock %} 
 
 {% block extra_js %}
-{% comment %} <script src="https://unpkg.com/htmx.org@2.0.4"></script> {% endcomment %}
 <script src="{% static 'finance_tracker/js/category_list.js' %}"></script>
 {% endblock %}

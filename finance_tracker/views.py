@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from decimal import Decimal
 from io import StringIO
@@ -80,6 +81,12 @@ def finance_tracker_dashboard(request):
     return render(request, 'finance_tracker/dashboard.html', context)
 
 
+class TransactionListAPI(LoginRequiredMixin, ListView):
+    template_name = 'finance_tracker/transaction_list_api.html'
+    model = Transaction
+    context_object_name = 'transactions'
+    
+
 class TransactionListView(LoginRequiredMixin, ListView):
     paginate_by = 10
     model = Transaction
@@ -118,7 +125,8 @@ class TransactionListView(LoginRequiredMixin, ListView):
             
             # Categories for filter btn
             categories = Category.objects.annotate(
-                total_amount=Sum('transaction__amount', filter=models.Q(transaction__owner=self.request.user))
+                total_amount=Sum('transaction__amount', filter=models.Q(
+                    transaction__owner=self.request.user))
             ).exclude(total_amount__isnull=True).exclude(total_amount=0).order_by('name')
 
             # Return start and end date for filtered transactions for stat bar
@@ -289,16 +297,33 @@ def transactions_api(request):
     transactions = Transaction.objects.exclude(
         category__name='Income').filter(
         owner=request.user
-    )
+    ).order_by('date')
+    
+    # # Pagination
+    # page = request.GET.get('page')
+    # items_per_page = 10
+    # paginator = Paginator(transactions, items_per_page)
+    
+    # try:
+    #     transactions_page = paginator.page(page)
+    # except PageNotAnInteger:
+    #     # If page is not an integer, deliver first page.
+    #     transactions_page = paginator.page(1)
+    # except EmptyPage:
+    #     # If page is out of range (e.g. 9999), deliver last page of results.
+    #     transactions_page = paginator.page(paginator.num_pages)
     
     # Format the data for JSON response
     transaction_data = []
-    for item in transactions:        
+    for transaction in transactions:        
         transaction_data.append({
-            'transactions': item
+            'id': transaction.id,
+            'date': transaction.date.isoformat(),
+            'amount': float(transaction.amount),
+            'description': transaction.description,
+            'category': transaction.category.name,
+            'notes': transaction.notes
         })
-    
-    print(transaction_data)
         
     return JsonResponse(transaction_data, safe=False)
 
