@@ -1,9 +1,10 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const spinner = document.querySelector('.loader-div');
+    const spinner = document.querySelector('.loader-div');
     const pageData = document.querySelector('.page-content');
     const noDataMessage = '<p class="text-center text-muted">No category data available.</p>';
+    const noDataHTMLFile = '/finance_tracker/components/upload-notify/';
 
   // Initially hide content
   if (pageData) {
@@ -12,46 +13,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetch('/finance_tracker/category_expense_json/')
     .then((resp) => resp.json())
-    .then((categoryData) => {
-      console.log('Fetched data:', categoryData);
+      .then((categoryData) => {
+          console.log('Fetched data:', categoryData);
 
-        if (categoryData && categoryData.length > 0) {
-            const sortedData = categoryData.sort(function (a, b) {
-                // Ignore case
-                const categoryA = a.category.toUpperCase();
-                const categoryB = b.category.toUpperCase();
-                if (categoryA < categoryB) {
-                    return -1;
-                }
-                if (categoryA > categoryB) {
-                    return 1;
-                }
-                return 0;
-            });
+          if (categoryData && categoryData.length > 0) {
+              const sortedData = categoryData.sort(function (a, b) {
+                  // Ignore case
+                  const categoryA = a.category.toUpperCase();
+                  const categoryB = b.category.toUpperCase();
+                  if (categoryA < categoryB) {
+                      return -1;
+                  }
+                  if (categoryA > categoryB) {
+                      return 1;
+                  }
+                  return 0;
+              });
 
-            console.log('Sorted data by category:', sortedData);
+              console.log('Sorted data by category:', sortedData);
 
-            sortedData
-                .forEach((data) => {
-                    let expTotalRaw = parseFloat(data.total_expense);
-                    let expTotal = isNaN(expTotalRaw) ? 'Error' : expTotalRaw.toFixed(2);
+              sortedData
+                  .forEach((data) => {
+                      let expTotalRaw = parseFloat(data.total_expense);
+                      let expTotal = isNaN(expTotalRaw) ? 'Error' : expTotalRaw.toFixed(2);
 
-                    // Format the number with commas
-                    const formattedExpTotal =
-                        '$ ' +
-                        Number(expTotal).toLocaleString('en-CA', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                        });
+                      // Format the number with commas
+                      const formattedExpTotal =
+                          '$ ' +
+                          Number(expTotal).toLocaleString('en-CA', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                          });
 
-                    let extraInfo = '';
-                    if (expTotalRaw < -5000) {
-                        extraInfo = '<span class="text-warning ms-1">(High Expense)</span>';
-                    }
+                      let extraInfo = '';
+                      if (expTotalRaw < -5000) {
+                          extraInfo = '<span class="text-warning ms-1">(High Expense)</span>';
+                      }
 
-                    // TODO add number of transaction to category card
-                    // TODO link each card to category detail view
-                    const markup = `
+                      // TODO add number of transaction to category card
+                      // TODO link each card to category detail view
+                      const markup = `
                     <div class="card rounded-3 border-0 bg-light shadow-sm">
                         <div class="card-body p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
@@ -89,13 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     `;
 
-                    document
-                        .querySelector('#category-card')
-                        .insertAdjacentHTML('beforeend', markup);
-                })
-        } else {
-            pageData.insertAdjacentHTML('beforeend', noDataMessage);
-            }
+                      document
+                          .querySelector('#category-card')
+                          .insertAdjacentHTML('beforeend', markup);
+                  })
+          } else {
+              // pageData.insertAdjacentHTML('beforeend', noDataMessage);
+              fetch(noDataHTMLFile)
+                  .then((resp) => resp.text())
+                  .then((html) => {
+                      pageData.insertAdjacentHTML('beforeend', html);
+                  })
+          }
+                    
 
           // Introduce a fixed delay before hiding the spinner
           setTimeout(() => {

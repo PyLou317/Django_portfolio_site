@@ -194,6 +194,9 @@ class CategoryList(LoginRequiredMixin, ListView):
     model = Category
     context_object_name = 'categories'
     
+
+def upload_notify_component(request):
+    return render(request, 'finance_tracker/components/upload_notify.html')
     
 
 @login_required
