@@ -12,7 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const pageData = document.querySelector('.page-content');
 
   const noDataHTMLFile = '/finance_tracker/components/upload-notify/';
-  const searchTerm = document.querySelector('#search-bar');
+  const searchInput = document.querySelector('[data-search]');
+
+  let searched_categories = [];
+
+  searchInput.addEventListener('input', (e) => {
+    const value = e.target.value.toLowerCase();
+    searched_categories.forEach((category) => {
+      const isVisible =
+        category.name.toLowerCase().includes(value) ||
+        category.expense_total.includes(value);
+      category.element.classList.toggle('hide', !isVisible);
+    });
+  });
 
   // Initially hide content
   if (pageData) {
@@ -36,9 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return 0;
         });
 
-        console.log(sortedData);
-
-        sortedData.forEach((data) => {
+        searched_categories = sortedData.map((data) => {
           let expTotalRaw = parseFloat(data.total_expense);
           let expTotal = isNaN(expTotalRaw) ? 'Error' : expTotalRaw.toFixed(2);
           const transactionCount = parseInt(data.transaction_count);
@@ -66,6 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
           countTotal.textContent = transactionCount;
 
           categoryCardContainer.append(card);
+
+          return {
+            name: data.category,
+            expense_total: formattedExpTotal,
+            transaction_count: transactionCount,
+            element: card,
+          };
         });
       } else {
         fetch(noDataHTMLFile)
