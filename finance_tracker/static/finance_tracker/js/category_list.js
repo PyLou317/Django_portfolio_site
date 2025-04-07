@@ -36,9 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
           return 0;
         });
 
+        console.log(sortedData);
+
         sortedData.forEach((data) => {
           let expTotalRaw = parseFloat(data.total_expense);
           let expTotal = isNaN(expTotalRaw) ? 'Error' : expTotalRaw.toFixed(2);
+          const transactionCount = parseInt(data.transaction_count);
 
           // Format the number with commas
           const formattedExpTotal =
@@ -56,12 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const card = categoryCardTemplate.content.cloneNode(true).children[0];
           const categoryName = card.querySelector('[data-category]');
           const expenseTotal = card.querySelector('[expense-total]');
+          const countTotal = card.querySelector('[transaction-total]');
 
           categoryName.textContent = data.category;
           expenseTotal.textContent = formattedExpTotal;
+          countTotal.textContent = transactionCount;
 
           categoryCardContainer.append(card);
-
         });
       } else {
         fetch(noDataHTMLFile)
@@ -71,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
       }
 
-      // Delay for spinner 
+      // Delay for spinner
       setTimeout(() => {
         if (spinner) {
           spinner.style.display = 'none';

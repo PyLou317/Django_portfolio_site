@@ -16,7 +16,7 @@ from .utils import categorize_transaction, add_header
 from .forms import UploadFileForm
 
 from .models import Transaction, Category
-from django.db.models import Q, Sum, DateTimeField
+from django.db.models import Q, Sum, Count
 from django.db.models.functions import TruncMonth
 
 from datetime import datetime
@@ -286,26 +286,23 @@ def upload_statement(request):
 # ----- Category Expense Graph #1 ----- #
 @login_required
 def category_expenses_json(request):
-    year = request.GET.get('year')
-    if not year:
-        year = datetime.today().year
-    else:
-        year = int(year)
-
-    category_expenses = Transaction.objects.exclude(
+    transactions = Transaction.objects.exclude(
         category__name='Income').filter(
-        owner=request.user,
-        date__year=2024
-    ).values('category__name').annotate(
-        total_expense=Sum('amount')
+        owner=request.user
+    )
+
+    category_expenses = transactions.values('category__name').annotate(
+        total_expense=Sum('amount'),
+        transaction_count=Count('id')
     ).order_by('-total_expense')
     
     # Format the data for JSON response
     category_data = []
-    for item in category_expenses:
+    for item in category_expenses:        
         category_data.append({
             'category': item['category__name'], 
-            'total_expense': str(item['total_expense'])
+            'total_expense': str(item['total_expense']),
+            'transaction_count': item['transaction_count']
         })
         
     return JsonResponse(category_data, safe=False)
@@ -377,4 +374,3 @@ def monthly_expense_json(request):
         })
         
     return JsonResponse(monthly_expense_data, safe=False)
-
