@@ -4,7 +4,7 @@ from crispy_forms.layout import Layout, Submit, Field, Row, Column
 
 
 class UploadFileForm(forms.Form):        
-    file = forms.FileField(required=True, help_text="Please upload your bank statement here (CSV file)")
+    file = forms.FileField(required=True, help_text="Please upload your bank statement as a CSV file")
 
     # Form Helper (crispy)
     def __init__(self, *args, **kwargs):

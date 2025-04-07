@@ -5,18 +5,12 @@
 {% load static %}
 
 {% block content %}
-  {% comment %} <div>
-    <div class="mx-4 my-3">
-      <h2>Finance Tracker</h2>
-      <h5>Upload Your Monthly Bank Statements</h5>
-    </div> {% endcomment %}
-
     {% comment %}------------ Upload File ------------{% endcomment %}
     {% if user.is_authenticated %}
-      <div id="upload-container-div" class="container d-flex justify-content-center align-items-center text-center wrapper">
-        <div id="upload_container" class="container shadow">
-          <h1 id="upload_file_header">Upload a file</h1>
-          <div class="upload-container">
+      <div id="uploadPage-div" class="container d-flex justify-content-center align-items-center text-center wrapper">
+        <div id="upload-container" class="container shadow">
+          <h1 id="upload-file-header">Upload a file</h1>
+          <div class="upload-icon-div">
             <div class="border-container">
               <div class="icons bi-4x d-flex justify-content-center ms-4 mb-2 fa-4x">
                 <i class="bi bi-filetype-csv"></i>

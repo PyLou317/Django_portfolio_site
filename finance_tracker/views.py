@@ -113,42 +113,46 @@ class TransactionListView(LoginRequiredMixin, ListView):
     
     
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        
-        # Categories for filter btn
-        categories = Category.objects.annotate(
-            total_amount=Sum('transaction__amount', filter=models.Q(transaction__owner=self.request.user))
-        ).exclude(total_amount__isnull=True).exclude(total_amount=0).order_by('name')
+        try:
+            context = super().get_context_data(**kwargs)
+            
+            # Categories for filter btn
+            categories = Category.objects.annotate(
+                total_amount=Sum('transaction__amount', filter=models.Q(transaction__owner=self.request.user))
+            ).exclude(total_amount__isnull=True).exclude(total_amount=0).order_by('name')
 
-        # Return start and end date for filtered transactions for stat bar
-        end_date = self.get_queryset().latest('date').date
-        start_date = self.get_queryset().earliest('date').date
-        
-        # Return queryset length (transactions) for stats bar
-        length = self.get_queryset().count
-        
-        # Return transactions sum for stats bar
-        category_id = self.request.GET.get('category_id')
-        if category_id:
-            if category_id == "52":
-                expense_transactions_sum = self.get_queryset().aggregate(
-                    total_expense_amount=Sum('amount'))
+            # Return start and end date for filtered transactions for stat bar
+            end_date = self.get_queryset().latest('date').date
+            start_date = self.get_queryset().earliest('date').date
+            
+            # Return queryset length (transactions) for stats bar
+            length = self.get_queryset().count
+            
+            # Return transactions sum for stats bar
+            category_id = self.request.GET.get('category_id')
+            if category_id:
+                if category_id == "52":
+                    expense_transactions_sum = self.get_queryset().aggregate(
+                        total_expense_amount=Sum('amount'))
+                else:
+                    expense_transactions_sum = self.get_queryset().exclude(
+                        category__name='Income').aggregate(
+                        total_expense_amount=Sum('amount'))
             else:
                 expense_transactions_sum = self.get_queryset().exclude(
                     category__name='Income').aggregate(
                     total_expense_amount=Sum('amount'))
-        else:
-            expense_transactions_sum = self.get_queryset().exclude(
-                category__name='Income').aggregate(
-                total_expense_amount=Sum('amount'))
-        
-        # Pass data to template
-        context['end_date'] = end_date
-        context['start_date'] = start_date
-        context['length'] = length
-        context['expense_summary'] = expense_transactions_sum
-        context['categories'] = categories
-        # context['filtered_transactions'] = filtered_transactions
+            
+            # Pass data to template
+            context['end_date'] = end_date
+            context['start_date'] = start_date
+            context['length'] = length
+            context['expense_summary'] = expense_transactions_sum
+            context['categories'] = categories
+            # context['filtered_transactions'] = filtered_transactions
+        except:
+            print(f'No Transactions')
+            return
         
         return context
 
@@ -183,10 +187,8 @@ class TransactionUpdateView(LoginRequiredMixin, UpdateView):
         return reverse_lazy('finance_tracker:transaction-list')
     
     
-
 class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     model = Transaction
-    
     
 
 class CategoryList(LoginRequiredMixin, ListView):
