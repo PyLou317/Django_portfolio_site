@@ -2,12 +2,11 @@
 {% load static %}
 
 {% block content %}
-{% if page_obj %}
-  <div class="container container-fluid-mobile mx-auto px-sm-0">
+<div class="container container-fluid-mobile mx-auto px-sm-0">
     <div class="mb-5 mt-2">
-      <h2 class="justin-content-center"><i class="bi bi-list-ul"></i> Transactions</h2>
+        <h2 class="justin-content-center"><i class="bi bi-list-ul"></i> Transactions</h2>
     </div>
-
+    
     {% comment %}------ Header ------{% endcomment %}
     <div class="row d-flex mt-4">
         {% comment %}------ Stats Bar ------{% endcomment %}
@@ -22,20 +21,20 @@
                 <h4>{{ length }}</h4>
             </div> 
             <div class="vr"></div>
-                {% if expense_summary.total_expense_amount > 0 %}
-                    <div class="flex-grow-1 py-2 px-4">
-                        <p class="fw-lighter">Total</p>
-                        <h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Earned</h4>
-                    </div>
-                    {% else %}
-                    <div class="flex-grow-1 py-2 px-4">
-                        <p class="fw-lighter">Total</p>
-                        <h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Spent</h4>
-                    </div>
-                {% endif %}
-          </div>
+            {% if expense_summary.total_expense_amount > 0 %}
+            <div class="flex-grow-1 py-2 px-4">
+                <p class="fw-lighter">Total</p>
+                <h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Earned</h4>
+            </div>
+            {% else %}
+            <div class="flex-grow-1 py-2 px-4">
+                <p class="fw-lighter">Total</p>
+                <h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Spent</h4>
+            </div>
+            {% endif %}
+        </div>
     </div>
-
+    
     <div class="row justify-content-between mt-5">
         {% comment %}------ Search Field ------{% endcomment %}
         <div class="col-lg-3 col-md-6 col-sm-12 align-self-end">
@@ -48,6 +47,7 @@
                 </div>
             </form>
         </div>
+        {% if page_obj %}
         {% comment %}------ Categories ------{% endcomment %}
         <div class="col-auto">
             <span id="toggleFilters" class="filter-badge"><i class="bi bi-filter"></i> Filter</span>
@@ -127,7 +127,10 @@
         </span>
       </div>
     {% else %}
-      {% include 'finance_tracker/components/upload_notify.html' %}
+    <div class="text-center my-5">
+        <p>No transactions found matching your search criteria.</p>
+        {% comment %} {% include 'finance_tracker/components/upload_notify.html' %} {% endcomment %}
+    </div>
     {% endif %}
   </div>
 {% endblock %}

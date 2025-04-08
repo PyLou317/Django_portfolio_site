@@ -94,19 +94,13 @@ class TransactionListView(LoginRequiredMixin, ListView):
     
     def get_queryset(self): 
         queryset = super().get_queryset().filter(owner=self.request.user)
-        search_term = self.request.GET.get('search_term') # Get the search term from the request
-        clear_search = self.request.GET.get('clear_search') # Get value of 'clear_search'
-
-        # Filter queryset based on category selcted 
+        search_term = self.request.GET.get('search_term')
+        clear_search = self.request.GET.get('clear_search')
         category_id = self.request.GET.get('category_id')
         
         if category_id:
             queryset = super().get_queryset().filter(
-                category_id=category_id, 
-                owner=self.request.user)
-        else:
-            queryset = super().get_queryset().filter(
-                owner=self.request.user)
+                category_id=category_id)
         
         if clear_search: # Check if 'clear_search' parameter is present
             return queryset
@@ -116,7 +110,9 @@ class TransactionListView(LoginRequiredMixin, ListView):
                 Q(description__icontains=search_term) |
                 Q(category__name__icontains=search_term)
             )
+            
         return queryset
+
     
     
     def get_context_data(self, **kwargs):
