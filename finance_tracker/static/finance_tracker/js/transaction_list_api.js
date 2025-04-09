@@ -8,22 +8,28 @@ document.addEventListener('DOMContentLoaded', () => {
     '[transaction-row-template]'
   );
 
+  const apiUrl = '/finance_tracker/transactions_api/';
+  const paginationControlsDiv = document.getElementById('pagination-controls');
+  let currentPage = 1;
+  const itemsPerPage = 10;
+
   const spinner = document.querySelector('.loader-div');
-  const pageData = document.querySelector('#page-content');
+  const pageData = document.querySelector('.no-data-page-content');
 
   const noDataHTMLFile = '/finance_tracker/components/upload-notify/';
   const searchInput = document.querySelector('[transaction-search-bar]');
 
+  let all_transactions = [];
   let searched_transactions = [];
 
   searchInput.addEventListener('input', (e) => {
     const value = e.target.value.toLowerCase();
     searched_transactions.forEach((transaction) => {
-        const isVisible =
-            transaction.description.toLowerCase().includes(value) ||
-            transaction.amount.includes(value) ||
-            transaction.category.toLowerCase().includes(value);
-            
+      const isVisible =
+        transaction.description.toLowerCase().includes(value) ||
+        transaction.amount.includes(value) ||
+        transaction.category.toLowerCase().includes(value);
+
       transaction.element.classList.toggle('hide', !isVisible);
     });
   });
@@ -37,14 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((resp) => resp.json())
     .then((transactionData) => {
       console.log(transactionData);
-      if (transactionData && transactionData.length > 0) {
-        searched_transactions = transactionData.map((data) => {
-            let transactionDate = data.date;
-            let amountRaw = parseFloat(data.amount);
-            let amountTotal = isNaN(amountRaw) ? 'Error' : amountRaw.toFixed(2);
-            let transactionDescription = data.description;
-            let transactionCategory = data.category;
-            let transactionNotes = data.notes;
+      if (transactionData['data'] && transactionData['data'].length > 0) {
+        searched_transactions = transactionData['data'].map((data) => {
+          let transactionDate = data.date;
+          let amountRaw = parseFloat(data.amount);
+          let amountTotal = isNaN(amountRaw) ? 'Error' : amountRaw.toFixed(2);
+          let transactionDescription = data.description;
+          let transactionCategory = data.category;
+          let transactionNotes = data.notes;
 
           // Format the number with commas
           const formattedAmountTotal =
@@ -54,12 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
               maximumFractionDigits: 2,
             });
 
-        //   let extraInfo = '';
-        //   if (expTotalRaw < -5000) {
-        //     extraInfo = '<span class="text-warning ms-1">(High Expense)</span>';
-        //   }
-
-          const card = transactionRowTemplate.content.cloneNode(true).children[0];
+          const card =
+            transactionRowTemplate.content.cloneNode(true).children[0];
           const date = card.querySelector('[transaction-desktop-date]');
           const amount = card.querySelector('[transaction-amount]');
           const category = card.querySelector('[transaction-category]');
@@ -96,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pageData) {
           pageData.style.display = 'block'; // Show the content
         }
-      }, 1000);
+      }, 500);
     })
 
     .catch((error) => {

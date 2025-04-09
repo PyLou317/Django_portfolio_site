@@ -1,6 +1,6 @@
 from django.db import models
 from django import forms
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .mixins import ViewPaginatorMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from decimal import Decimal
@@ -291,40 +292,29 @@ def upload_statement(request):
 
 
 # ----===== Transactions API =====---- #
-@login_required
-def transactions_api(request):
-    transactions = Transaction.objects.exclude(
-        category__name='Income').filter(
-        owner=request.user
-    ).order_by('date')
-    
-    # # Pagination
-    # page = request.GET.get('page')
-    # items_per_page = 10
-    # paginator = Paginator(transactions, items_per_page)
-    
-    # try:
-    #     transactions_page = paginator.page(page)
-    # except PageNotAnInteger:
-    #     # If page is not an integer, deliver first page.
-    #     transactions_page = paginator.page(1)
-    # except EmptyPage:
-    #     # If page is out of range (e.g. 9999), deliver last page of results.
-    #     transactions_page = paginator.page(paginator.num_pages)
-    
-    # Format the data for JSON response
-    transaction_data = []
-    for transaction in transactions:        
-        transaction_data.append({
-            'id': transaction.id,
-            'date': transaction.date.isoformat(),
-            'amount': float(transaction.amount),
-            'description': transaction.description,
-            'category': transaction.category.name,
-            'notes': transaction.notes
-        })
+class transactionsAPpiView(LoginRequiredMixin, ViewPaginatorMixin, View):
+    def get(self, request):
+        transactions = Transaction.objects.exclude(
+            category__name='Income').filter(
+            owner=request.user
+        ).order_by('date')
         
-    return JsonResponse(transaction_data, safe=False)
+        # Format the data for JSON response
+        transaction_data = []
+        for transaction in transactions:        
+            transaction_data.append({
+                'id': transaction.id,
+                'date': transaction.date.isoformat(),
+                'amount': float(transaction.amount),
+                'description': transaction.description,
+                'category': transaction.category.name,
+                'notes': transaction.notes
+            })
+        
+        page = request.GET.get('page')
+        limit = request.GET.get('limit')
+    
+        return JsonResponse(self.paginate(transaction_data, page, limit), safe=False)
 
 
 # ----===== Categories API =====---- #

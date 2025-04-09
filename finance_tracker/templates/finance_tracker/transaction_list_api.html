@@ -59,9 +59,8 @@
                 {% endfor %}
             </div> 
         </div> 
-        
 
-        <div id="transaction-table" class="table-responsive mt-3 page-content">
+        <div id="transaction-table" class="table-responsive mt-3">
             <table class="table table-hover" style="width: 100%;">
                 <thead>
                     <tr>
@@ -72,15 +71,22 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider table align-middle" transaction-row-container></tbody>
+                
+                <tbody class="table-group-divider table align-middle" transaction-row-container>
+
+                </tbody>
             </table>
         </div> 
+        {% comment %}------ Loader ------{% endcomment %}
+        <div class="loader-div">
+            <div class="loader"></div>
+        </div>
+        <div class="no-data-page-content"></div>
+        <div class="pagination" id="pagination-controls">
+        </div>
     </div>
 
-    {% comment %}------ Loader ------{% endcomment %}
-    <div class="loader-div">
-        <div class="loader"></div>
-    </div>
+    
         
     {% comment %}------ Transaction List Table ------{% endcomment %}
     <template transaction-row-template>

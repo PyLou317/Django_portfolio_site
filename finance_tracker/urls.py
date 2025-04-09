@@ -15,7 +15,7 @@ urlpatterns = [
     path('transactions/<pk>/delete/', views.TransactionDeleteView.as_view(success_url = reverse_lazy('transaction-list')), name='transaction_delete'),
     # API's
     # path('transactions_json/', views.transaction_list_json, name='transaction_list_json'),
-    path('transactions_api/', views.transactions_api, name='transactions_api'),
+    path('transactions_api/', views.transactionsAPpiView.as_view(), name='transactions_api'),
     path('category_expense_json/', views.category_expenses_json, name='category_expense_json'),
     path('monthly_expense_json/', views.monthly_expense_json, name='monthly_expense_json'),
     path('income_total_json/', views.income_total_json, name='income_total_json'),
