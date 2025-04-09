@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((resp) => resp.json())
     .then((transactionData) => {
       console.log(transactionData);
-      if (transactionData['data'] && transactionData['data'].length > 0) {
-        searched_transactions = transactionData['data'].map((data) => {
+      if (transactionData.data && transactionData.data.length > 0) {
+        searched_transactions = transactionData.data.map((data) => {
           let transactionDate = data.date;
           let amountRaw = parseFloat(data.amount);
           let amountTotal = isNaN(amountRaw) ? 'Error' : amountRaw.toFixed(2);
@@ -110,4 +110,28 @@ document.addEventListener('DOMContentLoaded', () => {
         pageData.style.display = 'block'; // Show any error message or fallback
       }
     });
+
+  paginationControlsDiv.innerHTML = '';
+
+  if (prevPage) {
+    const prevButton = document.createElement('button');
+    prevButton.textContent = 'Previous';
+    prevButton.addEventListener('click', () => {
+      fetchTransactions(prevPage);
+    });
+    paginationControlsDiv.appendChild(prevButton);
+  }
+
+  const currentPageSpan = document.createElement('span');
+  currentPageSpan.textContent = `Page ${currentPage}`;
+  paginationControlsDiv.appendChild(currentPageSpan);
+
+  if (nextPage) {
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.addEventListener('click', () => {
+      fetchTransactions(nextPage);
+    });
+    paginationControlsDiv.appendChild(nextButton);
+  }
 });

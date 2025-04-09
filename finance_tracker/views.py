@@ -294,8 +294,7 @@ def upload_statement(request):
 # ----===== Transactions API =====---- #
 class transactionsAPpiView(LoginRequiredMixin, ViewPaginatorMixin, View):
     def get(self, request):
-        transactions = Transaction.objects.exclude(
-            category__name='Income').filter(
+        transactions = Transaction.objects.filter(
             owner=request.user
         ).order_by('date')
         
