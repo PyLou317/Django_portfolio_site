@@ -24,6 +24,9 @@ from django.db.models.functions import TruncMonth
 from datetime import datetime
 import csv
 
+from .serializers import TransactionSerializer, CategorySerializer
+from rest_framework import generics, permissions
+
 
 
 def finance_tracker_home(request):
@@ -175,6 +178,7 @@ class TransactionForm(forms.ModelForm):
         widgets = {
             'notes': forms.Textarea(attrs={'rows': 2, 'cols': 40}),  # Adjust rows and cols as needed
         }
+        
 
 class TransactionUpdateView(LoginRequiredMixin, UpdateView):
     model = Transaction
@@ -290,6 +294,42 @@ def upload_statement(request):
         form = UploadFileForm()
     return render(request, 'finance_tracker/upload.html', {'upload_form': form})
 
+
+
+# ----===== Transactions DRF ListView API =====---- #
+class TransactionListAPIView(generics.ListCreateAPIView):
+    serializer_class = TransactionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_queryset(self):
+        """Override to filter transactions by the current user and exclude Income."""
+        return Transaction.objects.filter(owner=self.request.user)
+
+    def perform_create(self, serializer):
+        """Override to set the owner of the transaction to the current user."""
+        serializer.save(owner=self.request.user)
+
+
+# ----===== Transactions DRF DetailView API =====---- #
+class TransactionDetailAPIView(generics.RetrieveAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    
+# ----===== Category DRF ListView API =====---- #
+class CategoryListAPIView(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    
+# ----===== Category DRF DetailView API =====---- #
+class CategoryDetailAPIView(generics.RetrieveAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
 
 # ----===== Transactions API =====---- #
 class transactionsAPpiView(LoginRequiredMixin, ViewPaginatorMixin, View):
