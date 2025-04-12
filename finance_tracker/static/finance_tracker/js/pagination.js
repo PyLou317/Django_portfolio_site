@@ -1,10 +1,26 @@
 'use_strict';
 
-const previousPage = document.querySelector('.previous-page');
+const previousPageBtn = document.querySelector('.previous-page');
 const currentPage = document.querySelector('.current-page');
-const nextPage = document.querySelector('.next-page');
+const nextPageBtn = document.querySelector('.next-page');
 const paginationDiv = document.querySelector('.pagination-div');
 
-export function showPagination() {
-        paginationDiv.style.display = 'block';
-    }
+export function showPagination(
+  previousURL,
+  current,
+  nextURL
+) {
+    paginationDiv.style.display = 'block';
+    currentPage.textContent = current
+  if (!previousURL) {
+    previousPageBtn.classList.add('disabled')
+} else {
+      previousPageBtn.classList.remove('disabled')
+  }
+  
+    if (!nextURL) {
+    previousPageBtn.classList.add('disabled')
+} else {
+      previousPageBtn.classList.remove('disabled')
+  }
+}

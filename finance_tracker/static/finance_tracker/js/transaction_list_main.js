@@ -5,10 +5,11 @@ import { showPagination } from './pagination.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = '/finance_tracker/transactions_api/';
-  const tableContent = document.querySelector('[transaction-row-container]');
+  const tableContent = document.querySelector('#transaction-table');
 
   async function main() {
     showSpinner();
+    tableContent.style.display = 'none';
 
     const data = await fetchData(apiUrl);
 
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       renderHTML(data);
       console.log(data);
       showPagination();
-      tableContent.style.display = 'relative';
+      tableContent.style.display = 'block';
     } else {
       forceHideSpinner();
     }

@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixins import ViewPaginatorMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .pagination import CustomPageNumberPagination
 
 from decimal import Decimal
 from io import StringIO
@@ -300,6 +301,7 @@ def upload_statement(request):
 class TransactionListAPIView(generics.ListCreateAPIView):
     serializer_class = TransactionSerializer
     permission_classes = [permissions.IsAuthenticated]
+    pagination_class = CustomPageNumberPagination
     
     def get_queryset(self):
         """Override to filter transactions by the current user and exclude Income."""
@@ -312,9 +314,10 @@ class TransactionListAPIView(generics.ListCreateAPIView):
 
 # ----===== Transactions DRF DetailView API =====---- #
 class TransactionDetailAPIView(generics.RetrieveAPIView):
-    queryset = Transaction.objects.all()
+    queryset = Transaction.objects.all().order_by()
     serializer_class = TransactionSerializer
     permission_classes = [permissions.IsAuthenticated]
+    
     
     
 # ----===== Category DRF ListView API =====---- #

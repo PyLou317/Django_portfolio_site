@@ -10,7 +10,11 @@ export function renderHTML(transactionData) {
     let amountTotal = isNaN(amountRaw) ? 'Error' : amountRaw.toFixed(2);
     let transactionDescription = data.description;
     let transactionCategory = data.category_name;
-    let transactionNotes = data.notes;
+      let transactionNotes = data.notes;
+      
+      let previousUrl = transactionData.previous
+      let currentPage = transactionData.previous
+      let nextUrl = transactionData.previous
 
     // Format the number with commas
     const formattedAmountTotal =

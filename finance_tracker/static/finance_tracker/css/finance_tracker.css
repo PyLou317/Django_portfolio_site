@@ -224,7 +224,7 @@
     opacity: 0.55;
 }
 
-/* -----===== Transaction Table =====----- */
+/* -----===== Transaction List API Table =====----- */
 .transaction-search-field {
     background-image: var(--search-icon-url);
     background-repeat: no-repeat;
@@ -254,6 +254,7 @@
 }
 
 #transaction-table {
+    display: none;
     margin-bottom: 30px;
 }
 
@@ -272,6 +273,13 @@
     height: 100vh;
     margin-bottom: 200px;
 }
+
+.page-item.disabled .page-link {
+    pointer-events: none; /* Prevent clicks */
+    opacity: 0.5; /* Optional: visually indicate disabled state */
+    background-color: #e9ecef; /* optional. */
+    border-color: #dee2e6; /* optional. */
+  }
 
 @media only screen and (max-width: 767px) {
     .containter {
