@@ -81,6 +81,7 @@
         <div class="loader-div">
             <div class="loader"></div>
         </div>
+        
         <div class="no-data-page-content"></div>
         <div class="pagination justify-content-center" id="pagination-controls">
         </div>
@@ -108,7 +109,7 @@
 
 {% block extra_js %}
   <script src="{% static 'finance_tracker/js/transaction_list.js' %}"></script>
-  <script src="{% static 'finance_tracker/js/transaction_list_api.js' %}"></script>
+  <script type="module" src="{% static 'finance_tracker/js/transaction_list_main.js' %}"></script>
 {% endblock %}
 
 

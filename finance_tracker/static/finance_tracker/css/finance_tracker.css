@@ -386,7 +386,7 @@
 }
 
 .loader-div {
-    display: flex;
+    display: none;
     height: 50vh;
     justify-content: center;
     align-items: center;
