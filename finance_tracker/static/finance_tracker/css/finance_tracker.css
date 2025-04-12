@@ -254,7 +254,7 @@
 }
 
 #transaction-table {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .transaction-description, .transaction-date, .transaction-action {
@@ -320,8 +320,8 @@
     align-items: center;
 }
 
-#pagination-div {
-    margin-bottom: 100px;
+.pagination-div {
+    display: none;
 }
 
 .hidden {

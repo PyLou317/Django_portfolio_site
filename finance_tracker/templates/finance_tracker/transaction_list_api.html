@@ -60,30 +60,47 @@
             </div> 
         </div> 
 
-        <div id="transaction-table" class="table-responsive mt-3">
-            <table class="table table-hover" style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                
-                <tbody class="table-group-divider table align-middle" transaction-row-container>
-
-                </tbody>
-            </table>
-        </div> 
-        {% comment %}------ Loader ------{% endcomment %}
-        <div class="loader-div">
-            <div class="loader"></div>
+        <div class="table-wrapper">
+            <div id="transaction-table" class="table-responsive mt-3">
+                <table class="table table-hover" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider table align-middle" transaction-row-container></tbody>
+                </table>
+            </div> 
+            {% comment %}------ Loader ------{% endcomment %}
+            <div class="loader-div">
+                <div class="loader"></div>
+            </div>
         </div>
         
-        <div class="no-data-page-content"></div>
-        <div class="pagination justify-content-center" id="pagination-controls">
+        <div class="text-center pagination-div">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item previous-page">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active current-page" aria-current="page">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item next-page">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
         </div>
     </div>
 
@@ -111,35 +128,3 @@
   <script src="{% static 'finance_tracker/js/transaction_list.js' %}"></script>
   <script type="module" src="{% static 'finance_tracker/js/transaction_list_main.js' %}"></script>
 {% endblock %}
-
-
-{% comment %} <!--TODO--> ------ Pagination ------
-<div id="pagination-div" class="pagination pagination-btns justify-content-center">
-<span class="step-links">
-    <nav aria-label="Transaction lists pages">
-    <ul class="pagination">
-        {% if page_obj.has_previous %}
-        <li class="page-item">
-            <a class="page-link bg-secondary text-light" href="?page=1">&laquo; first</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link text-secondary" href="?page={{ page_obj.previous_page_number }}"><i class="bi bi-arrow-left"></i></a>
-        </li>
-        {% endif %}
-
-        <li class="page-item active" aria-current="page">
-        <span class="page-link bg-secondary border-secondary">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }} <span class="visually-hidden">(current)</span></span>
-        </li>
-
-        {% if page_obj.has_next %}
-        <li class="page-item">
-            <a class="page-link text-secondary" href="?page={{ page_obj.next_page_number }}"><i class="bi bi-arrow-right"></i></a>
-        </li>
-        <li class="page-item">
-            <a class="page-link text-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
-        </li>
-        {% endif %}
-    </ul>
-    </nav>
-</span>
-</div> {% endcomment %}
