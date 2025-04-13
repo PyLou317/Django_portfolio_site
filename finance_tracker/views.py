@@ -1,32 +1,49 @@
-from django.db import models
-from django import forms
-from django.views.generic import TemplateView, View
-from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import ViewPaginatorMixin
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .pagination import CustomPageNumberPagination
 
-from decimal import Decimal
-from io import StringIO
-from .utils import categorize_transaction, add_header
+# Django Views
+from django.views.generic import TemplateView, View
+from django.views.generic.list import ListView
+from django.views.generic.edit import UpdateView, DeleteView
 
-from .forms import UploadFileForm
 
+# Django Models
+from django.db import models
+from django.db.models import Sum, Min, Max
 from .models import Transaction, Category
 from django.db.models import Q, Sum, Count
 from django.db.models.functions import TruncMonth
 
+
+# Django Forms
+from django import forms
+from .forms import UploadFileForm
+
+# Django Auth
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+# Misc
+from .utils import categorize_transaction, add_header
+from io import StringIO
+from decimal import Decimal
 from datetime import datetime
 import csv
 
+# Pagination
+from .mixins import ViewPaginatorMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .pagination import CustomPageNumberPagination
+
+# Serializers
 from .serializers import TransactionSerializer, CategorySerializer
+
+# Rest Framework
 from rest_framework import generics, permissions
+from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 
@@ -300,16 +317,52 @@ def upload_statement(request):
 # ----===== Transactions DRF ListView API =====---- #
 class TransactionListAPIView(generics.ListCreateAPIView):
     serializer_class = TransactionSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
     pagination_class = CustomPageNumberPagination
     
     def get_queryset(self):
-        """Override to filter transactions by the current user."""
-        return Transaction.objects.filter(owner=self.request.user).order_by('-date')
+        queryset = Transaction.objects.filter(owner=self.request.user).exclude(category__name='Income')
+        category = self.request.query_params.get('category')
+        if category:
+                queryset = queryset.filter(category__name=category)
+        return queryset.order_by('-date')
     
     def list(self, request, *args, **kwargs):
-        response = super().list(request, *args, **kwargs)
-        return response
+        queryset = self.filter_queryset(self.get_queryset())
+        total_transactions = queryset.count()
+        total_amount = queryset.aggregate(Sum('amount'))['amount__sum'] or 0
+        date_range = queryset.aggregate(Min('date'), Max('date'))
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            response_data = {
+                'next': self.paginator.get_next_link(),
+                'previous': self.paginator.get_previous_link(),
+                'current_page': self.paginator.page.number,
+                'total_pages': self.paginator.page.paginator.num_pages,
+                'stats': {
+                    'min_date': date_range['date__min'],
+                    'max_date': date_range['date__max'],
+                    'total_transactions': total_transactions,
+                    'total_amount': total_amount,
+                },
+                'results': serializer.data
+            }
+            return Response(response_data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        response_data = {
+            'stats': {
+                'min_date': date_range['date__min'],
+                'max_date': date_range['date__max'],
+                'total_transactions': total_transactions,
+                'total_amount': total_amount,  
+            },
+            'results': serializer.data,
+        }
+        return Response(response_data)
 
 
     def perform_create(self, serializer):
