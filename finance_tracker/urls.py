@@ -11,8 +11,8 @@ urlpatterns = [
     path('categories/', views.CategoryList.as_view(), name='categories'),
     path('components/upload-notify/', views.upload_notify_component, name='upload_notify_component'),
     path('upload/', views.upload_statement, name='file_upload'),
-    path('transactions/<pk>/update/', views.TransactionUpdateView.as_view(success_url = reverse_lazy('transaction-list')), name='transaction_update'),
-    path('transactions/<pk>/delete/', views.TransactionDeleteView.as_view(success_url = reverse_lazy('transaction-list')), name='transaction_delete'),
+    path('transactions/<int:pk>/update/', views.TransactionUpdateView.as_view(success_url = reverse_lazy('transaction-list-api')), name='edit_transaction'),
+    path('transactions/<int:pk>/delete/', views.TransactionDeleteView.as_view(success_url = reverse_lazy('transaction-list-api')), name='delete_transaction'),
     # API's
     # path('transactions_json/', views.transaction_list_json, name='transaction_list_json'),
     path('transactions_api/', views.TransactionListAPIView.as_view(), name='transactions_api'),

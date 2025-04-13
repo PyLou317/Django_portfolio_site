@@ -118,8 +118,12 @@
             <td><span id="category-pill" class="badge badge-pill category-badge text-light" transaction-category></span></td>
             <td transaction-amount></td>
             <td class="transaction-action">
-                <a href="#"><i class="bi bi-pencil-square text-success"></i></a> |
-                <a href="#"><i class="bi bi-trash3-fill text-secondary"></i></a>
+                <a href="#" data-edit-url="{% url 'finance_tracker:edit_transaction' pk='0' %}">
+                    <i class="bi bi-pencil-square text-success edit-link"></i>
+                </a> |
+                <a href="#" data-delete-url="{% url 'finance_tracker:delete_transaction' pk='0' %}">
+                    <i class="bi bi-trash3-fill text-secondary delete-link"></i>
+                </a>
             </td>
         </tr>
     </template>

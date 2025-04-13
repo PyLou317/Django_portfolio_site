@@ -211,14 +211,14 @@ class TransactionUpdateView(LoginRequiredMixin, UpdateView):
         return form
     
     def get_success_url(self):
-        return reverse_lazy('finance_tracker:transaction-list')
+        return reverse_lazy('finance_tracker:transaction-list-api')
     
     
 class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     model = Transaction
     
     def get_success_url(self):
-        return reverse_lazy('finance_tracker:transaction-list')
+        return reverse_lazy('finance_tracker:transaction-list-api')
     
 
 class CategoryList(LoginRequiredMixin, ListView):
