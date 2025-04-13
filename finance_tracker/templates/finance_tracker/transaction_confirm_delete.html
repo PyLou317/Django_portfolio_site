@@ -32,7 +32,7 @@
                         {% csrf_token %}
                         <div class="d-grid gap-2 d-md-block">
                             <button type="submit" class="btn btn-danger me-2">Confirm Delete</button>
-                            <a href="{% url 'finance_tracker:transaction-list' %}" class="btn btn-secondary">Cancel</a>
+                            <a href="{% url 'finance_tracker:transaction-list-api' %}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>
