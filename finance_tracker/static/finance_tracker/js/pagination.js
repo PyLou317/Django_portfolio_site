@@ -3,14 +3,15 @@
 export function setupPagination(data) {
   const previousPageElement = document.querySelector('.previous-page');
   const nextPageElement = document.querySelector('.next-page');
-  const currentPageElement = document.querySelector('.current-page');
+    const currentPageElement = document.querySelector('.current-page');
+    const totalPages = data.total_pages
 
   const paginationDiv = document.querySelector('.pagination-div');
 
   const previousPageLink = document.querySelector('.previousUrl');
   const nextPageLink = document.querySelector('.nextUrl');
 
-  currentPageElement.textContent = data.current_page;
+  currentPageElement.textContent = `${data.current_page} of ${totalPages}`;
 
   paginationDiv.style.display = 'block';
   if (data.previous) {

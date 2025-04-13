@@ -6,8 +6,10 @@ import { setupPagination } from './pagination.js';
 document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = '/finance_tracker/transactions_api/';
   const tableContent = document.querySelector('#transaction-table');
-  const previousPageElement = document.querySelector('.previous-page');
-  const nextPageElement = document.querySelector('.next-page');
+  const previousPageBtn = document.querySelector(
+    '.previous-page a.previousUrl'
+  );
+  const nextPageBtn = document.querySelector('.next-page a.nextUrl');
 
   async function main(url = apiUrl) {
     showSpinner();
@@ -27,19 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  previousPageElement.addEventListener('click', (event) => {
-      event.preventDefault();
-      const previousUrl = document.querySelector('.previous-page a').href;
+  previousPageBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (previousPageBtn.parentElement.classList.contains('disabled')) {
+      return;
+    }
+    const previousUrl = previousPageBtn.href;
     if (previousUrl) {
-        main(previousUrl);
+      main(previousUrl);
     }
   });
 
-  nextPageElement.addEventListener('click', (event) => {
-      event.preventDefault();
-      const nextUrl = document.querySelector('.next-page a').href;
+  nextPageBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (nextPageBtn.parentElement.classList.contains('disabled')) {
+      return;
+    }
+    const nextUrl = nextPageBtn.href;
     if (nextUrl) {
-      main(nextUrl)
+      main(nextUrl);
     }
   });
 
