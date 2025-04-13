@@ -1,26 +1,29 @@
 'use_strict';
 
-const previousPageBtn = document.querySelector('.previous-page');
-const currentPage = document.querySelector('.current-page');
-const nextPageBtn = document.querySelector('.next-page');
-const paginationDiv = document.querySelector('.pagination-div');
+export function setupPagination(data) {
+  const previousPageElement = document.querySelector('.previous-page');
+  const nextPageElement = document.querySelector('.next-page');
+  const currentPageElement = document.querySelector('.current-page');
 
-export function showPagination(
-  previousURL,
-  current,
-  nextURL
-) {
-    paginationDiv.style.display = 'block';
-    currentPage.textContent = current
-  if (!previousURL) {
-    previousPageBtn.classList.add('disabled')
-} else {
-      previousPageBtn.classList.remove('disabled')
+  const paginationDiv = document.querySelector('.pagination-div');
+
+  const previousPageLink = document.querySelector('.previousUrl');
+  const nextPageLink = document.querySelector('.nextUrl');
+
+  currentPageElement.textContent = data.current_page;
+
+  paginationDiv.style.display = 'block';
+  if (data.previous) {
+    previousPageLink.setAttribute('href', data.previous);
+    previousPageElement.classList.remove('disabled');
+  } else {
+    previousPageElement.classList.add('disabled');
   }
-  
-    if (!nextURL) {
-    previousPageBtn.classList.add('disabled')
-} else {
-      previousPageBtn.classList.remove('disabled')
+
+  if (data.next) {
+    nextPageLink.setAttribute('href', data.next);
+    nextPageElement.classList.remove('disabled');
+  } else {
+    nextPageElement.classList.add('disabled');
   }
 }

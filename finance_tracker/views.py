@@ -304,8 +304,13 @@ class TransactionListAPIView(generics.ListCreateAPIView):
     pagination_class = CustomPageNumberPagination
     
     def get_queryset(self):
-        """Override to filter transactions by the current user and exclude Income."""
-        return Transaction.objects.filter(owner=self.request.user)
+        """Override to filter transactions by the current user."""
+        return Transaction.objects.filter(owner=self.request.user).order_by('-date')
+    
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        return response
+
 
     def perform_create(self, serializer):
         """Override to set the owner of the transaction to the current user."""
@@ -314,7 +319,7 @@ class TransactionListAPIView(generics.ListCreateAPIView):
 
 # ----===== Transactions DRF DetailView API =====---- #
 class TransactionDetailAPIView(generics.RetrieveAPIView):
-    queryset = Transaction.objects.all().order_by()
+    queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     permission_classes = [permissions.IsAuthenticated]
     

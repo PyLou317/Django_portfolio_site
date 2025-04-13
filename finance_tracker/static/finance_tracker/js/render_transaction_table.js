@@ -4,17 +4,15 @@ const transactionRowContainer = document.querySelector('[transaction-row-contain
 const transactionRowTemplate = document.querySelector('[transaction-row-template]');
 
 export function renderHTML(transactionData) {
-  transactionData.results.map((data) => {
+  transactionRowContainer.innerHTML = '';
+
+  transactionData.forEach((data) => {
     let transactionDate = data.date;
     let amountRaw = parseFloat(data.amount);
     let amountTotal = isNaN(amountRaw) ? 'Error' : amountRaw.toFixed(2);
     let transactionDescription = data.description;
     let transactionCategory = data.category_name;
-      let transactionNotes = data.notes;
-      
-      let previousUrl = transactionData.previous
-      let currentPage = transactionData.previous
-      let nextUrl = transactionData.previous
+    let transactionNotes = data.notes;
 
     // Format the number with commas
     const formattedAmountTotal =
