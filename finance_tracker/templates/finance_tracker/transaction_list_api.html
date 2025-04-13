@@ -60,26 +60,26 @@
             </div> 
         </div> 
 
-        <div class="table-wrapper">
-            <div id="transaction-table" class="table-responsive mt-3">
-                <table class="table table-hover" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider table align-middle" transaction-row-container></tbody>
-                </table>
-            </div> 
-            {% comment %}------ Loader ------{% endcomment %}
-            <div class="loader-div">
-                <div class="loader"></div>
-            </div>
+        {% comment %}------ Loader ------{% endcomment %}
+        <div class="loader-div">
+            <div class="loader"></div>
         </div>
+
+        <div id="transaction-table" class="table-responsive mt-3">
+            <table class="table table-hover" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider table align-middle" transaction-row-container></tbody>
+            </table>
+        </div> 
+
         
         {% comment %}------ Pagination ------{% endcomment %}
         <div class="text-center pagination-div">
@@ -126,6 +126,6 @@
 {% endblock %}
 
 {% block extra_js %}
-  <script src="{% static 'finance_tracker/js/transaction_list.js' %}"></script>
+  <script src="{% static 'finance_tracker/js/category_filters.js' %}"></script>
   <script type="module" src="{% static 'finance_tracker/js/transaction_list_main.js' %}"></script>
 {% endblock %}

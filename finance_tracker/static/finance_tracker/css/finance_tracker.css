@@ -254,7 +254,6 @@
 }
 
 #transaction-table {
-    display: none;
     margin-bottom: 30px;
 }
 
@@ -395,12 +394,14 @@
 
 .loader-div {
     display: none;
+    position: relative;
     height: 50vh;
     justify-content: center;
     align-items: center;
 }
 
 .loader {
+    position: absolute;
     border: 11px solid #f3f3f3; /* Light grey */
     border-top: 11px solid var(--accent-color);
     border-radius: 50%;
@@ -416,6 +417,6 @@
     100% { transform: rotate(360deg); }
   }
 
-  .hide {
-    display: none
+  #transaction-table.force-hide {
+    display: none !important;
   }

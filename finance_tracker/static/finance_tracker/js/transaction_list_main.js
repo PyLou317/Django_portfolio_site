@@ -6,14 +6,13 @@ import { setupPagination } from './pagination.js';
 document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = '/finance_tracker/transactions_api/';
   const tableContent = document.querySelector('#transaction-table');
-  const previousPageBtn = document.querySelector(
-    '.previous-page a.previousUrl'
-  );
+  const previousPageBtn = document.querySelector('.previous-page a.previousUrl');
   const nextPageBtn = document.querySelector('.next-page a.nextUrl');
+
+  tableContent.classList.add('force-hide');
 
   async function main(url = apiUrl) {
     showSpinner();
-    tableContent.style.display = 'none';
 
     const data = await fetchData(url);
 
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       renderHTML(data.results);
       console.log(data);
       setupPagination(data, main);
-      tableContent.style.display = 'block';
+      tableContent.classList.remove('force-hide');
     } else {
       forceHideSpinner();
     }
