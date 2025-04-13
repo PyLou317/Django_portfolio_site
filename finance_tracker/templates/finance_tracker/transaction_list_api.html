@@ -29,7 +29,7 @@
                         {% else %}
                         <div class="flex-grow-1 py-2 px-4">
                             <p class="fw-lighter">Total</p>
-                            <h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Spent</h4>
+                            <h4 id="stats-total"></h4>
                         </div>
                     {% endif %}
             </div>
@@ -60,11 +60,7 @@
             </div> 
         </div> 
 
-        {% comment %}------ Loader ------{% endcomment %}
-        <div class="loader-div">
-            <div class="loader"></div>
-        </div>
-
+        
         <div id="transaction-table" class="table-responsive mt-3">
             <table class="table table-hover" style="width: 100%;">
                 <thead>
@@ -78,6 +74,11 @@
                 </thead>
                 <tbody class="table-group-divider table align-middle" transaction-row-container></tbody>
             </table>
+
+            {% comment %}------ Loader ------{% endcomment %}
+            <div class="loader-div">
+                <div class="loader"></div>
+            </div>
         </div> 
 
         

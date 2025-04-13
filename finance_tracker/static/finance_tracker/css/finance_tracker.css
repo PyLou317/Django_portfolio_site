@@ -393,7 +393,7 @@
 }
 
 .loader-div {
-    display: none;
+    display: flex;
     position: relative;
     height: 50vh;
     justify-content: center;
