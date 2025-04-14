@@ -25,6 +25,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Misc
+from django.utils import formats
 from .utils import categorize_transaction, add_header
 from io import StringIO
 from decimal import Decimal
@@ -332,7 +333,10 @@ class TransactionListAPIView(generics.ListCreateAPIView):
         queryset = self.filter_queryset(self.get_queryset())
         total_transactions = queryset.count()
         total_amount = queryset.aggregate(Sum('amount'))['amount__sum'] or 0
-        date_range = queryset.aggregate(Min('date'), Max('date'))
+        min_date = queryset.aggregate(Min('date'))
+        formatted_min_date = min_date['date__min'].strftime("%B %d/%y")
+        max_date = queryset.aggregate(Max('date'))
+        formatted_max_date = max_date['date__max'].strftime("%B %d/%y")
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -343,8 +347,8 @@ class TransactionListAPIView(generics.ListCreateAPIView):
                 'current_page': self.paginator.page.number,
                 'total_pages': self.paginator.page.paginator.num_pages,
                 'stats': {
-                    'min_date': date_range['date__min'],
-                    'max_date': date_range['date__max'],
+                    'min_date': formatted_min_date,
+                    'max_date': formatted_max_date,
                     'total_transactions': total_transactions,
                     'total_amount': total_amount,
                 },
