@@ -21,17 +21,10 @@
                     <h4 id="transaction-count"></h4>
                 </div> 
                 <div class="vr"></div>
-                    {% if expense_summary.total_expense_amount > 0 %}
-                        <div class="flex-grow-1 py-2 px-4">
-                            <p class="fw-lighter">Total</p>
-                            <h4>${{ expense_summary.total_expense_amount|floatformat:0 }} Earned</h4>
-                        </div>
-                        {% else %}
                         <div class="flex-grow-1 py-2 px-4">
                             <p class="fw-lighter">Total</p>
                             <h4 id="stats-total"></h4>
                         </div>
-                    {% endif %}
             </div>
         </div>
 
@@ -48,16 +41,7 @@
             <div class="col-auto">
                 <span id="toggleFilters" class="filter-badge"><i class="bi bi-filter"></i> Filter</span>
             </div> 
-            <div id="filtersDiv" class="hidden text-center">
-                <a href="{% url 'finance_tracker:transaction-list' %}" class="me-1 mb-1">
-                <span class="badge rounded-pill text-bg-dark show-all-badge">Show All</span>
-                </a>
-                {% for category in categories %}
-                <a href="{% url 'finance_tracker:transaction-list' %}?category_id={{ category.id }}" class="me-1 mb-1">
-                <span class="badge rounded-pill category-filter-badge">{{ category }}</span>
-                </a>
-                {% endfor %}
-            </div> 
+            <div id="filtersDiv" class="hidden text-center"></div> 
         </div> 
 
         
@@ -107,7 +91,14 @@
     </div>
 
     
-        
+    
+    {% comment %}------ Filter Btn ------{% endcomment %}
+    <template filterButton>
+        <a class="me-1 mb-1">
+            <span class="badge rounded-pill category-filter-badge"></span>
+        </a>
+    </template>
+
     {% comment %}------ Transaction List Table ------{% endcomment %}
     <template transaction-row-template>
         <tr>
@@ -131,6 +122,5 @@
 {% endblock %}
 
 {% block extra_js %}
-  <script src="{% static 'finance_tracker/js/category_filters.js' %}"></script>
   <script type="module" src="{% static 'finance_tracker/js/transaction_list_main.js' %}"></script>
 {% endblock %}

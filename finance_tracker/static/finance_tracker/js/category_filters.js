@@ -1,11 +1,34 @@
-// Toggle category filters
-const filter_btn = document.getElementById('toggleFilters')
-const filters = document.getElementById('filtersDiv')
+'use_strict';
 
-const toggleFilter = function () {
-    filters.classList.toggle('hidden')
+// Toggle category filters
+const filterBtnDiv = document.querySelector('#filtersDiv')
+const filterBtn = document.querySelector('.category-filter-badge')
+
+const filterBadgeContainer = document.querySelector('#filtersDiv')
+const filterBadgeTemplate = document.querySelector('[filterButton]')
+
+
+export const getCategories = function (categoryData) {
+    filterBadgeContainer.innerHTML = '';
+
+    categoryData.forEach(data => {
+        const card = filterBadgeTemplate.content.cloneNode(true).children[0];
+        const categoryName = card.querySelector('.category-filter-badge')
+
+        categoryName.textContent = data
+
+        filterBadgeContainer.append(card)
+
+    });
 };
 
-filter_btn.addEventListener('click', toggleFilter)
+const toggleFilter = function () {
+    filterBtnDiv.classList.toggle('hidden')
+};
+
+export const filterFunction = function () {
+    const filterToggleBtn = document.querySelector('#toggleFilters')
+    filterToggleBtn.addEventListener('click', toggleFilter);
+}
 
 

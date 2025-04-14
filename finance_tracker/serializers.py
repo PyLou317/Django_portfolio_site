@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 from django.db.models import Sum
 
-
+        
 class CategorySerializer(serializers.ModelSerializer):
     transactions = serializers.SerializerMethodField()
     transaction_count = serializers.SerializerMethodField()

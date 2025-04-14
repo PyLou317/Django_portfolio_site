@@ -334,9 +334,11 @@ class TransactionListAPIView(generics.ListCreateAPIView):
         total_transactions = queryset.count()
         total_amount = queryset.aggregate(Sum('amount'))['amount__sum'] or 0
         min_date = queryset.aggregate(Min('date'))
-        formatted_min_date = min_date['date__min'].strftime("%B %d/%y")
+        formatted_min_date = min_date['date__min'].strftime("%b %d, %Y")
         max_date = queryset.aggregate(Max('date'))
-        formatted_max_date = max_date['date__max'].strftime("%B %d/%y")
+        formatted_max_date = max_date['date__max'].strftime("%b %d, %Y")
+        categories = Category.objects.all().values_list('name', flat=True)
+        
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -346,6 +348,7 @@ class TransactionListAPIView(generics.ListCreateAPIView):
                 'previous': self.paginator.get_previous_link(),
                 'current_page': self.paginator.page.number,
                 'total_pages': self.paginator.page.paginator.num_pages,
+                'categories': categories,
                 'stats': {
                     'min_date': formatted_min_date,
                     'max_date': formatted_max_date,
@@ -359,8 +362,8 @@ class TransactionListAPIView(generics.ListCreateAPIView):
         serializer = self.get_serializer(queryset, many=True)
         response_data = {
             'stats': {
-                'min_date': date_range['date__min'],
-                'max_date': date_range['date__max'],
+                'min_date': formatted_min_date,
+                'max_date': formatted_max_date,
                 'total_transactions': total_transactions,
                 'total_amount': total_amount,  
             },
