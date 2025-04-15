@@ -14,7 +14,7 @@ export const getCategories = function (categoryData) {
     categoryData.forEach(data => {
         const card = filterBadgeTemplate.content.cloneNode(true).children[0];
         const categoryName = card.querySelector('.category-filter-badge')
-
+        
         categoryName.textContent = data
 
         filterBadgeContainer.append(card)

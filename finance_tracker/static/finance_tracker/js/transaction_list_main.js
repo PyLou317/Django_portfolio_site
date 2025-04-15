@@ -3,10 +3,7 @@ import { renderHTML } from './render_transaction_table.js';
 import { showSpinner, hideSpinner, forceHideSpinner } from './spinner.js';
 import { setupPagination } from './pagination.js';
 import { renderStatsBar } from './stats_bar.js';
-import {
-  filterFunction,
-  getCategories,
-} from './category_filters.js';
+import { filterFunction, getCategories } from './category_filters.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = '/finance_tracker/transactions_api/';
@@ -19,25 +16,48 @@ document.addEventListener('DOMContentLoaded', () => {
   tableContent.classList.add('visually-hidden');
 
   async function main(url = apiUrl) {
-      filterFunction();
-      showSpinner();
-      
-      const data = await fetchData(url);
-      getCategories(data.categories);
+    filterFunction();
+    showSpinner();
+
+    const data = await fetchData(url);
+    getCategories(data.categories);
 
     hideSpinner();
 
-    if (data) {
-      renderStatsBar(data.stats);
-      renderHTML(data.results);
-      if (renderHTML) {
-        tableContent.classList.remove('visually-hidden');
-      }
-      console.log(data);
-      setupPagination(data, main);
-    } else {
-      forceHideSpinner();
-    }
+      try {
+          renderStatsBar(data.stats);
+          renderHTML(data.results);
+          if (renderHTML) {
+              tableContent.classList.remove('visually-hidden');
+          }
+          setupPagination(data, main);
+
+          const categoryFilters = document.querySelectorAll(
+              '.category-filter-badge'
+          );
+          categoryFilters.forEach((button) => {
+              button.addEventListener('click', async (event) => {
+                  const categoryName = button.textContent
+                  
+                  const params = new URLSearchParams();
+                  params.append('category', categoryName);
+                  const filterUrl = `${apiUrl}?${params.toString()}`;
+                  
+                  try {
+                      const filterData = await fetchData(filterUrl);
+                      renderHTML(filterData.results);
+                      renderStatsBar(filterData.stats);
+                      setupPagination(filterData, main);
+                      hideSpinner();
+                    } catch (error) {
+                        console.log('Error fetching filtered data:', error);
+                        forceHideSpinner();
+                    }
+                });
+            });
+        } catch (error) {
+            console.log('Error fetching Data:', error);
+        }
   }
 
   previousPageBtn.addEventListener('click', (event) => {
