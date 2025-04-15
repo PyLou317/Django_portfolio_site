@@ -24,40 +24,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     hideSpinner();
 
-      try {
-          renderStatsBar(data.stats);
-          renderHTML(data.results);
-          if (renderHTML) {
-              tableContent.classList.remove('visually-hidden');
-          }
-          setupPagination(data, main);
+    try {
+      renderStatsBar(data.stats);
+      renderHTML(data.results);
+      if (renderHTML) {
+        tableContent.classList.remove('visually-hidden');
+      }
+      setupPagination(data, main);
 
-          const categoryFilters = document.querySelectorAll(
-              '.category-filter-badge'
-          );
-          categoryFilters.forEach((button) => {
-              button.addEventListener('click', async (event) => {
-                  const categoryName = button.textContent
-                  
-                  const params = new URLSearchParams();
-                  params.append('category', categoryName);
-                  const filterUrl = `${apiUrl}?${params.toString()}`;
-                  
-                  try {
-                      const filterData = await fetchData(filterUrl);
-                      renderHTML(filterData.results);
-                      renderStatsBar(filterData.stats);
-                      setupPagination(filterData, main);
-                      hideSpinner();
-                    } catch (error) {
-                        console.log('Error fetching filtered data:', error);
-                        forceHideSpinner();
-                    }
-                });
+      const categoryFilters = document.querySelectorAll(
+        '.category-filter-badge'
+      );
+      categoryFilters.forEach((button) => {
+        button.addEventListener('click', async () => {
+          const categoryName = button.textContent;
+          const filterBtn = document.querySelector('.filter-badge');
+          const primaryColor =
+            getComputedStyle(button).getPropertyValue('--primary-color');
+          const gradientColor =
+            getComputedStyle(filterBtn).getPropertyValue('--gradient-color');
+            
+            categoryFilters.forEach((btn) => {
+                btn.style.backgroundColor = '';
+                btn.style.backgroundImage = '';
             });
-        } catch (error) {
-            console.log('Error fetching Data:', error);
-        }
+            button.style.backgroundImage = gradientColor;
+
+
+          const params = new URLSearchParams();
+          params.append('category', categoryName);
+          const filterUrl = `${apiUrl}?${params.toString()}`;
+
+          try {
+            const filterData = await fetchData(filterUrl);
+            renderHTML(filterData.results);
+            renderStatsBar(filterData.stats);
+            setupPagination(filterData, main);
+            hideSpinner();
+          } catch (error) {
+            console.log('Error fetching filtered data:', error);
+            forceHideSpinner();
+          }
+        });
+      });
+    } catch (error) {
+      console.log('Error fetching Data:', error);
+    }
   }
 
   previousPageBtn.addEventListener('click', (event) => {
