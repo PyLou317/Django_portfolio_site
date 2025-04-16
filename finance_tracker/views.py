@@ -334,11 +334,12 @@ class TransactionListAPIView(generics.ListCreateAPIView):
         total_transactions = queryset.count()
         total_amount = queryset.aggregate(Sum('amount'))['amount__sum'] or 0
         min_date = queryset.aggregate(Min('date'))
-        formatted_min_date = min_date['date__min'].strftime("%b %d, %Y")
         max_date = queryset.aggregate(Max('date'))
-        formatted_max_date = max_date['date__max'].strftime("%b %d, %Y")
-        categories = Category.objects.all().values_list('name', flat=True)
         
+        categories = Transaction.objects.filter(owner=request.user).values_list('category__name', flat=True).distinct()
+        
+        formatted_min_date = min_date['date__min'].strftime("%b %d, %Y") if 'date__min' in min_date and min_date['date__min'] else 'N/A'
+        formatted_max_date = max_date['date__max'].strftime("%b %d, %Y") if 'date__max' in max_date and max_date['date__max'] else 'N/A'
 
         page = self.paginate_queryset(queryset)
         if page is not None:

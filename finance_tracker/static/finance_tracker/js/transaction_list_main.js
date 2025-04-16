@@ -3,7 +3,14 @@ import { renderHTML } from './render_transaction_table.js';
 import { showSpinner, hideSpinner, forceHideSpinner } from './spinner.js';
 import { setupPagination } from './pagination.js';
 import { renderStatsBar } from './stats_bar.js';
-import { filterFunction, getCategories } from './category_filters.js';
+import {
+  clearFilters,
+  filterFunction,
+  getCategories,
+} from './category_filters.js';
+
+let filtersActive = false;
+let originalData;
 
 document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = '/finance_tracker/transactions_api/';
@@ -20,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showSpinner();
 
     const data = await fetchData(url);
+    originalData = data;
     getCategories(data.categories);
 
     hideSpinner();
@@ -32,27 +40,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       setupPagination(data, main);
 
-      const categoryFilters = document.querySelectorAll(
-        '.category-filter-badge'
-      );
+      const categoryFilters = document.querySelectorAll('.category-filter-badge');
+
       categoryFilters.forEach((button) => {
         button.addEventListener('click', async () => {
           const categoryName = button.textContent;
           const filterBtn = document.querySelector('.filter-badge');
-          const primaryColor =
-            getComputedStyle(button).getPropertyValue('--primary-color');
           const gradientColor =
             getComputedStyle(filterBtn).getPropertyValue('--gradient-color');
-            
-            categoryFilters.forEach((btn) => {
-                btn.style.backgroundColor = '';
-                btn.style.backgroundImage = '';
-            });
-            button.style.backgroundImage = gradientColor;
 
+          categoryFilters.forEach((btn) => {
+            btn.style.backgroundColor = '';
+            btn.style.backgroundImage = '';
+          });
+          button.style.backgroundImage = gradientColor;
 
           const params = new URLSearchParams();
           params.append('category', categoryName);
+          console.log(categoryName);
           const filterUrl = `${apiUrl}?${params.toString()}`;
 
           try {
