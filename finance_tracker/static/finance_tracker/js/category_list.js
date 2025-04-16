@@ -1,30 +1,13 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const categoryCardTemplate = document.querySelector(
-    '[category-card-template]'
-  );
-  const categoryCardContainer = document.querySelector(
-    '#category-card-container'
-  );
-
+  const categoryCardTemplate = document.querySelector('[category-card-template]');
+  const categoryCardContainer = document.querySelector('#category-card-container');
   const spinner = document.querySelector('.loader-div');
   const pageData = document.querySelector('.page-content');
-
   const noDataHTMLFile = '/finance_tracker/components/upload-notify/';
   const searchInput = document.querySelector('[data-search]');
-
   let searched_categories = [];
-
-  searchInput.addEventListener('input', (e) => {
-    const value = e.target.value.toLowerCase();
-    searched_categories.forEach((category) => {
-      const isVisible =
-        category.name.toLowerCase().includes(value) ||
-        category.expense_total.includes(value);
-      category.element.classList.toggle('hide', !isVisible);
-    });
-  });
 
   // Initially hide content
   if (pageData) {
@@ -101,6 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
           pageData.style.display = 'block'; // Show the content
         }
       }, 1000);
+        
+      searchInput.addEventListener('input', (e) => {
+        const value = e.target.value.toLowerCase();
+        searched_categories.forEach((category) => {
+          console.log(value);
+          const isVisible =
+            category.name.toLowerCase().includes(value) ||
+            category.expense_total.includes(value);
+          category.element.classList.toggle('hide', !isVisible);
+        });
+      });
     })
 
     .catch((error) => {
