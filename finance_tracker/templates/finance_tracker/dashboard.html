@@ -5,7 +5,7 @@
 {% block content %}
   <div>
     {% if expense_summary.total_expense_amount or income_summary.total_income_amount %}
-        <div class="container-fluid min-vh-100 mb-5">
+        <div class="container min-vh-100 mb-5">
             <div class="m-3">
                 {% firstof user.first_name user as name %}
                 <h2 class="dashboard-greeting-msg">Good {{ now|greeting }}, {{ name }}!</h2>   
