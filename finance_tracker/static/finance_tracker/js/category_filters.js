@@ -1,45 +1,22 @@
 'use_strict';
 
-// Toggle category filters
-const filterBtnDiv = document.querySelector('#filtersDiv')
-const filterBtn = document.querySelector('.filter-badge')
+const filterDropdownMenu = document.querySelector('.filter-dropdown-menu')
+const filterBadgeTemplate = document.querySelector('[filterButtonTemplate]')
 
-const filterBadgeContainer = document.querySelector('#filtersDiv')
-const filterBadgeTemplate = document.querySelector('[filterButton]')
 
 
 export const getCategories = function (categoryData) {
-    filterBadgeContainer.textContent = '';
-
-    categoryData.forEach(data => {
-        const card = filterBadgeTemplate.content.cloneNode(true).children[0];
-        const categoryName = card.querySelector('.category-filter-badge')
-        
-        categoryName.textContent = data
-
-        filterBadgeContainer.append(card)
-
+    categoryData.forEach(categoryName => {
+        const element = filterBadgeTemplate.content.cloneNode(true).children[0];
+        element.textContent = categoryName
+        filterDropdownMenu.append(element)
     });
 };
 
-const toggleFilter = function () {
-    filterBtnDiv.classList.toggle('hidden')
-    if (filterBtnDiv.classList.contains('hidden')) {
-        filterBtn.innerHTML = '<i class="bi bi-filter"></i> Filter'
+export const clearFilter = function (getCategories) {
+    if (getCategories) {
+        
     } else {
-        filterBtn.innerHTML = '<i class="bi bi-filter"></i> Hide'
-    }
-};
-
-export const clearFilters = function (fetchFunction) {
-    if (filterBtnDiv.innerHTML.includes('clear')) {
-        console.log("Toggled");
-        fetchFunction
+        clearFilterBtn.classList.add('.hide')
     }
 }
-
-export const filterFunction = function (fetchFunction) {
-    const filterToggleBtn = document.querySelector('#toggleFilters')
-    filterToggleBtn.addEventListener('click', toggleFilter);
-}
-

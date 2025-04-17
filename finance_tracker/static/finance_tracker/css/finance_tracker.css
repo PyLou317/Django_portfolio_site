@@ -231,23 +231,50 @@
   border-radius: 30px;
 }
 
+.filter-dropdown-menu {
+  max-height: 400px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  cursor: pointer;
+}
+
+#filter-badge,
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  border: none;
+}
+
 .filter-badge {
   background-image: var(--gradient-color);
-  border: none;
+  border: none !important;
   border-radius: 30px;
   color: white;
-  padding: 4px 10px;
+  padding: 3px 8px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   margin: 4px 2px;
   cursor: pointer;
 }
 
 .filter-badge:hover {
   background-image: linear-gradient(to right, #ff8c69, #ff6a4a, #ff5733);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.clearFilterBtn {
+  background-color: var(--body-color);
+  border: none !important;
+  border-radius: 30px;
+  color: white;
+  padding: 3px 8px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
 #transaction-table {

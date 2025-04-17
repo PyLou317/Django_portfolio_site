@@ -1,12 +1,14 @@
 'use_strict';
 
+const pageData = document.querySelector('[transaction-row-container]')
+
 let spinnerTimeout;
 
 export function showSpinner() {
     const spinner = document.querySelector('.loader-div');
     if (spinner) {
         console.log('spinner loaded');
-        spinner.classList.remove('visually-hidden');
+        spinner.style.display = 'flex';
     }
 }
 
@@ -15,9 +17,12 @@ export function hideSpinner() {
     const spinner = document.querySelector('.loader-div');
     setTimeout(() => {
         if (spinner) {
-            spinner.classList.add('visually-hidden');
+            spinner.style.display = 'none';
         }
-    }, 500);
+        if (pageData) {
+            pageData.style.display = 'relative';
+        }
+    }, 1000);
 }
 
 

@@ -3,14 +3,7 @@ import { renderHTML } from './render_transaction_table.js';
 import { showSpinner, hideSpinner, forceHideSpinner } from './spinner.js';
 import { setupPagination } from './pagination.js';
 import { renderStatsBar } from './stats_bar.js';
-import {
-  clearFilters,
-  filterFunction,
-  getCategories,
-} from './category_filters.js';
-
-let filtersActive = false;
-let originalData;
+import { clearFilter, getCategories } from './category_filters.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = '/finance_tracker/transactions_api/';
@@ -23,24 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
   tableContent.classList.add('visually-hidden');
 
   async function main(url = apiUrl) {
-    filterFunction();
-    showSpinner();
-
-    const data = await fetchData(url);
-    originalData = data;
-    getCategories(data.categories);
-
-    hideSpinner();
-
     try {
+      const data = await fetchData(url);
+      getCategories(data.categories);
+      hideSpinner();
       renderStatsBar(data.stats);
       renderHTML(data.results);
+
       if (renderHTML) {
         tableContent.classList.remove('visually-hidden');
       }
       setupPagination(data, main);
 
-      const categoryFilters = document.querySelectorAll('.category-filter-badge');
+      const categoryFilters = document.querySelectorAll(
+        '.category-filter-badge'
+      );
+      const clearFilterBtn = document.querySelector('.clearFilterBtn');
 
       categoryFilters.forEach((button) => {
         button.addEventListener('click', async () => {
@@ -57,11 +48,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const params = new URLSearchParams();
           params.append('category', categoryName);
-          console.log(categoryName);
           const filterUrl = `${apiUrl}?${params.toString()}`;
 
           try {
             const filterData = await fetchData(filterUrl);
+            if (clearFilterBtn) {
+                clearFilterBtn.classList.remove('hide');
+                clearFilterBtn.addEventListener('click', () => {
+                    main();
+                    categoryFilters.forEach((btn) => {
+                        btn.style.backgroundColor = '';
+                        btn.style.backgroundImage = '';
+                    });
+                    clearFilterBtn.classList.add('hide');
+              });
+            }
             renderHTML(filterData.results);
             renderStatsBar(filterData.stats);
             setupPagination(filterData, main);

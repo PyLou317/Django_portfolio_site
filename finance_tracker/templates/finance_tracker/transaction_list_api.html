@@ -37,13 +37,27 @@
                     </div>
                 </form>
             </div>
-            {% comment %}------ Categories ------{% endcomment %}
+            {% comment %}------ Category Filter Menu ------{% endcomment %}
+            <div class="col-auto ms-auto">
+                <span class="btn clearFilterBtn hide">Clear Filter</span>
+            </div>
             <div class="col-auto">
-                <span id="toggleFilters" class="filter-badge"><i class="bi bi-filter"></i> Filter</span>
-            </div> 
-            <div id="filtersDiv" class="hidden text-center"></div> 
+                <div class="dropdown filter-badge open">
+                    <a
+                        class="btn btn-sm text-light dropdown-toggle"
+                        type="button"
+                        id="filter-badge"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                    <i class="bi bi-filter"></i> Category Filters
+                    </a>
+                    <div class="dropdown-menu filter-dropdown-menu" aria-labelledby="triggerId">
+                        </div>
+                </div>
+            </div>
         </div> 
-
         
         <div id="transaction-table" class="table-responsive mt-3">
             <table class="table table-hover" style="width: 100%;">
@@ -91,12 +105,13 @@
     </div>
 
     
+    {% comment %} <a class="me-1 mb-1">
+        <span class="badge rounded-pill category-filter-badge"></span>
+    </a> {% endcomment %}
     
     {% comment %}------ Filter Btn ------{% endcomment %}
-    <template filterButton>
-        <a class="me-1 mb-1">
-            <span class="badge rounded-pill category-filter-badge"></span>
-        </a>
+    <template filterButtonTemplate>
+        <a class="dropdown-item category-filter-badge"></a>
     </template>
 
     {% comment %}------ Transaction List Table ------{% endcomment %}
