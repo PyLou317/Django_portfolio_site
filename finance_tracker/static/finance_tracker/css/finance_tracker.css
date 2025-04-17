@@ -256,12 +256,15 @@
   text-align: center;
   text-decoration: none;
   font-size: 12px;
-  margin: 4px 2px;
   cursor: pointer;
 }
 
 .filter-badge:hover {
   background-image: linear-gradient(to right, #ff8c69, #ff6a4a, #ff5733);
+}
+
+.clearFilterDiv {
+    margin-top: 5px;
 }
 
 .clearFilterBtn {
@@ -273,7 +276,6 @@
   text-align: center;
   text-decoration: none;
   font-size: 12px;
-  margin: 4px 2px;
   cursor: pointer;
 }
 
@@ -333,7 +335,7 @@
   }
 
   .desktop-date {
-    display: none;
+    display: block;
   }
 
   .pagination-btns a,

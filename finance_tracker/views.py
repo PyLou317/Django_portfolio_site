@@ -336,7 +336,9 @@ class TransactionListAPIView(generics.ListCreateAPIView):
         min_date = queryset.aggregate(Min('date'))
         max_date = queryset.aggregate(Max('date'))
         
-        categories = Transaction.objects.filter(owner=request.user).values_list('category__name', flat=True).distinct()
+        categories = Transaction.objects.filter(
+            owner=request.user).values_list(
+                'category__name', flat=True).distinct().order_by('category__name')
         
         formatted_min_date = min_date['date__min'].strftime("%b %d, %Y") if 'date__min' in min_date and min_date['date__min'] else 'N/A'
         formatted_max_date = max_date['date__max'].strftime("%b %d, %Y") if 'date__max' in max_date and max_date['date__max'] else 'N/A'
