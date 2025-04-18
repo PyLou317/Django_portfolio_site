@@ -104,84 +104,82 @@ def finance_tracker_dashboard(request):
     return render(request, 'finance_tracker/dashboard.html', context)
 
 
-class TransactionListAPI(LoginRequiredMixin, ListView):
-    template_name = 'finance_tracker/transaction_list_api.html'
+class TransactionListView(LoginRequiredMixin, ListView):
+    template_name = 'finance_tracker/transaction_list.html'
     model = Transaction
     context_object_name = 'transactions'
     
 
-class TransactionListView(LoginRequiredMixin, ListView):
-    paginate_by = 10
-    model = Transaction
-    ordering = ['-date'] 
+# class TransactionListView(LoginRequiredMixin, ListView):
+#     paginate_by = 10
+#     model = Transaction
+#     ordering = ['-date'] 
     
-    def get_queryset(self): 
-        queryset = super().get_queryset().filter(owner=self.request.user)
-        search_term = self.request.GET.get('search_term')
-        clear_search = self.request.GET.get('clear_search')
-        category_id = self.request.GET.get('category_id')
+#     def get_queryset(self): 
+#         queryset = super().get_queryset().filter(owner=self.request.user)
+#         search_term = self.request.GET.get('search_term')
+#         clear_search = self.request.GET.get('clear_search')
+#         category_id = self.request.GET.get('category_id')
         
-        if category_id:
-            queryset = super().get_queryset().filter(
-                category_id=category_id)
+#         if category_id:
+#             queryset = super().get_queryset().filter(
+#                 category_id=category_id)
         
-        if clear_search: # Check if 'clear_search' parameter is present
-            return queryset
+#         if clear_search: # Check if 'clear_search' parameter is present
+#             return queryset
         
-        if search_term: 
-            queryset = queryset.filter(
-                Q(description__icontains=search_term) |
-                Q(category__name__icontains=search_term)
-            )
+#         if search_term: 
+#             queryset = queryset.filter(
+#                 Q(description__icontains=search_term) |
+#                 Q(category__name__icontains=search_term)
+#             )
             
-        return queryset
+#         return queryset
 
-    
-    
-    def get_context_data(self, **kwargs):
-        try:
-            context = super().get_context_data(**kwargs)
+#     def get_context_data(self, **kwargs):
+#         try:
+#             context = super().get_context_data(**kwargs)
             
-            # Categories for filter btn
-            categories = Category.objects.annotate(
-                total_amount=Sum('transaction__amount', filter=models.Q(
-                    transaction__owner=self.request.user))
-            ).exclude(total_amount__isnull=True).exclude(total_amount=0).order_by('name')
+#             # Categories for filter btn
+#             categories = Category.objects.annotate(
+#                 total_amount=Sum('transaction__amount', filter=models.Q(
+#                     transaction__owner=self.request.user))
+#             ).exclude(total_amount__isnull=True).exclude(total_amount=0).order_by('name')
 
-            # Return start and end date for filtered transactions for stat bar
-            end_date = self.get_queryset().latest('date').date
-            start_date = self.get_queryset().earliest('date').date
+#             # Return start and end date for filtered transactions for stat bar
+#             end_date = self.get_queryset().latest('date').date
+#             start_date = self.get_queryset().earliest('date').date
             
-            # Return queryset length (transactions) for stats bar
-            length = self.get_queryset().count
+#             # Return queryset length (transactions) for stats bar
+#             length = self.get_queryset().count
             
-            # Return transactions sum for stats bar
-            category_id = self.request.GET.get('category_id')
-            if category_id:
-                if category_id == "52":
-                    expense_transactions_sum = self.get_queryset().aggregate(
-                        total_expense_amount=Sum('amount'))
-                else:
-                    expense_transactions_sum = self.get_queryset().exclude(
-                        category__name='Income').aggregate(
-                        total_expense_amount=Sum('amount'))
-            else:
-                expense_transactions_sum = self.get_queryset().exclude(
-                    category__name='Income').aggregate(
-                    total_expense_amount=Sum('amount'))
+#             # Return transactions sum for stats bar
+#             category_id = self.request.GET.get('category_id')
+#             if category_id:
+#                 if category_id == "52":
+#                     expense_transactions_sum = self.get_queryset().aggregate(
+#                         total_expense_amount=Sum('amount'))
+#                 else:
+#                     expense_transactions_sum = self.get_queryset().exclude(
+#                         category__name='Income').aggregate(
+#                         total_expense_amount=Sum('amount'))
+#             else:
+#                 expense_transactions_sum = self.get_queryset().exclude(
+#                     category__name='Income').aggregate(
+#                     total_expense_amount=Sum('amount'))
             
-            # Pass data to template
-            context['end_date'] = end_date
-            context['start_date'] = start_date
-            context['length'] = length
-            context['expense_summary'] = expense_transactions_sum
-            context['categories'] = categories
-            # context['filtered_transactions'] = filtered_transactions
-        except:
-            print(f'No Transactions')
-            return
+#             # Pass data to template
+#             context['end_date'] = end_date
+#             context['start_date'] = start_date
+#             context['length'] = length
+#             context['expense_summary'] = expense_transactions_sum
+#             context['categories'] = categories
+#             # context['filtered_transactions'] = filtered_transactions
+#         except:
+#             print(f'No Transactions')
+#             return
         
-        return context
+#         return context
 
 
 class TransactionForm(forms.ModelForm):

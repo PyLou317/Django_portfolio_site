@@ -7,7 +7,6 @@ urlpatterns = [
     path('', views.finance_tracker_home, name='home'),
     path('dashboard/', views.finance_tracker_dashboard, name='dashboard'),
     path('transactions/', views.TransactionListView.as_view(), name='transaction-list'),
-    path('transactions/api/', views.TransactionListAPI.as_view(), name='transaction-list-api'),
     path('categories/', views.CategoryList.as_view(), name='categories'),
     path('components/upload-notify/', views.upload_notify_component, name='upload_notify_component'),
     path('upload/', views.upload_statement, name='file_upload'),

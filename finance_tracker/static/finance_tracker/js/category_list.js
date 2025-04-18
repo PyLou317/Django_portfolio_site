@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
       searchInput.addEventListener('input', (e) => {
         const value = e.target.value.toLowerCase();
         searched_categories.forEach((category) => {
-          console.log(value);
+        //   console.log(value);
           const isVisible =
             category.name.toLowerCase().includes(value) ||
             category.expense_total.includes(value);

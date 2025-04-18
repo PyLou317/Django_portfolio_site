@@ -296,9 +296,9 @@
   display: none; /* Hide the mobile date by default */
 }
 
-.container-fluid-mobile {
+.container-transaction-page {
   height: 100vh;
-  margin-bottom: 200px;
+  /* margin-bottom: 200px; */
 }
 
 .page-item.disabled .page-link {
