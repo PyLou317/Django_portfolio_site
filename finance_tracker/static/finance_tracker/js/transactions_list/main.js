@@ -1,4 +1,4 @@
-import { fetchData } from './fetch_transactions.js';
+import { fetchData } from './API.js';
 import { renderHTML, renderStatsBar } from './UI.js';
 import { showSpinner, hideSpinner, forceHideSpinner } from '../spinner.js';
 import { setupPagination } from './pagination.js';
@@ -7,9 +7,7 @@ import { getCategories } from '../category_filters.js';
 document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = '/finance_tracker/transactions_api/';
   const tableContent = document.querySelector('[transaction-row-container]');
-  const previousPageBtn = document.querySelector(
-    '.previous-page a.previousUrl'
-  );
+  const previousPageBtn = document.querySelector('.previous-page a.previousUrl');
   const nextPageBtn = document.querySelector('.next-page a.nextUrl');
   const searchInput = document.querySelector('[transaction-search-bar]');
 
@@ -39,17 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       setupPagination(data, main);
 
-      const categoryFilters = document.querySelectorAll(
-        '.category-filter-badge'
-      );
+      const categoryFilters = document.querySelectorAll('.category-filter-badge');
       const clearFilterBtn = document.querySelector('.clearFilterBtn');
 
       categoryFilters.forEach((button) => {
         button.addEventListener('click', async () => {
           const categoryName = button.textContent;
           const filterBtn = document.querySelector('.filter-badge');
-          const gradientColor =
-            getComputedStyle(filterBtn).getPropertyValue('--gradient-color');
+          const gradientColor = getComputedStyle(filterBtn).getPropertyValue('--gradient-color');
 
           categoryFilters.forEach((btn) => {
             btn.style.backgroundColor = '';
