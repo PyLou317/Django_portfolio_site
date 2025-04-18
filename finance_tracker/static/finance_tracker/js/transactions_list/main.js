@@ -2,7 +2,7 @@ import { fetchData } from './API.js';
 import { renderHTML, renderStatsBar } from './UI.js';
 import { showSpinner, hideSpinner, forceHideSpinner } from '../spinner.js';
 import { setupPagination } from './pagination.js';
-import { getCategories } from '../category_filters.js';
+import { getCategories } from './category_filters.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = '/finance_tracker/transactions_api/';

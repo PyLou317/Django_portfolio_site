@@ -224,6 +224,12 @@ class CategoryList(LoginRequiredMixin, ListView):
     template_name = 'finance_tracker/category_list.html'
     model = Category
     context_object_name = 'categories'
+
+
+class CategoryDetailView(LoginRequiredMixin, ListView):
+    template_name = 'finance_tracker/category_detail.html'
+    model = Category
+    context_object_name = 'categories'
     
 
 def upload_notify_component(request):
@@ -397,7 +403,6 @@ class TransactionDetailAPIView(generics.RetrieveAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     permission_classes = [permissions.IsAuthenticated]
-    
     
     
 # ----===== Category DRF ListView API =====---- #
