@@ -1,9 +1,8 @@
 import { fetchData } from './fetch_transactions.js';
-import { renderHTML } from './render_transaction_table.js';
-import { showSpinner, hideSpinner, forceHideSpinner } from './spinner.js';
+import { renderHTML, renderStatsBar } from './UI.js';
+import { showSpinner, hideSpinner, forceHideSpinner } from '../spinner.js';
 import { setupPagination } from './pagination.js';
-import { renderStatsBar } from './stats_bar.js';
-import { clearFilter, getCategories } from './category_filters.js';
+import { getCategories } from '../category_filters.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = '/finance_tracker/transactions_api/';
