@@ -12,8 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     '.previous-page a.previousUrl'
   );
   const nextPageBtn = document.querySelector('.next-page a.nextUrl');
+  const searchInput = document.querySelector('[transaction-search-bar]');
 
   tableContent.classList.add('visually-hidden');
+
+  // Debounce function (from lodash)
+  function debounce(func, delay) {
+    let timeoutId;
+    return function (...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  }
 
   async function main(url = apiUrl) {
     try {
@@ -53,14 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
           try {
             const filterData = await fetchData(filterUrl);
             if (clearFilterBtn) {
-                clearFilterBtn.classList.remove('hide');
-                clearFilterBtn.addEventListener('click', () => {
-                    main();
-                    categoryFilters.forEach((btn) => {
-                        btn.style.backgroundColor = '';
-                        btn.style.backgroundImage = '';
-                    });
-                    clearFilterBtn.classList.add('hide');
+              clearFilterBtn.classList.remove('hide');
+              clearFilterBtn.addEventListener('click', () => {
+                main();
+                categoryFilters.forEach((btn) => {
+                  btn.style.backgroundColor = '';
+                  btn.style.backgroundImage = '';
+                });
+                clearFilterBtn.classList.add('hide');
               });
             }
             renderHTML(filterData.results);
@@ -77,6 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Error fetching Data:', error);
     }
   }
+
+  const handleSearch = debounce((event) => {
+    const searchTerm = event.target.value.trim();
+    const searchUrl = searchTerm ? `${apiUrl}?search=${searchTerm}` : apiUrl;
+    main(searchUrl);
+  }, 300);
+
+  searchInput.addEventListener('input', handleSearch);
 
   previousPageBtn.addEventListener('click', (event) => {
     event.preventDefault();

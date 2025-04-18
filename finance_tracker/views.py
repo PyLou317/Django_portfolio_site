@@ -41,7 +41,7 @@ from .pagination import CustomPageNumberPagination
 from .serializers import TransactionSerializer, CategorySerializer
 
 # Rest Framework
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -319,12 +319,26 @@ class TransactionListAPIView(generics.ListCreateAPIView):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
     pagination_class = CustomPageNumberPagination
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['description', 'amount', 'date', 'category__name']
     
     def get_queryset(self):
         queryset = Transaction.objects.filter(owner=self.request.user).exclude(category__name='Income')
         category = self.request.query_params.get('category')
+        
+        # Manual search if not using filter_backends #
+        # search_term = self.request.query_params.get('search')
+        
+        # if search_term:
+        #     queryset = queryset.filter(
+        #         Q(description__icontains=search_term) |
+        #         Q(category__name__icontains=search_term) |
+        #         Q(amount__icontains=search_term)
+        #     )
+        
         if category:
                 queryset = queryset.filter(category__name=category)
+                
         return queryset.order_by('-date')
     
     def list(self, request, *args, **kwargs):
