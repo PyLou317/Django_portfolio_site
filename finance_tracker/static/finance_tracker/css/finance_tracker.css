@@ -298,7 +298,7 @@
 
 .container-transaction-page {
   height: 100vh;
-  /* margin-bottom: 200px; */
+  margin-bottom: 100px;
 }
 
 .page-item.disabled .page-link {
