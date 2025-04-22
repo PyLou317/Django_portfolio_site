@@ -1,7 +1,7 @@
 from django.urls import path, reverse_lazy
 from . import views
 
-app_name = 'users' # needed for namespacing
+app_name = 'users'
 
 urlpatterns = [
     path('profile/', views.user_profile, name='profile_home'),
