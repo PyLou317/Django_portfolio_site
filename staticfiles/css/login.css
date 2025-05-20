@@ -1,4 +1,4 @@
-@import url('../../static/finance_tracker/css/finance_tracker_main.css');
+@import url('finance_tracker_main.css');
 
 *{
   padding: 0;
@@ -8,14 +8,13 @@
 body{
   width: 100%;
   height: 100vh;
-  background-color: var(--background-color);
-  /* background: linear-gradient(
+  background: linear-gradient(
     to top,
     rgb(255, 255, 255) 0%,
     rgb(255, 255, 255) 25%,
-    var(--background-color)  25%,
-    var(--background-color) 100%
-  ); */
+    var(--primary-color)  25%,
+    var(--primary-color) 100%
+  );
 }
 
 #home-btn {
