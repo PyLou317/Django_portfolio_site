@@ -1,0 +1,26 @@
+{% extends 'finance_tracker/simple_base.html' %} 
+{% load static %}
+
+{% block title %} Evergreen Financial - Finance Tracker {% endblock %}
+
+{% block description %} Track and manage your personal finances all in one place with Evergreen Financial {% endblock %} 
+
+{% block content %}
+<div class="landing-page-container">
+    <div class="call-to-action">
+        <div class="app-logo">
+            <i class="bi bi-app-indicator"></i> </div>
+        <h1 class="appName">Evergreen Financial</h1>
+        <span id="changingWord" class="fw-bold tagline lead"></span></p>
+        <div class="auth-buttons">
+            <a href="{% url 'finance_tracker:dashboard' %}" class="btn btn-primary btn-lg rounded-pill login-btn">Log In</a>
+            <a href="{% url 'account_signup' %}" class="btn btn-outline-secondary btn-lg rounded-pill signup-btn">Sign Up</a>
+            <p id="terms-agreement-text" class="mt-2 small">By continuing, you agree to our <a href="#">Terms</a> & <a href="#">Privacy Policy</a>.</p>
+        </div>
+    </div>
+</div>
+  {% endblock %}
+
+  {% block extra_js %}
+  <script src="{% static 'finance_tracker/js/landing_page.js' %}"></script>
+  {% endblock %}
