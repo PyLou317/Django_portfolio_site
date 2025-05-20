@@ -1,0 +1,91 @@
+:root {
+  --font: 'Inter', sans-serif;
+  --body-color: #637381;
+  --background-color: #242424;
+  --heading-color: #212b36;
+  --primary-color: rgb(75, 192, 192);
+  --secondary-color: #373737;
+  --accent-color: #ff7f50;
+  --white: #ffffff;
+}
+
+body,
+html {
+  height: 100vh;
+  margin: 0;
+  font-family: 'century-gothic', sans-serif;
+  background-color: var(--background-color);
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.landing-page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.appName {
+  font-family: var(--font), serif;
+  font-weight: 500;
+  font-size: 3rem;
+  color: var(--white);
+}
+
+.call-to-action {
+  max-width: 90%;
+  padding: 2rem;
+}
+
+.app-logo {
+  font-size: 3rem;
+  color: var(--accent-color); /* Bootstrap primary color */
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: lightgray;
+  /* max-width: 300px; */
+}
+
+#changingWord {
+  display: inline-block;
+  text-align: center;
+}
+
+.auth-buttons .btn {
+  margin-bottom: 0.75rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.login-btn {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.login-btn:hover {
+  background-color: rgb(88, 224, 224);
+  border-color: rgb(88, 224, 224);
+}
+
+.enterNowBtn {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.enterNowBtn:hover {
+  background-color: #1e3869;
+  border-color: #1e3869;
+}
+
+#terms-agreement-text {
+  color: rgb(158, 158, 158);
+}
