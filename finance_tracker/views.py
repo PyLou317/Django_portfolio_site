@@ -49,7 +49,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 def finance_tracker_home(request):
-    return render(request, 'finance_tracker/index.html')
+    return render(request, 'finance_tracker/landing_page.html')
 
 
 @login_required
